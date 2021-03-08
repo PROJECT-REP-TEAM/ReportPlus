@@ -1,0 +1,34 @@
+[
+	{
+		"kind":1,
+		"background":["#B678FD","#4A64F9"],
+		"content":[
+			{"text":"","value":"1800","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
+			{"text":"日均新增目标","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+		]
+	},
+	{
+		"kind":1,
+		"background":["#B678FD","#4A64F9"],
+		"content":[
+			{"text":"","value":"1960","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
+			{"text":"当日新增会员","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+		]
+	},
+	{
+		"kind":1,
+		"background":["#B678FD","#4A64F9"],
+		"content":[
+			{"text":"","value":"36050","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
+			{"text":"本月新增会员","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+		]
+	},
+	{
+		"kind":1,
+		"background":["#B678FD","#4A64F9"],
+		"content":[
+			{"text":"","value":"3%","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
+			{"text":"日均环比","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+		]
+	}
+]

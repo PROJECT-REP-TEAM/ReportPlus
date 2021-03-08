@@ -1,0 +1,418 @@
+<template>
+	<view class="window">
+		<view class="nav row_align_center" :style="{marginTop: topBar+'px'}" id="nav">
+			<text class="title">{{title?title:''}}</text>
+			<li class="iconfont icon-zuojiantou back hidden"></li>
+		</view>
+		<view class="row_align_center head" id="head">
+			<!-- 日期下拉列表 -->
+			<drop-down @changeItem="changeTime" :list="timeArray" :contentTop="top" selectWidth="260rpx"
+			 contentLeft="0" ref="dropdown"></drop-down>
+			 <!-- 日历选择日期 -->
+			<view v-if="showCalendar" :class="['dropdown-item__selected',listWidth!='150rpx'?'dropdown-item__right':'dropdown-item__left']"
+				  @click="openCalendar" class="calendar_drag">
+				<view class="selected__name">{{nowDate}}</view>
+				<li class="iconfont icon-calendar" style="margin-left: 10rpx;"></li>
+			</view>
+			<!-- 公司区域下拉列表 -->
+			<drop-down @changeItem="changeLocation" :list="locationArray" :contentTop="top" contentRight="10"
+			 :selectWidth="showCalendar?'200rpx':'300rpx'" listWidth="75%"></drop-down>
+		</view>
+		<uni-calendar
+		     ref="calendar"
+		     :insert="false"
+			 :start-date="startDate"
+			 :end-date="endDate"
+			 :clearDate="false"
+		     @confirm="confirm"
+		      >
+		</uni-calendar>
+		<!--滑动列表头-->
+		<wuc-tab id="wuctab" :tab-list="tabList" :tabCur.sync="tabCur" tab-class="text-center text-white bg-blue" select-class="text-white"></wuc-tab>
+		<!--主体内容-->
+		<view class="data_body">
+			<view v-show="tabCur == 0">
+				<wechat
+					:progressData="wechatModel.wechatLineBar" 
+					:friendTextBlock="wechatModel.friendTextBlock" 
+					:friendTrand="wechatModel.friendTrand" 
+					:teamTrand="wechatModel.teamTrand"
+					:userChat="wechatModel.userChat"
+					:panelData="wechatModel.panelData"
+					:scrollHeight="scrollHeight">
+				</wechat>
+			</view>
+			<view v-show="tabCur == 1">
+				<user-operate
+					:progressData="UserOperateModel.userOperateLineBar" 
+					:userActive="UserOperateModel.userActive" 
+					:userConsume="UserOperateModel.userConsume" 
+					:userARPU="UserOperateModel.userARPU"
+					:userActiveAt="UserOperateModel.userActiveAt"
+					:xProductDropPrecent="UserOperateModel.xProductDropPrecent"
+					:wProductDropPrecent="UserOperateModel.wProductDropPrecent"
+					:illnessDropPrecent="UserOperateModel.illnessDropPrecent"
+					:scrollHeight="scrollHeight">
+				</user-operate>
+			</view>
+			<view v-show="tabCur == 2">
+				<user-healthy
+					:progressData="UserHealthyModel.userHealthyLineBar" 
+					:baseData="UserHealthyModel.baseData" 
+					:userTrand="UserHealthyModel.userTrand" 
+					:scanTrand="UserHealthyModel.scanTrand"
+					:scanTrandPrecent="UserHealthyModel.scanTrandPrecent"
+					:miniActive="UserHealthyModel.miniActive"
+					:miniActivePrecent="UserHealthyModel.miniActivePrecent"
+					:buyActive="UserHealthyModel.buyActive"
+					:buyActivePrecent="UserHealthyModel.buyActivePrecent"
+					:scrollHeight="scrollHeight">
+				</user-healthy>
+			</view>
+			<view v-show="tabCur == 3">
+				<user-server :scrollHeight="scrollHeight"></user-server>
+			</view>
+		</view>
+		<!--水印-->
+		<view class="water-mark-mask row_wrap" :style="{height: scrollHeight}">
+			<text class="container" v-for="(count,index) in 10" :key="index">{{info.name}}</text>
+		</view>
+	</view>
+</template>
+<script>
+	import MixCanvas from "../../components/canvas/mix-canvas.vue"
+	import ProgressCanvas from "../../components/canvas/progress-canvas.vue"
+	
+	import Wechat from "../../components/data-center/wechat.vue"
+	import wechatLineBar from '../../static/json/wechat/1.json';
+	import friendTextBlock from '../../static/json/wechat/2.json';
+	import friendTrand from '../../static/json/wechat/3.json';
+	import panelData from '../../static/json/wechat/4.json';
+	import teamTrand from '../../static/json/wechat/5.json';
+	import userChat from '../../static/json/wechat/6.json';
+	
+	import UserOperate from "../../components/data-center/user-operate.vue"
+	import userOperateLineBar from '../../static/json/user-operate/1.json';
+	import userActive from '../../static/json/user-operate/2.json';
+	import userConsume from '../../static/json/user-operate/2.json';
+	import userARPU from '../../static/json/user-operate/4.json';
+	import userActiveAt from '../../static/json/user-operate/6.json';
+	import xProductDropPrecent from '../../static/json/user-operate/7.json';
+	import wProductDropPrecent from '../../static/json/user-operate/9.json';
+	import illnessDropPrecent from '../../static/json/user-operate/8.json';
+	
+	import UserHealthy from "../../components/data-center/user-healthy.vue"
+	import userHealthyLineBar from '../../static/json/user-healthy/1.json';
+	import baseData from '../../static/json/user-healthy/2.json';
+	import userTrand from '../../static/json/user-healthy/3.json';
+	import scanTrand from '../../static/json/user-healthy/4.json';
+	import scanTrandPrecent from '../../static/json/user-healthy/5.json';
+	import miniActive from '../../static/json/user-healthy/6.json';
+	import miniActivePrecent from '../../static/json/user-healthy/3.json';
+	import buyActive from '../../static/json/user-healthy/6.json';
+	import buyActivePrecent from '../../static/json/user-healthy/3.json';
+	
+	import UserServer from "../../components/data-center/user-server.vue"
+	
+	export default {
+		components: {
+			WucTab: resolve => require(['@/components/wuc-tab/wuc-tab.vue'], resolve),
+			DropDown: resolve => require(['@/components/drop-down/drop-down.vue'], resolve),
+			UniCalendar:resolve => require(['@/components/uni-calendar/uni-calendar.vue'], resolve),
+			MixCanvas,
+			ProgressCanvas,
+			Wechat,
+			UserOperate,
+			UserHealthy,
+			UserServer,
+		},  
+		data() {
+			return {
+				tabList: this.$Config.TABLIST, //标签头
+				timeArray: this.$Config.TIMEARRAY, //时间数组
+				info:this.$store.state.userInfo, //用户数据
+				title: "数据报表中心", //标题
+				showDataTime: "today", //选中的时间
+				tabCur: 0, //标签头下标
+				topBar: 17, //导航高
+				top: '180', //下拉栏位置
+				scrollHeight:"600px", //数据展示体高度
+				nowDate:this.$Common.getNowDate(),//现在日期
+				endDate:this.$Common.getNowDate(),//日历可选日期范围的结束时间
+				startDate:this.$Common.getPreMonth(this.$Common.getNowDate()),//日历可选日期范围的开始时间,
+				showCalendar:false,
+				wechatModel:{
+					wechatLineBar,
+					friendTextBlock,
+					friendTrand,
+					teamTrand,
+					userChat,
+					panelData
+				},
+				UserOperateModel:{
+					userOperateLineBar,
+					userActive,
+					userConsume,
+					userARPU,
+					userActiveAt,
+					xProductDropPrecent,
+					wProductDropPrecent,
+					illnessDropPrecent
+				},
+				UserHealthyModel:{
+					userHealthyLineBar,
+					baseData,
+					userTrand,
+					scanTrand,
+					scanTrandPrecent,
+					miniActive,
+					miniActivePrecent,
+					buyActive,
+					buyActivePrecent
+				},
+			};
+		},
+		computed: {
+			locationArray() {
+				return [{value:"GDBJ-ENTRY-1",text:"天猫"},{value:"GDBJ-ENTRY-201",text:"京东"}];
+			}
+		},
+		methods: {
+			// 打开日历
+			openCalendar(){
+				this.$refs.calendar.open();
+			},
+			// 选择日期
+			confirm(e) {
+				if (this.nowDate != e.fulldate || !this.showCalendar) {
+					this.showCalendar = true;
+					this.$refs.dropdown.selectAuto();
+					this.nowDate = e.fulldate;
+					this.showDataTime = e.fulldate.replace(/-/g,"");
+					console.log("当前时间:"+this.showDataTime)
+				}
+			},
+			changeTime(e) {
+				if(e.value == "auto"){
+					this.openCalendar();
+				}
+				else if (this.showDataTime != e.value) {
+					this.showDataTime = e.value;
+					this.showCalendar = false;
+					console.log("当前时间:"+this.showDataTime)
+				}
+			},
+			changeLocation(e) {
+				console.log("当前选中平台："+e.text)
+			},
+			//获取设备信息
+			async getTelephoneInfo() {
+				var telephoneInfo = await this.$Common.getTelephoneInfo();
+				let hasHeight = 0;
+				if (telephoneInfo.top >= 40) {
+					this.top = telephoneInfo.statusBarHeight * 2 + 150;
+					this.topBar = telephoneInfo.statusBarHeight;
+				}
+				// 设置滚动高度
+				const query = wx.createSelectorQuery();
+				query.select('#nav').boundingClientRect();
+				query.select('#head').boundingClientRect();
+				query.select('#wuctab').boundingClientRect();
+				query.exec(res=>{
+					res.map((item, index)=>{
+						hasHeight += item.height;
+					})
+					this.scrollHeight = (telephoneInfo.screenHeight - hasHeight-this.topBar) + 'px';
+				})
+			},
+		},
+		onLoad() {
+			uni.hideShareMenu();
+			this.getTelephoneInfo();
+		}
+	};
+</script>
+<style lang="scss">
+	.textPage {
+	  height: 100vh;
+	  overflow: hidden;
+	}
+	.dybgArea {
+	  height: 600rpx;
+	  .dyContent {
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    h2 {
+	      text-align: center;
+	      font-size: 50rpx;
+	      font-weight: lighter;
+	      color: rgba(255, 255, 255, 0.9);
+	      text-shadow: 0 8rpx 8rpx rgba(0,0,0,0.2);
+	    }
+	    p {
+	      font-size: 30rpx;
+	      color: rgba(255, 255, 255, 0.5);
+	      text-shadow: 0 4rpx 4rpx rgba(0,0,0,0.1);
+	    }
+	  }
+	}
+	page,body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+	.window{
+		height: 100vh;
+		overflow: hidden;
+		
+		
+		scroll-view {
+			box-sizing: border-box;
+		}
+		.swiper {
+			box-sizing: border-box;
+		}
+		
+		.nav {
+			background-image: url(http://photo.gdbjyy.cn/image/BCAI/top_bg.jpg);
+			background-size: 100% 100%;
+		
+			.back {
+				font-size: 54rpx;
+				padding: 20rpx 14rpx 15rpx 14rpx;
+				color:#fff;
+			}
+			.title {
+				color: #fff;
+				font-size: 30rpx;
+				flex: 1;
+				text-align: center;
+			}
+			.hidden {
+				visibility: hidden;
+			}
+		}
+		
+		.head {
+			padding: 0 16rpx 14rpx 16rpx;
+			color: #fff;
+			background-color: #40A2ED;
+			justify-content: space-between;
+			font-size:26rpx!important;
+			.calendar_drag{
+				width: 340rpx;
+				display: flex;
+				justify-content: center;
+				align-items:center;
+				
+				.calendar_name{
+					margin-right: 10rpx;
+				}
+				.icon-calendar{
+					font-size:26rpx;
+					margin-top:4rpx;
+				}
+			}
+		}
+		
+		.data_body {
+			overflow: auto;
+			text-align: center;
+			color: #333333;
+			background-repeat: repeat;
+			background-color: #ffffff;
+			
+			.item{
+				padding: 0 20rpx;
+				margin-bottom: 20rpx;
+				.name{
+					font-weight: 600;
+					font-size: 36rpx;
+				}
+				.operate{
+					view{
+						padding: 5rpx 12rpx;
+						color: #fff;
+					}
+					.bg-blue{
+						background-color: #40A2ED;
+					}
+					.bg-yellow{
+						background-color: #FFC300;
+					}
+				}
+				.tip{
+					margin-bottom: 30rpx;
+				
+					.update{
+						color: #C4100A;
+						margin-left: auto;
+						font-size: 30rpx;
+					}
+				}
+			}
+			.cry{
+				font-size: 96rpx;
+				margin-bottom: 10rpx;
+			}
+		}
+		
+		.qiun-charts {
+			width: 750upx;
+			height: 500upx;
+			background-color: #FFFFFF;
+		}
+		
+		.line_window {
+			position: fixed;
+			z-index: 80;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		
+			.shadow {
+				width: 100%;
+				height: 100%;
+				z-index: 90;
+				position: absolute;
+				background-color: rgba(0, 0, 0, 0.5);
+			}
+		
+			.body {
+				background-color: #fff;
+				z-index: 100;
+			}
+		}
+	}
+	.water-mark-mask {
+		width: 100%;
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		z-index: 1000;
+		justify-content: space-between;
+		pointer-events: none; //无视鼠标事件，相当于鼠标事件透传下去一样
+		flex:1;
+		overflow: hidden;
+		
+		text{
+			width: 50%;
+			color: #909399;
+			opacity: 0.25;
+			transform:rotate(-15deg);
+		}
+	}
+	.histogram{
+		height: 100%;
+		width: 100%;
+		
+		canvas{
+			margin-top: 40rpx;
+		}
+	}
+</style>

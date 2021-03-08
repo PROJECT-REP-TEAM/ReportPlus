@@ -1,0 +1,21 @@
+{
+	"categories": [
+		{
+			"color": "#1890ff"
+		}
+	],
+	"series": [
+		[{
+			"title": "新增小程序会员占比",
+			"data": 0.21,
+			"color": "#24ABFD"
+		}],
+		[
+			{
+				"title": "已回复单聊占比",
+				"data": 0.65,
+				"color": "#24ABFD"
+			}
+		]
+	]
+}
