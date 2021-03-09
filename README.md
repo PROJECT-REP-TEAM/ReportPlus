@@ -27,13 +27,12 @@
 
 ### 数据进度(data-progress)
 
- 1. 表头 (header)
-
-    | params | 类型           | 说明                                        |
-    | ------ | -------------- | ------------------------------------------- |
-    | label  | string         | 表头显示的文字                              |
-    | key    | string         | 表头的key键值，用于列内容的赋值             |
-    | width  | string, number | 该列的列宽，其值可覆盖参数default-col-width |
+	| params    | 类型   | 说明                                       |
+	| ------    | ------ | -------------------------------------------|
+	| dataType  | string | 不传表示不展示目标值和现在值，传则展示       |
+	| expect    | string | 目标值                                     |
+	| now       | string | 现在达成值                                 |
+	| value     | string | 现在达成值/目标值                           |
 
 ### 文本块 (text-block)
     | params | 类型           | 说明                                        |
