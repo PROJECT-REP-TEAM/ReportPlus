@@ -42,11 +42,9 @@
     | background    | string         | 背景颜色             |
     | content  | array | 该文本框内文本内容 |
 	
-- kind目前取值：1,2，3,4,5
+- kind目前取值：1,2,3,4,5(注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色)
 - 1：分两层，上层纯数字，下纯文字 的排版类型
 ```
-数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
-注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色
 {
 	"kind":1,
 	"background":["#3EB2F5","#9374F7"],
@@ -58,8 +56,6 @@
 ```
 - 2：分两层，上层文字+数字，下层文字+数字 的排版类型
 ```
-数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
-注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色
 {
 	"kind":2,
 	"background":["#B678FD","#4A64F9"],
@@ -71,8 +67,6 @@
 ```
 - 3：分三层，上层纯数字，中层纯文字，下层分左右块，左下层文+数，右下层文+数 的排版类型
 ```
-数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
-注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色
 {
 	"kind":3,
 	"background":["#B678FD","#4A64F9"],
@@ -86,8 +80,6 @@
 ```
 - 4：分三层，上层纯文字，中层纯数字，下层文+数， 的排版类型
 ```
-数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
-注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色
 {
 	"kind":4,
 	"background":["#3EB2F5","#9374F7"],
@@ -100,8 +92,6 @@
 ```
 - 5：分5层，具体可看会员运营-活跃会员的板块
 ```
-数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
-注意：content中：文本放text中，数字放value，colortext为文本颜色，colorvalue为数字颜色
 {
 	"kind":5,
 	"background":["#F77E89","#F7953B"],
