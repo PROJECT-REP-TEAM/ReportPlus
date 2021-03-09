@@ -15,13 +15,13 @@
 
 ## UReport的页面
 - 企业微信
-![企业微信](https://img-blog.csdnimg.cn/20210309103640712.gif#pic_center)
+- ![企业微信](https://img-blog.csdnimg.cn/20210309103640712.gif#pic_center)
 - 会员运营
-![会员运营](https://img-blog.csdnimg.cn/20210309103650305.gif#pic_center)
+- ![会员运营](https://img-blog.csdnimg.cn/20210309103650305.gif#pic_center)
 - 会员健康
-![会员健康](https://img-blog.csdnimg.cn/20210309103710581.gif#pic_center)
+- ![会员健康](https://img-blog.csdnimg.cn/20210309103710581.gif#pic_center)
 - 会员服务
-![会员服务](https://img-blog.csdnimg.cn/20210309103717854.gif#pic_center)
+- ![会员服务](https://img-blog.csdnimg.cn/20210309103717854.gif#pic_center)
 
 ## 由于其他图表都有对应的插件文件，所以仅对text-block封装的参数做说明
  1. 文本块 (text-block)
