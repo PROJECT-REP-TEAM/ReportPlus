@@ -152,7 +152,7 @@
 					position: absolute;
 					top: 20rpx;
 					left: 10rpx;
-					width: 144rpx;
+					max-width: 144rpx;
 				}
 				.value{
 					color: #fff;
@@ -160,7 +160,7 @@
 					position: absolute;
 					top: 64rpx;
 					left: 10rpx;
-					width: 144rpx;
+					max-width: 144rpx;
 				}
 				
 				.circle{

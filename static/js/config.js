@@ -42,7 +42,7 @@ const TIMEARRAY = [
 const TABLIST = [
     {name:"企业微信",type:"WECHAT"},
     {name:"会员运营",type:"OPERATE"},
-    {name:"高济健康",type:"GJJK"},
+    {name:"会员健康",type:"GJJK"},
     {name:"会员服务",type:"SERVICE"},
 ];
 

@@ -3,20 +3,19 @@
 		"expect": "",
 		"now": "",
 		"name": "时间进度",
-		"value": "37.88"
+		"value": "60.12"
 	},
 	{
-		"expect": "224.64",
-		"now": "53.96",
+		"expect": "30000",
+		"now": "36000",
 		"dataType": "1",
-		"name": "销售额",
-		"value": "24.02"
+		"name": "会员拉新",
+		"value": "120"
 	},
 	{
-		"expect": "80.17",
-		"now": "18.82",
-		"dataType": "1",
-		"name": "毛利额",
-		"value": "23.48"
+		"expect": "",
+		"now": "",
+		"name": "扫码渗透率",
+		"value": "35"
 	}
 ]

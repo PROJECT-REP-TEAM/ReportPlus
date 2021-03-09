@@ -5,6 +5,7 @@
 			<view class="progress">
 				<data-progress :progressList="progressData" :borderRadius="20" padMiddle="true"></data-progress>
 			</view>
+			<view class="split_line"></view>
 			
 			<!-- 新增小程序会员趋势-->
 			<view class="friend_operate">
@@ -103,7 +104,7 @@
 	}
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 	.content{
 		padding-top: 10rpx;
 		.progress,.firend_operate{

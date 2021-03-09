@@ -93,7 +93,7 @@
 	}
 </script>
 
-<style lang="less">
+<style scoped lang="less">
 	.content{
 		padding-top: 10rpx;
 		.progress,.firend_operate{
