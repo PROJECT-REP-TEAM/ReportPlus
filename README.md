@@ -25,6 +25,14 @@
 
 ## 由于其他图表都有对应的插件文件，所以仅对text-block封装的参数做说明
 
+### 表头 (header)
+
+    | params | 类型           | 说明                                        |
+    | ------ | -------------- | ------------------------------------------- |
+    | label  | string         | 表头显示的文字                              |
+    | key    | string         | 表头的key键值，用于列内容的赋值             |
+    | width  | string, number | 该列的列宽，其值可覆盖参数default-col-width |
+
 ### 数据进度(data-progress)
 
 	| params    | 类型   | 说明                                       |
