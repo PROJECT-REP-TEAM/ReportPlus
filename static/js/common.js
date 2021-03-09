@@ -1,6 +1,26 @@
 import store from "../../store/index.js"
 
 module.exports = {
+	//提示窗
+	tipMsg: function (title, icon, time, mask,callback) {
+	    title = title == undefined ? "系统繁忙" : title;
+	    icon = icon == undefined ? "none" : icon;
+	    time = time == undefined ? 1300 : time;
+	    mask = mask == undefined ? true : mask;
+	    uni.showToast({
+	        title: title,
+	        icon: icon,
+	        mask: mask,
+	        duration: time,
+			success() {
+				if(callback){
+					setTimeout(()=>{
+						callback()
+					},time);
+				}	
+			}
+	    })
+	},
 	getTelephoneInfo(){
 		return new Promise((resolve, reject) => {
 			var data = uni.getStorageSync("telephoneInfo");

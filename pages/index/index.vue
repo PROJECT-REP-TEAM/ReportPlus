@@ -32,42 +32,13 @@
 		<!--主体内容-->
 		<view class="data_body">
 			<view v-show="tabCur == 0">
-				<wechat
-					:progressData="wechatModel.wechatLineBar" 
-					:friendTextBlock="wechatModel.friendTextBlock" 
-					:friendTrand="wechatModel.friendTrand" 
-					:teamTrand="wechatModel.teamTrand"
-					:userChat="wechatModel.userChat"
-					:panelData="wechatModel.panelData"
-					:scrollHeight="scrollHeight">
-				</wechat>
+				<wechat :scrollHeight="scrollHeight" />
 			</view>
 			<view v-show="tabCur == 1">
-				<user-operate
-					:progressData="UserOperateModel.userOperateLineBar" 
-					:userActive="UserOperateModel.userActive" 
-					:userConsume="UserOperateModel.userConsume" 
-					:userARPU="UserOperateModel.userARPU"
-					:userActiveAt="UserOperateModel.userActiveAt"
-					:xProductDropPrecent="UserOperateModel.xProductDropPrecent"
-					:wProductDropPrecent="UserOperateModel.wProductDropPrecent"
-					:illnessDropPrecent="UserOperateModel.illnessDropPrecent"
-					:scrollHeight="scrollHeight">
-				</user-operate>
+				<user-operate :scrollHeight="scrollHeight" />
 			</view>
 			<view v-show="tabCur == 2">
-				<user-healthy
-					:progressData="UserHealthyModel.userHealthyLineBar" 
-					:baseData="UserHealthyModel.baseData" 
-					:userTrand="UserHealthyModel.userTrand" 
-					:scanTrand="UserHealthyModel.scanTrand"
-					:scanTrandPrecent="UserHealthyModel.scanTrandPrecent"
-					:miniActive="UserHealthyModel.miniActive"
-					:miniActivePrecent="UserHealthyModel.miniActivePrecent"
-					:buyActive="UserHealthyModel.buyActive"
-					:buyActivePrecent="UserHealthyModel.buyActivePrecent"
-					:scrollHeight="scrollHeight">
-				</user-healthy>
+				<user-healthy :scrollHeight="scrollHeight"/>
 			</view>
 			<view v-show="tabCur == 3">
 				<user-server :scrollHeight="scrollHeight"></user-server>
@@ -80,37 +51,12 @@
 	</view>
 </template>
 <script>
-	import MixCanvas from "../../components/canvas/mix-canvas.vue"
-	import ProgressCanvas from "../../components/canvas/progress-canvas.vue"
 	
 	import Wechat from "../../components/data-center/wechat.vue"
-	import wechatLineBar from '../../static/json/wechat/1.json';
-	import friendTextBlock from '../../static/json/wechat/2.json';
-	import friendTrand from '../../static/json/wechat/3.json';
-	import panelData from '../../static/json/wechat/4.json';
-	import teamTrand from '../../static/json/wechat/5.json';
-	import userChat from '../../static/json/wechat/6.json';
 	
 	import UserOperate from "../../components/data-center/user-operate.vue"
-	import userOperateLineBar from '../../static/json/user-operate/1.json';
-	import userActive from '../../static/json/user-operate/2.json';
-	import userConsume from '../../static/json/user-operate/2.json';
-	import userARPU from '../../static/json/user-operate/4.json';
-	import userActiveAt from '../../static/json/user-operate/6.json';
-	import xProductDropPrecent from '../../static/json/user-operate/7.json';
-	import wProductDropPrecent from '../../static/json/user-operate/9.json';
-	import illnessDropPrecent from '../../static/json/user-operate/8.json';
 	
 	import UserHealthy from "../../components/data-center/user-healthy.vue"
-	import userHealthyLineBar from '../../static/json/user-healthy/1.json';
-	import baseData from '../../static/json/user-healthy/2.json';
-	import userTrand from '../../static/json/user-healthy/3.json';
-	import scanTrand from '../../static/json/user-healthy/4.json';
-	import scanTrandPrecent from '../../static/json/user-healthy/5.json';
-	import miniActive from '../../static/json/user-healthy/6.json';
-	import miniActivePrecent from '../../static/json/user-healthy/3.json';
-	import buyActive from '../../static/json/user-healthy/6.json';
-	import buyActivePrecent from '../../static/json/user-healthy/3.json';
 	
 	import UserServer from "../../components/data-center/user-server.vue"
 	
@@ -119,8 +65,6 @@
 			WucTab: resolve => require(['@/components/wuc-tab/wuc-tab.vue'], resolve),
 			DropDown: resolve => require(['@/components/drop-down/drop-down.vue'], resolve),
 			UniCalendar:resolve => require(['@/components/uni-calendar/uni-calendar.vue'], resolve),
-			MixCanvas,
-			ProgressCanvas,
 			Wechat,
 			UserOperate,
 			UserHealthy,
@@ -141,35 +85,6 @@
 				endDate:this.$Common.getNowDate(),//日历可选日期范围的结束时间
 				startDate:this.$Common.getPreMonth(this.$Common.getNowDate()),//日历可选日期范围的开始时间,
 				showCalendar:false,
-				wechatModel:{
-					wechatLineBar,
-					friendTextBlock,
-					friendTrand,
-					teamTrand,
-					userChat,
-					panelData
-				},
-				UserOperateModel:{
-					userOperateLineBar,
-					userActive,
-					userConsume,
-					userARPU,
-					userActiveAt,
-					xProductDropPrecent,
-					wProductDropPrecent,
-					illnessDropPrecent
-				},
-				UserHealthyModel:{
-					userHealthyLineBar,
-					baseData,
-					userTrand,
-					scanTrand,
-					scanTrandPrecent,
-					miniActive,
-					miniActivePrecent,
-					buyActive,
-					buyActivePrecent
-				},
 			};
 		},
 		computed: {
@@ -182,16 +97,17 @@
 			openCalendar(){
 				this.$refs.calendar.open();
 			},
-			// 选择日期
+			// 日历选择日期
 			confirm(e) {
 				if (this.nowDate != e.fulldate || !this.showCalendar) {
 					this.showCalendar = true;
 					this.$refs.dropdown.selectAuto();
 					this.nowDate = e.fulldate;
 					this.showDataTime = e.fulldate.replace(/-/g,"");
-					console.log("当前时间:"+this.showDataTime)
+					this.$Common.tipMsg("当前时间:"+ this.showDataTime)
 				}
 			},
+			//下拉选择时间
 			changeTime(e) {
 				if(e.value == "auto"){
 					this.openCalendar();
@@ -199,11 +115,11 @@
 				else if (this.showDataTime != e.value) {
 					this.showDataTime = e.value;
 					this.showCalendar = false;
-					console.log("当前时间:"+this.showDataTime)
+					this.$Common.tipMsg("当前时间:"+ this.showDataTime)
 				}
 			},
 			changeLocation(e) {
-				console.log("当前选中平台："+e.text)
+				this.$Common.tipMsg("当前选中平台:"+ e.text)
 			},
 			//获取设备信息
 			async getTelephoneInfo() {

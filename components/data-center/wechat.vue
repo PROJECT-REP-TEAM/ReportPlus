@@ -3,7 +3,7 @@
 		<scroll-view v-if="true" scroll-y class="data_body" :style="{height:scrollHeight}">
 			<!--数据进度条-->
 			<view class="progress">
-				<data-progress :progressList="progressData" :borderRadius="20" padMiddle="true"></data-progress>
+				<data-progress :progressList="wechatLineBar" :borderRadius="20" padMiddle="true"></data-progress>
 			</view>
 			<view class="split_line"></view>
 			
@@ -29,7 +29,7 @@
 			<!-- 客户联系-->
 			<view class="friend_operate">
 				<view class="title">【客户联系】1对1运营执行</view>
-				<senior-table :headers="DataTable.headers" :contents="DataTable.contents" :urlCol="DataTable.urlCol" :firstLineFixed="true" :sortCol="DataTable.sortCol"></senior-table>
+				<senior-table :headers="dataTable.headers" :contents="dataTable.contents" :urlCol="dataTable.urlCol" :firstLineFixed="true" :sortCol="dataTable.sortCol"></senior-table>
 			</view>
 		</scroll-view>
 		<view  v-else class="container padding_stand-big normal_color">
@@ -42,35 +42,19 @@
 	import DataProgress from "../data-progress/data-progress.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
 	import PanelCanvas from "../canvas/panel-canvas.vue"
-	import DataTable from "../../static/json/table/1.json"
 	import SeniorTable from "../data-table/senior-table.vue"
+	
+	import wechatLineBar from '../../static/json/wechat/1.json';
+	import friendTextBlock from '../../static/json/wechat/2.json';
+	import friendTrand from '../../static/json/wechat/3.json';
+	import panelData from '../../static/json/wechat/4.json';
+	import teamTrand from '../../static/json/wechat/5.json';
+	import userChat from '../../static/json/wechat/6.json';
+	import dataTable from "../../static/json/table/1.json"
+	
 	export default {
 		name:'wechat',
 		props: {
-			progressData: {
-				type: Array,
-				default: []
-			},
-			friendTextBlock: {
-				type: Array,
-				default:  []
-			},
-			friendTrand:{
-				type: Object,
-				default: {}
-			},
-			teamTrand:{
-				type: Object,
-				default: {}
-			},
-			userChat:{
-				type:Array,
-				default: []
-			},
-			panelData:{
-				type: Object,
-				default: {}
-			},
 			scrollHeight:{
 				type:String,
 				default:"600px"
@@ -81,7 +65,13 @@
 		},
 		data() {
 			return {
-				DataTable,
+				wechatLineBar,
+				friendTextBlock,
+				friendTrand,
+				panelData,
+				teamTrand,
+				userChat,
+				dataTable
 			}
 		},
 		mounted() {

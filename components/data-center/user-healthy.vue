@@ -3,7 +3,7 @@
 		<scroll-view v-if="true" scroll-y class="data_body" :style="{height:scrollHeight}">
 			<!--数据进度条-->
 			<view class="progress">
-				<data-progress :progressList="progressData" :borderRadius="20" padMiddle="true"></data-progress>
+				<data-progress :progressList="userHealthyLineBar" :borderRadius="20" padMiddle="true"></data-progress>
 			</view>
 			<view class="split_line"></view>
 			
@@ -45,46 +45,21 @@
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
+	
+	import userHealthyLineBar from '../../static/json/user-healthy/1.json';
+	import baseData from '../../static/json/user-healthy/2.json';
+	import userTrand from '../../static/json/user-healthy/3.json';
+	import buyActivePrecent from '../../static/json/user-healthy/3.json';
+	import miniActivePrecent from '../../static/json/user-healthy/3.json';
+	import scanTrand from '../../static/json/user-healthy/4.json';
+	import scanTrandPrecent from '../../static/json/user-healthy/5.json';
+	import miniActive from '../../static/json/user-healthy/6.json';
+	import buyActive from '../../static/json/user-healthy/6.json';
+	
 	var _self;
 	export default {
 		name:'user-healthy',
 		props: {
-			progressData: {
-				type: Array,
-				default: []
-			},
-			baseData: {
-				type: Array,
-				default:  []
-			},
-			userTrand:{
-				type: Object,
-				default: {}
-			},
-			scanTrand:{
-				type:Array,
-				default: []
-			},
-			scanTrandPrecent:{
-				type: Object,
-				default: {}
-			},
-			miniActive:{
-				type: Array,
-				default: []
-			},
-			miniActivePrecent:{
-				type: Object,
-				default: {}
-			},
-			buyActive:{
-				type: Array,
-				default: []
-			},
-			buyActivePrecent:{
-				type: Object,
-				default: {}
-			},
 			scrollHeight:{
 				type:String,
 				default:"600px"
@@ -95,6 +70,15 @@
 		},
 		data() {
 			return {
+				userHealthyLineBar,
+				baseData,
+				userTrand,
+				scanTrand,
+				scanTrandPrecent,
+				miniActive,
+				miniActivePrecent,
+				buyActive,
+				buyActivePrecent
 			}
 		},
 		mounted() {

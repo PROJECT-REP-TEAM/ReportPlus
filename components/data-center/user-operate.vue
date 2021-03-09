@@ -3,7 +3,7 @@
 		<scroll-view v-if="true" scroll-y class="data_body" :style="{height:scrollHeight}">
 			<!--数据进度条-->
 			<view class="progress">
-				<data-progress :progressList="progressData" :borderRadius="20" padMiddle="true"></data-progress>
+				<data-progress :progressList="userOperateLineBar" :borderRadius="20" padMiddle="true"></data-progress>
 			</view>
 			<view class="split_line"></view>
 			
@@ -46,7 +46,7 @@
 					<text class="font-middle">(最近活跃时间)</text>
 				</view>
 				<!-- <data-table :table="userActiveAt"></data-table> -->
-				<senior-table :headers="DataTable.headers" :contents="DataTable.contents" :urlCol="DataTable.urlCol" :firstLineFixed="true" :sortCol="DataTable.sortCol" :computedCol="DataTable.computedCol" :formatCol="DataTable.formatCol"></senior-table>
+				<senior-table :headers="dataTable.headers" :contents="dataTable.contents" :urlCol="dataTable.urlCol" :firstLineFixed="true" :sortCol="dataTable.sortCol" :computedCol="dataTable.computedCol" :formatCol="dataTable.formatCol"></senior-table>
 			</view>
 			<view class="split_line"></view>
 			
@@ -82,48 +82,22 @@
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
-	import DataTable from "../../static/json/table/2.json"
 	import ProgressCanvas from "../canvas/progress-canvas.vue"
 	import SeniorTable from "../data-table/senior-table.vue"
+	
+	import userOperateLineBar from '../../static/json/user-operate/1.json';
+	import userActive from '../../static/json/user-operate/2.json';
+	import userConsume from '../../static/json/user-operate/2.json';
+	import userARPU from '../../static/json/user-operate/4.json';
+	import userActiveAt from '../../static/json/user-operate/6.json';
+	import xProductDropPrecent from '../../static/json/user-operate/7.json';
+	import wProductDropPrecent from '../../static/json/user-operate/9.json';
+	import illnessDropPrecent from '../../static/json/user-operate/8.json';
+	import dataTable from "../../static/json/table/2.json"
+	
 	export default {
 		name:'user-operate',
 		props: {
-			progressData: {
-				type: Array,
-				default: []
-			},
-			userActive: {
-				type: Array,
-				default:  []
-			},
-			userConsume: {
-				type: Array,
-				default:  []
-			},
-			userARPU:{
-				type: Object,
-				default: {}
-			},
-			teamTrand:{
-				type: Object,
-				default: {}
-			},
-			userActiveAt:{
-				type:Array,
-				default: []
-			},
-			xProductDropPrecent:{
-				type:Array,
-				default: []
-			},
-			wProductDropPrecent:{
-				type:Array,
-				default: []
-			},
-			illnessDropPrecent:{
-				type: Object,
-				default: {}
-			},
 			scrollHeight:{
 				type:String,
 				default:"600px"
@@ -134,7 +108,15 @@
 		},
 		data() {
 			return {
-				DataTable
+				userOperateLineBar,
+				userActive,
+				userConsume,
+				userARPU,
+				userActiveAt,
+				xProductDropPrecent,
+				wProductDropPrecent,
+				illnessDropPrecent,
+				dataTable
 			}
 		},
 		mounted() {
