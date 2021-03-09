@@ -32,7 +32,59 @@
     | background    | string         | 背景颜色             |
     | content  | array | 该文本框内文本内容 |
 	
-- kind所对应的文本类型和传参类型可自行看json格式
+- kind目前取值：1,2，3,4,5
+- 1：分两层，上层纯数字，下纯文字 的排版类型
+```
+数据格式,这么区分的原因是希望可以单独控制文本和数字的颜色或大小
+{
+	"kind":1,
+	"background":["#3EB2F5","#9374F7"],
+	"content":[
+		{"text":"","value":"5860","colortext":"","colorvalue":"#fff","size":"44rpx"},
+		{"text":"新增微好友","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"}
+	]
+}
+```
+- 2：分两层，上层文字+数字，下层文字+数字 的排版类型
+```
+数据格式
+{
+	"kind":2,
+	"background":["#B678FD","#4A64F9"],
+	"content":[
+		{"text":"环比增长","value":"3.2%","colortext":"#fff","colorvalue":"#fff","size":"24rpx"},
+		{"text":"同比增长","value":"1.1%","colortext":"#fff","colorvalue":"#fff","size":"24rpx"}
+	]
+}
+```
+- 3：分三层，上层纯数字，中层纯文字，下层分左右块，左下层文+数，右下层文+数 的排版类型
+```
+数据格式
+{
+	"kind":3,
+	"background":["#B678FD","#4A64F9"],
+	"content":[
+		{"text":"","value":"38%","colortext":"","colorvalue":"#fff","size":"44rpx"},
+		{"text":"小程序购买活跃会员占比","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"},
+		{"text":"同比","value":"2.5%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"},
+		{"text":"环比","value":"3.2%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"}
+	]
+}
+```
+- 5：分5层，具体可看会员运营-活跃会员的板块
+```
+{
+	"kind":5,
+	"background":["#F77E89","#F7953B"],
+	"content":[
+		{"text":"会员销售占比","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"},
+		{"text":"","value":"80%","colortext":"","colorvalue":"#fff","size":"44rpx"},
+		{"text":"环比","value":"81.5%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"},
+		{"text":"同比","value":"-81.3%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"},
+		{"text":"平均参考水平","value":"85%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"}
+	]
+},
+```
 
 ## 后期计划
 - 新增排行的复用组件
