@@ -25,15 +25,7 @@
 
 ## 由于其他图表都有对应的插件文件，所以仅对text-block封装的参数做说明
 
- 1. 表头 (header)
-
-    | params | 类型           | 说明                                        |
-    | ------ | -------------- | ------------------------------------------- |
-    | label  | string         | 表头显示的文字                              |
-    | key    | string         | 表头的key键值，用于列内容的赋值             |
-    | width  | string, number | 该列的列宽，其值可覆盖参数default-col-width |
-
-### 数据进度(data-progress)
+ 数据进度(data-progress)
 
 	| params    | 类型   | 说明                                       |
 	| ------    | ------ | -------------------------------------------|
@@ -42,10 +34,11 @@
 	| now       | string | 现在达成值                                 |
 	| value     | string | 现在达成值/目标值                           |
 
-### 文本块 (text-block)
+ 文本块 (text-block)
+
     | params | 类型           | 说明                                        |
     | ------ | -------------- | ------------------------------------------- |
-    | kind  | string         | 表示使用哪种类型的文本块                              |
+    | kind  | string         | 表示使用哪种类型的文本块                       |
     | background    | string         | 背景颜色             |
     | content  | array | 该文本框内文本内容 |
 	
