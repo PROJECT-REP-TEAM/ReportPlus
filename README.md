@@ -1,6 +1,6 @@
 # UReport数据报表中心小程序
 
-## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢ucharts作者秋云和SirW的优秀开源项目
+## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## `小伙伴们，如果觉得还不错记得 star 呀`
 
@@ -23,7 +23,7 @@
 - 会员服务
 - ![会员服务](https://img-blog.csdnimg.cn/20210309103717854.gif#pic_center)
 
-## 由于其他图表都有对应的插件文件，所以仅对text-block封装的参数做说明
+## 由于其他图表都有对应的插件文件，所以仅对data-progress和text-block封装的参数做说明
 
  1. 进度条 (data-progress)
 
