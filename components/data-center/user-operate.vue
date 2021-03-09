@@ -45,7 +45,6 @@
 				<view class="title">活跃会员分布
 					<text class="font-middle">(最近活跃时间)</text>
 				</view>
-				<!-- <data-table :table="userActiveAt"></data-table> -->
 				<senior-table :headers="dataTable.headers" :contents="dataTable.contents" :urlCol="dataTable.urlCol" :firstLineFixed="true" :sortCol="dataTable.sortCol" :computedCol="dataTable.computedCol" :formatCol="dataTable.formatCol"></senior-table>
 			</view>
 			<view class="split_line"></view>
@@ -87,13 +86,13 @@
 	
 	import userOperateLineBar from '../../static/json/user-operate/1.json';
 	import userActive from '../../static/json/user-operate/2.json';
-	import userConsume from '../../static/json/user-operate/2.json';
+	import userConsume from '../../static/json/user-operate/3.json';
 	import userARPU from '../../static/json/user-operate/4.json';
-	import userActiveAt from '../../static/json/user-operate/6.json';
+	import dataTable from "../../static/json/user-operate/6.json"
 	import xProductDropPrecent from '../../static/json/user-operate/7.json';
 	import wProductDropPrecent from '../../static/json/user-operate/9.json';
 	import illnessDropPrecent from '../../static/json/user-operate/8.json';
-	import dataTable from "../../static/json/table/2.json"
+	
 	
 	export default {
 		name:'user-operate',
@@ -112,7 +111,6 @@
 				userActive,
 				userConsume,
 				userARPU,
-				userActiveAt,
 				xProductDropPrecent,
 				wProductDropPrecent,
 				illnessDropPrecent,

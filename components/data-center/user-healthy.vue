@@ -28,13 +28,6 @@
 				<text-block :content="miniActive"></text-block>
 				<mix-canvas :mixJson="miniActivePrecent" canvasId="hh"></mix-canvas>
 			</view>
-			<view class="split_line"></view>
-			
-			<!-- 小程序购买活跃会员占比-->
-			<view class="friend_operate">
-				<text-block :content="buyActive"></text-block>
-				<mix-canvas :mixJson="buyActivePrecent" canvasId="ii"></mix-canvas>
-			</view>
 		</scroll-view>
 		<view  v-else class="container padding_stand-big normal_color">
 			<li class="iconfont icon-cry cry"></li>暂无数据
@@ -49,12 +42,11 @@
 	import userHealthyLineBar from '../../static/json/user-healthy/1.json';
 	import baseData from '../../static/json/user-healthy/2.json';
 	import userTrand from '../../static/json/user-healthy/3.json';
-	import buyActivePrecent from '../../static/json/user-healthy/3.json';
-	import miniActivePrecent from '../../static/json/user-healthy/3.json';
+	
 	import scanTrand from '../../static/json/user-healthy/4.json';
 	import scanTrandPrecent from '../../static/json/user-healthy/5.json';
 	import miniActive from '../../static/json/user-healthy/6.json';
-	import buyActive from '../../static/json/user-healthy/6.json';
+	import miniActivePrecent from '../../static/json/user-healthy/7.json';
 	
 	var _self;
 	export default {
@@ -77,8 +69,6 @@
 				scanTrandPrecent,
 				miniActive,
 				miniActivePrecent,
-				buyActive,
-				buyActivePrecent
 			}
 		},
 		mounted() {

@@ -46,11 +46,10 @@
 	
 	import wechatLineBar from '../../static/json/wechat/1.json';
 	import friendTextBlock from '../../static/json/wechat/2.json';
-	import friendTrand from '../../static/json/wechat/3.json';
-	import panelData from '../../static/json/wechat/4.json';
+	import panelData from '../../static/json/wechat/3.json';
+	import friendTrand from '../../static/json/wechat/4.json';
 	import teamTrand from '../../static/json/wechat/5.json';
-	import userChat from '../../static/json/wechat/6.json';
-	import dataTable from "../../static/json/table/1.json"
+	import dataTable from "../../static/json/wechat/6.json"
 	
 	export default {
 		name:'wechat',
@@ -70,7 +69,6 @@
 				friendTrand,
 				panelData,
 				teamTrand,
-				userChat,
 				dataTable
 			}
 		},
