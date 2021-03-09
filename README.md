@@ -3,8 +3,8 @@
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## 下载地址
-[码云Gitee开源](https://gitee.com/huang_si_hao/uni_-report)
-[Dcloud插件市场](https://ext.dcloud.net.cn/plugin?id=4373)
+- [码云Gitee开源](https://gitee.com/huang_si_hao/uni_-report)
+- [Dcloud插件市场](https://ext.dcloud.net.cn/plugin?id=4373)
 
 ## `小伙伴们，如果觉得还不错记得 star 呀`
 
