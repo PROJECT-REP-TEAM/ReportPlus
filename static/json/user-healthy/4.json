@@ -3,16 +3,16 @@
 		"kind":1,
 		"background":["#B678FD","#4A64F9"],
 		"content":[
-			{"text":"","value":"42%","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
-			{"text":"当日扫码率","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+			{"text":"","value":"42%","colortext":"","colorvalue":"#fff","size":"44rpx"},
+			{"text":"当日扫码率","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"}
 		]
 	},
 	{
 		"kind":1,
 		"background":["#B678FD","#4A64F9"],
 		"content":[
-			{"text":"","value":"37%","colortext":"","colorvalue":"#24ABFD","size":"44rpx"},
-			{"text":"累计扫码率","value":"","colortext":"#000","colorvalue":"","size":"24rpx"}
+			{"text":"","value":"37%","colortext":"","colorvalue":"#fff","size":"44rpx"},
+			{"text":"累计扫码率","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"}
 		]
 	},
 	{
