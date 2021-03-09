@@ -41,13 +41,18 @@
 					<pie-canvas :pieJson="ProductRateData" canvasId="aa"></pie-canvas>
 				</view>
 				<view class="split_line"></view>
+				<!-- 服务评价概览-->
+				<view class="friend_operate">
+					<view class="title">服务评价概览</view>
+					<text-block :content="ServiceComment"></text-block>
+				</view>
 				<!-- 本周会员访问趋势图 -->
 				<view class="friend_operate">
 					<view class="title">本周会员访问趋势图
 					</view>
 					<mix-canvas :mixJson="TrendData" canvasId="aa"></mix-canvas>
 				</view>
-				<!-- <view class="split_line"></view> -->
+				
 			</template>
 			<template v-else>
 				<view class="container padding_stand-big normal_color">
@@ -65,6 +70,7 @@
 	import CircleData from "../../static/json/user-server/1.json"
 	import ProductRateData from '../../static/json/user-server/2.json';
 	import TrendData from '../../static/json/user-server/3.json';
+	import ServiceComment from '../../static/json/user-server/4.json';
 	export default {
 		name:"user-server",
 		props:{
@@ -81,6 +87,7 @@
 				CircleData,
 				TrendData,
 				ProductRateData,
+				ServiceComment
 			}
 		},
 		methods:{

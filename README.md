@@ -9,8 +9,8 @@
 ![](https://img-blog.csdnimg.cn/2021030910362459.jpg#pic_center)
 
 ## 特点
-- 使用的是uni-app中最受欢迎的图表uCharts插件完成图表展示，该插件文档详细，且调用简单方便、性能及体验极佳。# [ucharts图表插件](https://ext.dcloud.net.cn/plugin?id=271)。
-- 使用wyb-tav=ble插件完成表格功能，支持图表排序、滚动等众多功能，上手极其方便。# [table表格插件](https://ext.dcloud.net.cn/plugin?id=2667)
+- 使用的是uni-app中最受欢迎的图表uCharts插件完成图表展示，该插件文档详细，且调用简单方便、性能及体验极佳。 [ucharts图表插件](https://ext.dcloud.net.cn/plugin?id=271)。
+- 使用wyb-tav=ble插件完成表格功能，支持图表排序、滚动等众多功能，上手极其方便。 [table表格插件](https://ext.dcloud.net.cn/plugin?id=2667)
 - 对页面、图表、表格都进行了封装，用户只需要进行数据组装即可快速完成页面的布局。
 
 ## UReport的页面
@@ -68,6 +68,19 @@
 		{"text":"小程序购买活跃会员占比","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"},
 		{"text":"同比","value":"2.5%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"},
 		{"text":"环比","value":"3.2%","colortext":"#fff","colorvalue":"#fff","size":"20rpx"}
+	]
+}
+```
+- 4：分三层，上层纯文字，中层纯数字，下层文+数， 的排版类型
+```
+数据格式
+{
+	"kind":4,
+	"background":["#3EB2F5","#9374F7"],
+	"content":[
+		{"text":"平均分","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"},
+		{"text":"","value":"82","colortext":"","colorvalue":"#fff","size":"44rpx"},
+		{"text":"up","value":"0.7","colortext":"","colorvalue":"#fff","size":"20rpx"}
 	]
 }
 ```

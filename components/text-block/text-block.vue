@@ -26,7 +26,7 @@
 				<view class="view_100" :style="{fontSize:item.content[1].size,color:item.content[1].colorvalue}">{{item.content[1].value}}</view>
 				<view class="four_3" :style="{fontSize:item.content[2].size,color:item.content[2].colorvalue}">
 					<text>比上月</text>
-					<li v-if="item.content[2].text == 'up'" class="iconfont icon-up icon" style="color: #FA1E4F;"></li>
+					<li v-if="item.content[2].text == 'up'" class="iconfont icon-up icon" style="color: #fff;"></li>
 					<li v-else class="iconfont icon-down icon"></li>
 					<text>{{item.content[2].value}}</text>
 				</view>
