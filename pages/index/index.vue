@@ -1,6 +1,7 @@
 <template>
 	<view class="window">
-		<view class="nav row_align_center" :style="{marginTop: topBar+'px'}" id="nav">
+		<view class="topLine" :style="{height: topBar+'px'}"></view>
+		<view class="nav row_align_center" id="nav">
 			<text class="title">{{title?title:''}}</text>
 			<li class="iconfont icon-zuojiantou back hidden"></li>
 		</view>
@@ -184,7 +185,10 @@
 	.window{
 		height: 100vh;
 		overflow: hidden;
-		
+		.topLine{
+			background-color: #40A2ED;
+			width: 100%;
+		}
 		
 		scroll-view {
 			box-sizing: border-box;

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="content">
 		<scroll-view class="data_body" scroll-y :style="{height:scrollHeight}">
 			<template v-if="true">
 				<!-- 会员成长数据-->
@@ -90,6 +90,11 @@
 				ServiceComment
 			}
 		},
+		watch:{
+			scrollHeight(newV){
+				console.log(newV);
+			}
+		},
 		methods:{
 			getColor(index){
 				let color = "";
@@ -111,13 +116,16 @@
 			},
 		},
 		created() {
+			
 		}
 	}
 </script>
 
 <style scoped lang="scss">
+	.content{
+		padding-top: 10rpx;
+	}
 	.data_body{
-		padding: 10rpx 0;
 		height: 100%;
 		text-align: center;
 		color: #333333;
@@ -173,7 +181,7 @@
 				.circle{
 					position: absolute;
 					right: 8rpx;
-					top: 14rpx;
+					top: 16rpx;
 				}
 			}
 			.block_0{
