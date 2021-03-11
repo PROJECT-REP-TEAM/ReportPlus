@@ -17,6 +17,30 @@
 			</view>
 			<view class="split_line"></view>
 			
+			<!-- 2d模式-->
+			<view class="friend_operate">
+				<view style="height: 800rpx;">
+					<view class="title">2D模式</view>
+					<view class="trend_title">模拟器可能会不显示，请到真机下运行查看</view>
+					<view  style="height: 600rpx;">
+						<u-charts
+						class="qiun-charts" 
+						type="column" 
+						canvasId="renshu2" 
+						:opts="opts"
+						canvas2d="true"
+						:chartData="chartData" 
+						:inScrollView="true"
+						@getIndex="getIndex"
+						@complete="complete"
+						@scrollLeft="scrollLeft"
+						@scrollRight="scrollRight"
+						/>
+					</view>
+				</view>
+			</view>
+			<view class="split_line"></view>
+			
 			<!-- 微客群运营-->
 			<view class="friend_operate">
 				<view class="title">微客群运营</view>
@@ -41,6 +65,7 @@
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
+	import uCharts from "../canvas/mix-test.vue"
 	import PanelCanvas from "../canvas/panel-canvas.vue"
 	import SeniorTable from "../data-table/senior-table.vue"
 	
@@ -60,7 +85,7 @@
 			}
 		},
 		components:{
-			DataProgress,MixCanvas,PanelCanvas,SeniorTable
+			DataProgress,MixCanvas,PanelCanvas,SeniorTable,uCharts
 		},
 		data() {
 			return {
@@ -69,14 +94,68 @@
 				friendTrand,
 				panelData,
 				teamTrand,
-				dataTable
+				dataTable,
+				scrollTop: 0,
+				//覆盖默认配置，开启滚动条
+				opts:{
+					enableScroll: true,
+					xAxis: {
+						itemCount:4,
+						scrollShow:true,
+						scrollAlign:'left',
+					},
+				},
+				//模拟的后端返回数据，实际应用自行拼接
+				chartData:{
+					categories: ['2020-12-10', '2020-12-11', '2020-12-12', '2020-12-13', '2020-12-14', '2020-12-15', '2020-12-16', '2020-12-17', '2020-12-18'],
+					series: [
+						{
+							name: '日新增用户量',
+							data: [10, 20, 10, 30, 20, 15, 30, 40,55]
+						}
+					]
+				}
 			}
 		},
-		mounted() {
-			
+		onShareAppMessage(){
+				//#ifdef MP-QQ
+				qq.showShareMenu({showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']})
+				//#endif
 		},
 		methods:{
-			
+			//获取点击图表索引
+			getIndex(e){
+				console.log(e);
+				//TODO something
+				console.log(e.charts.opts);
+				//获取到索引后，可以获取该索引相关一系列数据，其中e.charts.opts中可获取相关
+				console.log(e.charts.opts.categories[e.currentIndex],e.charts.opts.series[0].data[e.currentIndex])
+			},
+			complete(e){
+				console.log(e);
+				//移除监听事件，避免其他动作时触发该事件
+				e.charts.delEventListener('renderComplete')
+				//TODO something
+				//下面展示了渲染完成后显示自定义tooltip
+				//{mp:{changedTouches:[{x: 0, y: 80}]}}其中x值无需指定，y值为tooltip显示的上边距的值
+				let cindex=3;//默认显示的索引位置
+				let textList=[{text:'默认显示的tooltip',color:null},{text:'类别1：某个值xxx',color:'#2fc25b'},{text:'类别2：某个值xxx',color:'#facc14'},{text:'类别3：某个值xxx',color:'#f04864'}];
+				e.charts.showToolTip({mp:{changedTouches:[{x: 0, y: 80}]}}, {
+					index:cindex,
+					textList:textList
+				});
+			},
+			//开启滚动条后，滚动条到最左侧触发的事件，用于动态打点
+			scrollLeft(e){
+				console.log(e);
+			},
+			//开启滚动条后，滚动条到最右侧触发的事件，用于动态打点
+			scrollRight(e){
+				console.log(e);
+			},
+			scroll(e) {
+					this.scrollTop = e.detail.scrollTop
+			},
 		}
 	}
 </script>

@@ -10,7 +10,8 @@
 </template>
 
 <script>
-	import uCharts from '../../utils/uCharts/u-charts.min.js';
+	// import uCharts from '../../utils/uCharts/u-charts.min.js';
+	import uCharts from '../../js_sdk/u-charts/u-charts.min.js';
 	var _self;
 	var canvaMix={};
    
