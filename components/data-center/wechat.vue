@@ -26,7 +26,8 @@
 						<u-charts
 						class="qiun-charts" 
 						type="column" 
-						canvasId="renshu2" 
+						canvasId="renshu2"
+						pixelRatio=3
 						:opts="opts"
 						canvas2d="true"
 						:chartData="chartData" 

@@ -7,8 +7,8 @@
 		</view>
 		<view class="row_align_center head" id="head">
 			<!-- 日期下拉列表 -->
-			<drop-down @changeItem="changeTime" :list="timeArray" :contentTop="top" selectWidth="260rpx"
-			 contentLeft="0" ref="dropdown"></drop-down>
+			<drop-down ref="caleDrop" @tap="changDrop(1)" @changeItem="changeTime" :list="timeArray" :contentTop="top" selectWidth="260rpx"
+			 contentLeft="0"></drop-down>
 			 <!-- 日历选择日期 -->
 			<view v-if="showCalendar" :class="['dropdown-item__selected',listWidth!='150rpx'?'dropdown-item__right':'dropdown-item__left']"
 				  @click="openCalendar" class="calendar_drag">
@@ -16,7 +16,7 @@
 				<li class="iconfont icon-calendar" style="margin-left: 10rpx;"></li>
 			</view>
 			<!-- 公司区域下拉列表 -->
-			<drop-down @changeItem="changeLocation" :list="locationArray" :contentTop="top" contentRight="10"
+			<drop-down ref="companyDrop" @tap="changDrop(2)" @changeItem="changeLocation" :list="locationArray" :contentTop="top" contentRight="10"
 			 :selectWidth="showCalendar?'200rpx':'300rpx'" listWidth="75%"></drop-down>
 		</view>
 		<uni-calendar
@@ -94,6 +94,13 @@
 			}
 		},
 		methods: {
+			changDrop(index){
+				if(index == 1 && this.$refs.companyDrop.showList){
+					this.$refs.companyDrop.closePopup()
+				}else if(index == 2 && this.$refs.caleDrop.showList){
+					this.$refs.caleDrop.closePopup()
+				}
+			},
 			// 打开日历
 			openCalendar(){
 				this.$refs.calendar.open();
@@ -102,7 +109,7 @@
 			confirm(e) {
 				if (this.nowDate != e.fulldate || !this.showCalendar) {
 					this.showCalendar = true;
-					this.$refs.dropdown.selectAuto();
+					this.$refs.caleDrop.selectAuto();
 					this.nowDate = e.fulldate;
 					this.showDataTime = e.fulldate.replace(/-/g,"");
 					this.$Common.tipMsg("当前时间:"+ this.showDataTime)
