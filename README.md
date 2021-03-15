@@ -112,15 +112,10 @@
 
 ## 常见问题
 - 问题一：点开下拉列表、日历等弹出图层时，图表的层级会盖过这些样式
-  例子：
-  
-![解决前](https://img-blog.csdnimg.cn/20210315165140477.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwMDgxNg==,size_16,color_FFFFFF,t_70#pic_center)
   原因：canvas在微信默认是最高级
   解决方法：将图表改成2d模式既可以解决图表层级最高级的问题，案例中提供了2d模式的demo
-  解决后：
-  ![解决后](https://img-blog.csdnimg.cn/20210315165325211.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwMDgxNg==,size_16,color_FFFFFF,t_70#pic_center)
-
-- 问题二：图表点击无效，显示不出提示信息，那是因为我对它们做了限制，如果不禁掉这些点击事件，会影响整个页面的滚动，因为当你手指在图表上滚动时，会触发图表的事件从而页面的滚动事件失效。
+- 问题二：图表点击无效，显示不出提示信息，
+  原因：对它们做了限制，如果不禁掉这些点击事件，会影响整个页面的滚动，因为当你手指在图表上滚动时，会触发图表的事件从而页面的滚动事件失效。
   解决方法：去看ucharts的混合图表案例，加上点击方法和事件
 
 ## 后期计划
