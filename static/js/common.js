@@ -94,4 +94,51 @@ module.exports = {
 			}
 		}
 	},
+	//检测小程序更新
+	checkUpdateVersion(){
+		//新版本更新
+		if (uni.canIUse('getUpdateManager')) {
+			//判断当前微信版本是否支持版本更新
+			const updateManager = uni.getUpdateManager();
+			updateManager.onCheckForUpdate(function (res) {
+				if (res.hasUpdate) {
+					// 请求完新版本信息的回调
+					updateManager.onUpdateReady(function () {
+						uni.showModal({
+							title: '更新提示',
+							content: '已更新版本，是否重启小程序？',
+							showCancel:false,
+							cancelColor:'#eeeeee',
+							confirmColor:'#40A2ED',
+							success: function (res) {
+								if (res.confirm) {
+									// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+									updateManager.applyUpdate();
+								}
+							},
+						});
+					});
+					// 新的版本下载失败
+					updateManager.onUpdateFailed(function () {
+						uni.showModal({
+							title: '更新失败',
+							content: '请检查网络设置，若仍更新失败，重新搜索打开',
+							success(res) {
+								if (res.confirm) {
+									// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+									updateManager.applyUpdate();
+								}
+							}
+						});
+					});
+				}
+			});
+		} else {
+			uni.showModal({
+				// 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+				title: '提示',
+				content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
+			});
+		}
+	},
 }

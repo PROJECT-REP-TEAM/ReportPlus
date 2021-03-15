@@ -262,7 +262,6 @@ export default {
 		init() {
 			chartdom = uni.createSelectorQuery().in(this).select('.chartsview');
 			chartdom.boundingClientRect(data => {
-				console.log(data,"--------");
 				if(data.width>0 && data.height>0){
 					this.cWidth = data.width
 					this.cHeight = data.height

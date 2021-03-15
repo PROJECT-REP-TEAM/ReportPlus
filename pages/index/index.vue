@@ -151,7 +151,7 @@
 			},
 		},
 		onLoad() {
-			uni.hideShareMenu();
+			uni.showShareMenu();
 			this.getTelephoneInfo();
 		}
 	};

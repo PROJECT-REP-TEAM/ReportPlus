@@ -126,14 +126,14 @@
 		methods:{
 			//获取点击图表索引
 			getIndex(e){
-				console.log(e);
+				// console.log(e);
 				//TODO something
-				console.log(e.charts.opts);
+				// console.log(e.charts.opts);
 				//获取到索引后，可以获取该索引相关一系列数据，其中e.charts.opts中可获取相关
-				console.log(e.charts.opts.categories[e.currentIndex],e.charts.opts.series[0].data[e.currentIndex])
+				// console.log(e.charts.opts.categories[e.currentIndex],e.charts.opts.series[0].data[e.currentIndex])
 			},
 			complete(e){
-				console.log(e);
+				// console.log(e);
 				//移除监听事件，避免其他动作时触发该事件
 				e.charts.delEventListener('renderComplete')
 				//TODO something

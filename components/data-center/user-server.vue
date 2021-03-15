@@ -33,6 +33,7 @@
 					</view>
 				</view>
 				<view class="split_line"></view>
+				
 				<!-- 会员数据来源 -->
 				<view class="friend_operate">
 					<view class="title">会员数据来源
@@ -41,18 +42,25 @@
 					<pie-canvas :pieJson="ProductRateData" canvasId="aa"></pie-canvas>
 				</view>
 				<view class="split_line"></view>
+				
 				<!-- 服务评价概览-->
 				<view class="friend_operate">
 					<view class="title">服务评价概览</view>
 					<text-block :content="ServiceComment"></text-block>
 				</view>
+				
 				<!-- 本周会员访问趋势图 -->
 				<view class="friend_operate">
-					<view class="title">本周会员访问趋势图
-					</view>
+					<view class="title">本周会员访问趋势图</view>
 					<mix-canvas :mixJson="TrendData" canvasId="aa"></mix-canvas>
 				</view>
+				<view class="split_line"></view>
 				
+				<!-- 新增会员排行榜 -->
+				<view class="friend_operate">
+					<view class="title">新增会员排行榜</view>
+					<ranking-list :content="RankData" @updateRanking="updateRanking"></ranking-list>
+				</view>
 			</template>
 			<template v-else>
 				<view class="container padding_stand-big normal_color">
@@ -67,10 +75,12 @@
 	import ProgressCircle from "../canvas/progress-circle.vue"
 	import PieCanvas from "../canvas/pie-canvas.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
+	import RankingList from "../ranking-list/ranking-list.vue"
 	import CircleData from "../../static/json/user-server/1.json"
 	import ProductRateData from '../../static/json/user-server/2.json';
 	import TrendData from '../../static/json/user-server/3.json';
 	import ServiceComment from '../../static/json/user-server/4.json';
+	import RankData from '../../static/json/user-server/5.json';
 	export default {
 		name:"user-server",
 		props:{
@@ -80,22 +90,22 @@
 			}
 		},
 		components:{
-			ProgressCircle,MixCanvas,PieCanvas
+			ProgressCircle,MixCanvas,PieCanvas,RankingList
 		},
 		data(){
 			return {
 				CircleData,
 				TrendData,
 				ProductRateData,
-				ServiceComment
-			}
-		},
-		watch:{
-			scrollHeight(newV){
-				console.log(newV);
+				ServiceComment,
+				RankData
 			}
 		},
 		methods:{
+			updateRanking(nVal){
+				this.RankData = nVal;
+				console.log(this.RankData);
+			},
 			getColor(index){
 				let color = "";
 				switch(index){

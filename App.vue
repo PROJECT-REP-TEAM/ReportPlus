@@ -5,7 +5,7 @@
 <script>
 	export default {
 		onLaunch: function() {
-			
+			this.$Common.checkUpdateVersion();
 		}
 	}
 </script>
