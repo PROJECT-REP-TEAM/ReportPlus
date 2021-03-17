@@ -287,34 +287,6 @@
 				margin-bottom: 10rpx;
 			}
 		}
-		
-		.qiun-charts {
-			width: 750upx;
-			height: 500upx;
-			background-color: #FFFFFF;
-		}
-		
-		.line_window {
-			position: fixed;
-			z-index: 80;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-		
-			.shadow {
-				width: 100%;
-				height: 100%;
-				z-index: 90;
-				position: absolute;
-				background-color: rgba(0, 0, 0, 0.5);
-			}
-		
-			.body {
-				background-color: #fff;
-				z-index: 100;
-			}
-		}
 	}
 	.water-mark-mask {
 		width: 100%;

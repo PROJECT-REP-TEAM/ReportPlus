@@ -1,32 +1,27 @@
 [
 	{
 		"name":"华东",
-		"background":["#F77E89","#F7953B"],
 		"num":50000,
-		"width":"83.17"
+		"width":""
 	},
 	{
 		"name":"华南",
-		"background":["#3EB2F5","#9374F7"],
 		"num":30000,
-		"width":"49.90"
+		"width":""
 	},
 	{
 		"name":"华北",
-		"background":["#3EB2F5","#9374F7"],
 		"num":45500,
-		"width":"75.68"
+		"width":""
 	},
 	{
 		"name":"西北",
-		"background":["#3EB2F5","#9374F7"],
 		"num":60120,
-		"width":"100.00"
+		"width":""
 	},
 	{
 		"name":"西南",
-		"background":["#3EB2F5","#9374F7"],
 		"num":26020,
-		"width":"43.23"
+		"width":""
 	}
 ]
