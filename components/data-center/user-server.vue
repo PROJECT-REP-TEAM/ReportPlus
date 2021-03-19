@@ -104,7 +104,6 @@
 		methods:{
 			updateRanking(nVal){
 				this.RankData = nVal;
-				console.log(this.RankData);
 			},
 			getColor(index){
 				let color = "";

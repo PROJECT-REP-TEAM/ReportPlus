@@ -4,9 +4,16 @@
  -->
 <script>
 	export default {
-		onLaunch: function() {
-			this.$Common.checkUpdateVersion();
-		}
+		mpType: 'app',
+		  onLaunch() {
+		    this.$Common.checkUpdateVersion();
+		  },
+		  onShow() {
+		    console.log('App Show');
+		  },
+		  onHide() {
+		    console.log('App Hide');
+		  },
 	}
 </script>
 

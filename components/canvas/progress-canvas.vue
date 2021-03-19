@@ -56,11 +56,6 @@
 			this.arcbarWidth=uni.upx2px(24);
 			this.getServerData();
 		},
-		onShareAppMessage(){
-				//#ifdef MP-QQ
-				qq.showShareMenu({showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']})
-				//#endif
-		},
 		methods: {
 			getServerData(){
 				let Arcbar1={series:[]};

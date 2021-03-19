@@ -12,7 +12,7 @@
 		</view>
 		<view class="dropdown-item__content" :style="{top: contentTop + 'rpx'}" v-if="showList">
 			<!-- dropdown -->
-			<view :class="['list', showClass]" :style="{left: contentLeft>0?contentLeft + 'rpx':auto,right: contentRight>0?contentRight + 'rpx':auto,}">
+			<view :class="['list', showClass]" :style="{left: contentLeft>0?contentLeft + 'rpx':'auto',right: contentRight>0?contentRight + 'rpx':'auto',}">
 				<view class="list__option"
 					v-for="(item, index) in list" :key="index"
 					@click="choose(item)">
@@ -39,16 +39,16 @@
 				}
 			},
 			contentTop:{
-				type:Number,
-				default:185
+				type:String,
+				default:"185"
 			},
 			contentLeft:{
-				type:Number,
-				default:0
+				type:String,
+				default:"0"
 			},
 			contentRight:{
-				type:Number,
-				default:0
+				type:String,
+				default:"0"
 			},
 			listWidth:{
 				type:String,
@@ -114,6 +114,10 @@
 </script>
 
 <style lang="scss">
+	
+	li{
+		 list-style-type:none;
+	}
 	.dropdown-item__content{
 		z-index: 10!important;
 	}

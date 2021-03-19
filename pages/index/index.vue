@@ -151,7 +151,9 @@
 			},
 		},
 		onLoad() {
+			//#ifndef H5
 			uni.showShareMenu();
+			//#endif
 			this.getTelephoneInfo();
 		}
 	};

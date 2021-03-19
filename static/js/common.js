@@ -26,6 +26,7 @@ module.exports = {
 			var data = uni.getStorageSync("telephoneInfo");
 			if(!data){
 				// 获取右上角胶囊的位置信息
+				//#ifndef H5
 				let btn = wx.getMenuButtonBoundingClientRect();
 				uni.getSystemInfo({
 					success: e => {
@@ -42,6 +43,7 @@ module.exports = {
 						reject(err);
 					}
 				})
+				//#endif
 			}else{
 				resolve(data);
 			}

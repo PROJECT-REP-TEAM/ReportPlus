@@ -54,11 +54,6 @@
 			this.cHeight=uni.upx2px(250);
 			this.getServerData();
 		},
-		onShareAppMessage(){
-				//#ifdef MP-QQ
-				qq.showShareMenu({showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']})
-				//#endif
-		},
 		methods: {
 			getServerData(){
 				

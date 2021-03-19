@@ -1,22 +1,22 @@
 [
 	{
 		"name":"访问人数",
-		"precent":"22.47",
+		"precent":22.4,
 		"value":"12786"
 	},
 	{
 		"name":"新访问人数",
-		"precent":"37.17",
+		"precent":37.17,
 		"value":"1096"
 	},
 	{
 		"name":"总添加人数",
-		"precent":"0.17",
+		"precent":0.17,
 		"value":"147604"
 	},
 	{
 		"name":"新添加人数",
-		"precent":"63.21",
+		"precent":63.21,
 		"value":"173"
 	}
 ]

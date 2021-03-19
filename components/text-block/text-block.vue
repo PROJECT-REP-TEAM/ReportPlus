@@ -16,8 +16,8 @@
 				<view class="view_100" :style="{fontSize:item.content[1].size,color:item.content[1].colortext}">{{item.content[1].text}}</view>
 				<view class="three_3 view_100">
 					<view v-for="(j,i) in 2" :key="i">
-						<text :style="{fontSize:item.content[j+2].size,color:item.content[j+2].colortext}">{{item.content[j+2].text}}:</text>
-						<text :style="{fontSize:item.content[j+2].size,color:item.content[j+2].colorvalue}">{{item.content[j+2].value}}</text>
+						<text :style="{fontSize:item.content[i+2].size,color:item.content[i+2].colortext}">{{item.content[i+2].text}}:</text>
+						<text :style="{fontSize:item.content[i+2].size,color:item.content[i+2].colorvalue}">{{item.content[i+2].value}}</text>
 					</view>
 				</view>
 			</view>
@@ -113,6 +113,9 @@
 			border-radius: 10rpx;
 			.four_3{
 				display: flex;
+				li {
+					 list-style-type:none;
+				}
 				.icon{
 					margin-top: -8rpx;
 					transform: scale(0.8);

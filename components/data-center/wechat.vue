@@ -18,7 +18,7 @@
 			<view class="split_line"></view>
 			
 			<!-- 2d模式-->
-			<view class="friend_operate">
+			<!-- <view class="friend_operate">
 				<view style="height: 800rpx;">
 					<view class="title">2D模式</view>
 					<view class="trend_title">模拟器可能会不显示，请到真机下运行查看</view>
@@ -40,7 +40,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="split_line"></view>
+			<view class="split_line"></view> -->
 			
 			<!-- 微客群运营-->
 			<view class="friend_operate">
@@ -66,7 +66,7 @@
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
 	import MixCanvas from "../canvas/mix-canvas.vue"
-	import uCharts from "../canvas/mix-test.vue"
+	// import uCharts from "../canvas/mix-test.vue"
 	import PanelCanvas from "../canvas/panel-canvas.vue"
 	import SeniorTable from "../data-table/senior-table.vue"
 	
@@ -86,7 +86,7 @@
 			}
 		},
 		components:{
-			DataProgress,MixCanvas,PanelCanvas,SeniorTable,uCharts
+			DataProgress,MixCanvas,PanelCanvas,SeniorTable,
 		},
 		data() {
 			return {
@@ -117,11 +117,6 @@
 					]
 				}
 			}
-		},
-		onShareAppMessage(){
-				//#ifdef MP-QQ
-				qq.showShareMenu({showShareItems: ['qq', 'qzone', 'wechatFriends', 'wechatMoment']})
-				//#endif
 		},
 		methods:{
 			//获取点击图表索引

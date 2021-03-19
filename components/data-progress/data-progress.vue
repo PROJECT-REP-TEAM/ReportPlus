@@ -24,12 +24,12 @@
 				}
 			},
 			borderRadius:{
-				type:String,
-				default:""
+				type:Number,
+				default:0
 			},
 			padMiddle:{
-				type:Boolean,
-				default:false
+				type:String,
+				default:"false"
 			}
 		},
 		data() {

@@ -42,12 +42,12 @@ export default {
 			default: "uchartsid"
 		},
 		canvas2d: {
-			type: Boolean,
-			default: false
+			type: String,
+			default: "false"
 		},
 		pixelRatio: {
-			type: Number,
-			default: 1
+			type: String,
+			default: "1"
 		},
 		background: {
 			type: String,
@@ -285,6 +285,7 @@ export default {
 							.fields({ node: true, size: true })
 							.exec((res) => {
 								const canvas = res[0].node
+								console.log(canvas);
 								const ctx = canvas.getContext('2d')
 								options[this.canvasId].context = ctx
 								canvas.width = data.width * this.pixelRatio
