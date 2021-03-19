@@ -86,7 +86,11 @@
 			}
 		},
 		components:{
-			DataProgress,MixCanvas,PanelCanvas,SeniorTable,
+			DataProgress,
+			MixCanvas,
+			PanelCanvas,
+			SeniorTable,
+			// uCharts
 		},
 		data() {
 			return {
