@@ -25,10 +25,10 @@
 				<view class="view_100" :style="{fontSize:item.content[0].size,color:item.content[0].colortext}">{{item.content[0].text}}</view>
 				<view class="view_100" :style="{fontSize:item.content[1].size,color:item.content[1].colorvalue}">{{item.content[1].value}}</view>
 				<view class="four_3" :style="{fontSize:item.content[2].size,color:item.content[2].colorvalue}">
-					<text>比上月</text>
-					<li v-if="item.content[2].text == 'up'" class="iconfont icon-up icon" style="color: #fff;"></li>
-					<li v-else class="iconfont icon-down icon"></li>
-					<text>{{item.content[2].value}}</text>
+					<text>{{item.content[2].text}}</text>
+					<li v-if="item.content[3].text == 'up'" class="iconfont icon-up icon" :style="{color:item.content[3].colortext}"></li>
+					<li v-else class="iconfont icon-down icon" :style="{color:item.content[3].colortext}"></li>
+					<text :style="{fontSize:item.content[3].size,color:item.content[3].colorvalue}">{{item.content[3].value}}</text>
 				</view>
 			</view>
 			<view v-else-if="item.kind == 5" :key="index" :class="[(index+1)%3==0 ? '':'marginRight','kind','kind_five','breathe-red']" :style="{backgroundImage:'linear-gradient(to top right,'+item.background[0]+','+item.background[1]+')',marginRight:(index+1)%3==0?'0rpx':'40rpx'}">

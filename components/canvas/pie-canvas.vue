@@ -21,6 +21,10 @@
 				type:Object,
 				default:null
 			},
+			chartType:{
+				type:String,
+				default:'ring'
+			}
 		},
 		data() {
 			return {
@@ -60,9 +64,9 @@
 				canvaPie=new uCharts({
 					$this:_self,
 					canvasId: canvasId,
-					type: 'ring',
+					type: this.chartType,
 					fontSize:11,
-					padding:[15,15,0,15],
+					padding:[15,60,0,15],
 					legend:{
 						show:true,
 						padding:5,
@@ -81,6 +85,9 @@
 						  border:true,
 						  borderColor:'#FFFFFF',
 						  borderWidth:1
+						},
+						rose:{
+							labelWidth:30
 						}
 					},
 				});
@@ -94,7 +101,7 @@
 				// canvaPie.touchLegend(e,{animation:true});
 			},
 			changeData(){
-				if(isJSON(_self.textarea)){
+				if(this.$Common.isJSON(_self.textarea)){
 					let newdata=JSON.parse(_self.textarea);
 					canvaPie.updateData({
 						series: newdata.series,
@@ -114,13 +121,13 @@
 <style>
 	/*样式的width和height一定要与定义的cWidth和cHeight相对应*/
 	.qiun-charts {
-		width: 750upx;
+		width: 100%;
 		height: 500upx;
 		background-color: #FFFFFF;
 	}
 	
 	.charts {
-		width: 750upx;
+		width: 100%;
 		height: 500upx;
 		background-color: #FFFFFF;
 	}

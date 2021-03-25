@@ -4,7 +4,7 @@
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## 下载地址
-- [码云Gitee开源](https://gitee.com/huang_si_hao/uni_-report)
+- [码云Gitee开源](https://gitee.com/huang_si_hao/u_report)
 - [Dcloud插件市场](https://ext.dcloud.net.cn/plugin?id=4373)
 
 ## `小伙伴们，如果觉得还不错记得 star 呀`
@@ -22,11 +22,14 @@
 - 企业微信
 - ![企业微信](https://img-blog.csdnimg.cn/20210311104151959.gif#pic_center)
 - 会员运营
-- ![企业微信](https://img-blog.csdnimg.cn/20210311104151959.gif#pic_center)
+- ![会员运营](https://img-blog.csdnimg.cn/20210325112754464.gif#pic_center)
 - 会员健康
 - ![会员健康](https://img-blog.csdnimg.cn/20210311104348588.gif#pic_center)
 - 会员服务
-- ![会员服务](https://img-blog.csdnimg.cn/20210311104405144.gif#pic_center)
+- ![会员服务](https://img-blog.csdnimg.cn/20210325112821960.gif#pic_center)
+- 智慧教育报表中心
+- ![智慧教育报表中心](https://img-blog.csdnimg.cn/2021032511291616.gif#pic_center)
+
 
 ## 由于其他图表都有对应的插件文件，所以仅对data-progress和text-block封装的参数做说明
 
@@ -87,11 +90,12 @@
 ```
 {
 	"kind":4,
-	"background":["#3EB2F5","#9374F7"],
+	"background":["#F0F0F0","#F0F0F0"],
 	"content":[
-		{"text":"平均分","value":"","colortext":"#fff","colorvalue":"","size":"24rpx"},
-		{"text":"","value":"82","colortext":"","colorvalue":"#fff","size":"44rpx"},
-		{"text":"up","value":"0.7","colortext":"","colorvalue":"#fff","size":"20rpx"}
+		{"text":"已评价数","value":"","colortext":"#000","colorvalue":"","size":"24rpx"},
+		{"text":"","value":"161","colortext":"","colorvalue":"#09A1FD","size":"44rpx"},
+		{"text":"增长","value":"","colortext":"#000","colorvalue":"","size":"20rpx"},
+		{"text":"up","value":"325","colortext":"#DF297D","colorvalue":"#f25287","size":"20rpx"}
 	]
 }
 ```

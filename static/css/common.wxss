@@ -9,7 +9,9 @@
     display: flex;
     flex-direction: column;
 }
-
+.margin_stand-samll{
+	margin:5px 0;
+}
 .column_justify_center {
     display: flex;
     flex-direction: column;

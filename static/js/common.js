@@ -143,4 +143,43 @@ module.exports = {
 			});
 		}
 	},
+	/**
+	 * @param {string} url 目标页面的路由
+	 * @param {Object} param 传递给目标页面的参数
+	 * @description 处理目标页面的参数，转成json字符串传递给param字段，在目标页面通过JSON.parse(options.param)接收
+	 */
+	navigateTo(url, param = {},flag) {
+		if(store.state.isReadyLogin<=0 && !flag){
+			this.loginTip();
+		}else{
+			let part = '';
+			for(var item in param){
+				part += '&' + item + '=' + param[item];
+			}
+			url = "/pages" + url + part.replace('&','?');
+			uni.navigateTo({
+				url: url,
+				fail:err=> {
+					this.tipMsg('暂未开放该功能！');
+				},
+			})
+		}
+	},
+	navigateBack(url, param = {}) {
+	    if (store.state.loginFlag <= 0) {
+	        this.tipMsg("很抱歉,你没有权限！");
+	    } else {
+	        let part = '';
+	        for (var item in param) {
+	            part += '&' + item + '=' + param[item];
+	        }
+	        url = "/pages" + url + part.replace('&', '?');
+	        uni.navigateBack({
+	            url: url,
+	            fail: err => {
+	                this.tipMsg('暂未开放该功能！');
+	            },
+	        })
+	    }
+	},
 }

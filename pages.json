@@ -7,6 +7,20 @@
 		  "navigationStyle": "custom",
 		  "pageOrientation": "auto"
 	  }
+	},
+	{
+	  "path": "pages/main/index",
+	  "style": {
+		  "navigationStyle": "custom",
+		  "pageOrientation": "auto"
+	  }
+	},
+	{
+	  "path": "pages/school/index",
+	  "style": {
+		  "navigationStyle": "custom",
+		  "pageOrientation": "auto"
+	  }
 	}
   ],
   "window": {

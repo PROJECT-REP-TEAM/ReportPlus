@@ -79,7 +79,7 @@
 					canvasId: this.canvasId,
 					type: 'mix',
 					fontSize:11,
-					padding:[5,5,0,5],
+					padding:[5,30,0,5],
 					legend:{
 						show:true,
 						position:'bottom',
@@ -107,6 +107,7 @@
 						data:this.yAxis,
 						showTitle:true,
 						gridType:'dash',
+						disableGrid:this.yAxis[0].disableGrid == undefined ?false:this.yAxis[0].disableGrid,
 						dashLength:4,
 						splitNumber:5
 					},
@@ -144,13 +145,13 @@
 				});
 				*/
 				//下面是拖动滚动条到尽头的事件，不需要请删除
-				canvaMix[_self.canvasId].addEventListener('scrollLeft', () => {
-				    console.log("已经到最【左】边啦");
-				});
-				//下面是拖动滚动条到尽头的事件，不需要请删除
-				canvaMix[_self.canvasId].addEventListener('scrollRight', () => {
-				    console.log("已经到最【右】边啦");
-				});
+				// canvaMix[_self.canvasId].addEventListener('scrollLeft', () => {
+				//     console.log("已经到最【左】边啦");
+				// });
+				// //下面是拖动滚动条到尽头的事件，不需要请删除
+				// canvaMix[_self.canvasId].addEventListener('scrollRight', () => {
+				//     console.log("已经到最【右】边啦");
+				// });
 			},
 			touchMix(e){
 				canvaMix[this.canvasId].scrollStart(e);
@@ -175,14 +176,14 @@
 <style>
 	/*样式的width和height一定要与定义的cWidth和cHeight相对应*/
 	.qiun-charts {
-		width: 750upx;
+		width: 100%;
 		height: 500upx;
 		background-color: #FFFFFF;
 		position: relative;
 	}
 	
 	.charts {
-		width: 750upx;
+		width: 100%;
 		height: 500upx;
 		background-color: #FFFFFF;
 	}
