@@ -33,16 +33,16 @@
 		<wuc-tab id="wuctab" :tab-list="tabList" :tabCur.sync="tabCur" tab-class="text-center text-white bg-blue" select-class="text-white"></wuc-tab>
 		<!--主体内容-->
 		<view class="data_body">
-			<view v-show="tabCur == 0">
+			<view v-if="tabCur == 0">
 				<wechat :scrollHeight="scrollHeight" />
 			</view>
-			<view v-show="tabCur == 1">
+			<view v-else-if="tabCur == 1">
 				<user-operate :scrollHeight="scrollHeight" />
 			</view>
-			<view v-show="tabCur == 2">
+			<view v-else-if="tabCur == 2">
 				<user-healthy :scrollHeight="scrollHeight"/>
 			</view>
-			<view v-show="tabCur == 3">
+			<view v-else-if="tabCur == 3">
 				<user-server :scrollHeight="scrollHeight"></user-server>
 			</view>
 		</view>

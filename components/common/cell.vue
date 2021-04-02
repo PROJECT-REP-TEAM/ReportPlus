@@ -1,7 +1,7 @@
 <template>
 	<view class="row_align_center cell_body"  :style="{margin:marginVal}" @click="clickCell">
 		<li v-if="leftIcon != '' && !isImg" :class="[leftIcon,leftIconClass,'iconfont']" style="margin-right: 18rpx;"></li>
-		<image v-if="leftIcon != '' && isImg" :src="leftIcon" :class="leftIconClass"></image>
+		<image v-if="leftIcon != '' && isImg" :src="leftIcon" class="cellIcon"></image>
 		<text class="the_text">{{textVal}}</text>
 		<slot></slot>
 		<li v-if="rightIcon != ''" :class="[rightIcon,rightIconClass,'iconfont']"></li>
@@ -17,10 +17,6 @@
 				default: ''
 			},
 			rightIcon:{
-				type: String,
-				default: ''
-			},
-			leftIconClass:{
 				type: String,
 				default: ''
 			},
@@ -62,6 +58,11 @@
 	.cell_body{
 		padding: 24rpx 0;
 		border-bottom: 1px solid #F8F8FA;
+		.cellIcon{
+			margin-right: 18rpx;
+			height: 40rpx;
+			width: 40rpx;
+		}
 		.the_text{
 			flex: 1;
 			font-size: 14px;
@@ -69,6 +70,9 @@
 		}
 		.iconfont{
 			color: #fff;
+		}
+		li {
+			list-style-type:none;
 		}
 	}
 	

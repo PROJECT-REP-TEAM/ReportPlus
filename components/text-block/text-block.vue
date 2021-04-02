@@ -63,6 +63,12 @@
 		},
 		methods: {
 			
+		},
+		mounted() {
+			uni.onWindowResize((res) => {
+			    console.log('变化后的窗口宽度=' + res.size.windowWidth)
+			    console.log('变化后的窗口高度=' + res.size.windowHeight)
+			})
 		}
 	}
 </script>

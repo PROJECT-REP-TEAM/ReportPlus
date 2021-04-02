@@ -1,6 +1,6 @@
 <template>
 	<view class="window column">
-		<view class="topLine" :style="{height: topBar+'px'}"></view>
+		<!-- <view class="topLine" :style="{height: topBar+'px'}"></view> -->
 		<view class="nav row_align_center" id="nav">
 			<text class="title">报表视图</text>
 			<li class="iconfont icon-zuojiantou back hidden"></li>
