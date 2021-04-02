@@ -7,7 +7,7 @@
 - [码云Gitee开源](https://gitee.com/huang_si_hao/u_report)
 - [Dcloud插件市场](https://ext.dcloud.net.cn/plugin?id=4373)
 
-## `小伙伴们，如果觉得还不错记得 star 呀`
+## `无偿开源！你们的start是我的动力！`
 
 ## 快速体验
 
