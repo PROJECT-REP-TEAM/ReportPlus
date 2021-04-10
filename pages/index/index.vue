@@ -1,3 +1,16 @@
+<!-- 
+ * UReport 精美报表工具
+ * Copyright (c) 2021 howcode https://gitee.com/huang_si_hao All rights reserved.
+ * MIT ( https://gitee.com/huang_si_hao/u_report/blob/master/LICENSE )
+ * 复制使用请保留本段注释，感谢支持开源！
+ * 
+ * 开源地址:
+ * https://gitee.com/huang_si_hao/u_report
+ * 
+ * uni-app插件市场地址：
+ * https://ext.dcloud.net.cn/plugin?id=4373
+ * 
+ -->
 <template>
 	<view class="window column">
 		<!-- <view class="topLine" :style="{height: topBar+'px'}"></view> -->
