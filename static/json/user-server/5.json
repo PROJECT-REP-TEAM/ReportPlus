@@ -2,26 +2,31 @@
 	{
 		"name":"华东",
 		"num":50000,
-		"width":""
+		"width":"",
+		"background":"#FFBE68"
 	},
 	{
 		"name":"华南",
 		"num":30000,
-		"width":""
+		"width":"",
+		"background":"#0FEBE1"
 	},
 	{
 		"name":"华北",
 		"num":45500,
-		"width":""
+		"width":"",
+		"background":"#BF8DFC"
 	},
 	{
 		"name":"西北",
 		"num":60120,
-		"width":""
+		"width":"",
+		"background":"#FF859C"
 	},
 	{
 		"name":"西南",
 		"num":26020,
-		"width":""
+		"width":"",
+		"background":"#51ADCF"
 	}
 ]
