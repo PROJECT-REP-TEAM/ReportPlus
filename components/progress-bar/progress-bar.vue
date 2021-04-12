@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<view class="ranking">
-			<view class="ranking-item" v-for="(content,index) in content" :key="index">
+		<view v-if="content.length > 0" class="ranking">
+			<view class="ranking-item" v-for="(content,index) in content" :key="index" :style="{padding:progressPadding+'rpx'}">
 				<view class="name">{{content.name}}</view>
 				<view class="progress" >
-					<text :style="{background:content.background,width:content.width + '%'}"></text>
+					<text :style="{background:content.background,width:content.width + '%',height:progressWidth+'rpx'}"></text>
 				</view>
 				<view class="num">{{content.num}}</view>
 			</view>
@@ -21,14 +21,43 @@
 				default() {
 					return []
 				}
+			},
+			isPC:{
+			    type:Boolean,
+			    default:false
+			},
+			isRank:{
+			    type:Boolean,
+			    default:false
+			}
+		},
+		data(){
+			return{
+				progressWidth:24,
+				progressPadding:10,
+				maxNumber:0,
+				culCount:0
+			}
+		},
+		watch:{
+			content(newV){
+				this.culCount += 1;
+				if(this.culCount < 3){
+					this.init()
+				}
 			}
 		},
 		methods:{
 			init(){
 				if(this.content && this.content.length >0){
-					let max = Math.max.apply(Math,this.content.map(item => { return item.num }));
+					if(this.isRank){
+						this.content = this.content.sort((a,b) => b.num - a.num);
+						this.maxNumber = this.content[0].num;
+					}else{
+						this.maxNumber = Math.max.apply(Math,this.content.map(item => { return item.num }));
+					}
 					this.content.map((item,index) =>{
-						item.width = this.computeWidth(max,item.num);
+						item.width = this.computeWidth(this.maxNumber,item.num);
 					});
 					this.$emit("updateRanking",this.content)
 				}
@@ -39,6 +68,10 @@
 			},
 		},
 		mounted() {
+			if(this.isPC){
+			    this.progressWidth = 40;
+				this.progressPadding = 30;
+			}
 			this.init();
 		}
 	}
@@ -48,15 +81,17 @@
 	.ranking-item{
 		display: flex;
 		margin-bottom: 13rpx;
-		padding: 10rpx;
 		align-content: center;
-		height: 24rpx;
+		height: 28rpx;
 		
 		.name{
 			padding-right: 10rpx;
 			color: #868688;
 			font-size: 20rpx;
 			flex: 1;
+			white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
 		}
 		.progress{
 			flex:5;
@@ -65,7 +100,6 @@
 			
 			text{
 				display: inline-block;
-				height: 100%;
 				border-radius: 30rpx;
 				vertical-align:top;
 			}
