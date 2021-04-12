@@ -26,7 +26,15 @@
 					<text class="font-small">(会员年度平均销售金额)</text>
 					<text class="trend_title">目标增量{{userARPU.targetAdd}}</text>
 				</view>
-				<mix-canvas :mixJson="userARPU" canvasId="cc"></mix-canvas>
+				<!-- <mix-canvas :mixJson="userARPU" canvasId="cc"></mix-canvas> -->
+				<view class="charts-box">
+					<qiun-data-charts type="mix"
+						:chartData="userARPU" 
+						:reshow="delayload"
+						:canvas2d="isCanvas2d"
+						canvasId="two_a"
+						:opts="{yAxis:{data:[{title: '',max:userARPU?userARPU.yAxis[0].max:0,min:userARPU?userARPU.yAxis[0].min:0},{title: '',unit:'%',max:userARPU?userARPU.yAxis[1].max:0,min:userARPU?userARPU.yAxis[1].min:0,position:'right'}]},extra:{markLine:{data:[{value:userARPU?userARPU.target:'',LineColor:'#ff9900',showLabel:true}]}}}"/>
+				</view>
 			</view>
 			<view class="split_line"></view>
 			
@@ -36,7 +44,15 @@
 					<text class="font-middle">(年)</text>
 					<text class="trend_title">目标增量{{userARPU.targetAdd}}</text>
 				</view>
-				<mix-canvas :mixJson="userARPU" canvasId="dd"></mix-canvas>
+				<!-- <mix-canvas :mixJson="userARPU" canvasId="dd"></mix-canvas> -->
+				<view class="charts-box">
+						<qiun-data-charts type="mix"
+							:chartData="userARPU" 
+							:reshow="delayload"
+							:canvas2d="isCanvas2d"
+							canvasId="two_b"
+							:opts="{yAxis:{data:[{title: '',max:userARPU?userARPU.yAxis[0].max:0,min:userARPU?userARPU.yAxis[0].min:0},{title: '',unit:'%',max:userARPU?userARPU.yAxis[1].max:0,min:userARPU?userARPU.yAxis[1].min:0,position:'right'}]},extra:{markLine:{data:[{value:userARPU?userARPU.target:'',LineColor:'#ff9900',showLabel:true}]}}}"/>
+				</view>
 			</view>
 			<view class="split_line"></view>
 			
@@ -54,14 +70,33 @@
 				<view class="title">
 					X（慢病） 商品脱落率
 				</view>
-				<progress-canvas :progressJson="xProductDropPrecent"></progress-canvas>
+				<!-- <progress-canvas :progressJson="xProductDropPrecent"></progress-canvas> -->
+				<view style="display: flex;justify-content: space-between;">
+					<view v-for="(item,index) in xProductDropPrecent" class="charts-box" style="height: 130px;width: 45%;">
+						<qiun-data-charts 
+							type="arcbar" 
+							:chartData="item" 
+							:canvasId="'two_c_'+ index" 
+							:canvas2d="true"
+							:reshow="delayload"
+							:opts="{title:{name:item.series[0].data * 100 + '%',color:item.series[0].color,fontSize:25},subtitle:{name:item.series[0].name,color:'#666666',fontSize:12}}" />
+					</view>
+				</view>
 			</view>
 			
 			<!-- 慢病病种脱落率-->
 			<view class="friend_operate">
 				<view class="title">慢病病种脱落率
 				</view>
-				<mix-canvas :mixJson="illnessDropPrecent" canvasId="ee"></mix-canvas>
+				<!-- <mix-canvas :mixJson="illnessDropPrecent" canvasId="ee"></mix-canvas> -->
+				<view class="charts-box">
+					<qiun-data-charts type="mix"
+						:chartData="illnessDropPrecent" 
+						:reshow="delayload"
+						:canvas2d="true"
+						canvasId="two_d"
+						:opts="{yAxis:{data:[{title: ''}]}}"/>
+				</view>
 			</view>
 			
 			<!-- W商品脱落率-->
@@ -69,7 +104,18 @@
 				<view class="title">
 					W（保健） 商品脱落率
 				</view>
-				<progress-canvas :progressJson="wProductDropPrecent"></progress-canvas>
+				<!-- <progress-canvas :progressJson="wProductDropPrecent"></progress-canvas> -->
+				<view style="display: flex;justify-content: space-between;">
+					<view v-for="(item,index) in wProductDropPrecent" class="charts-box" style="height: 130px;width: 45%;">
+						<qiun-data-charts 
+							type="arcbar" 
+							:chartData="item" 
+							:canvasId="'two_e_'+index" 
+							:canvas2d="true"
+							:reshow="delayload"
+							:opts="{title:{name:item.series[0].data * 100 + '%',color:item.series[0].color,fontSize:25},subtitle:{name:item.series[0].name,color:'#666666',fontSize:12}}" />
+					</view>
+				</view>
 			</view>
 		</scroll-view>
 		<view  v-else class="container padding_stand-big normal_color">
@@ -80,8 +126,6 @@
 
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
-	import MixCanvas from "../canvas/mix-canvas.vue"
-	import ProgressCanvas from "../canvas/progress-canvas.vue"
 	import SeniorTable from "../data-table/senior-table.vue"
 	
 	import userOperateLineBar from '../../static/json/user-operate/1.json';
@@ -103,7 +147,7 @@
 			}
 		},
 		components:{
-			DataProgress,MixCanvas,ProgressCanvas,SeniorTable
+			DataProgress,SeniorTable
 		},
 		data() {
 			return {
@@ -114,13 +158,22 @@
 				xProductDropPrecent,
 				wProductDropPrecent,
 				illnessDropPrecent,
-				dataTable
+				dataTable,
+				delayload:false,
+				isCanvas2d:this.$Config.ISCANVAS2D
 			}
 		},
 		mounted() {
+			this.getData();
 		},
 		methods:{
-			
+			async getData(){
+				uni.showLoading();
+				await setTimeout(() => {
+					this.delayload = true;
+					uni.hideLoading();
+				}, 1000)
+			}
 		}
 	}
 </script>

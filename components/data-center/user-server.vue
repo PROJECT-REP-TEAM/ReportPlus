@@ -7,17 +7,13 @@
 					<view class="title">会员成长数据</view>
 					<view class="progress_circle">
 						<view v-for="(item,index) in CircleData" :key="index" :class="['progress_block','block_'+index]">
-							<view class="name">{{item.name}}</view>
-							<view class="value">{{item.value}}</view>
-							<progress-circle 
-								class="circle" 
-								cid="circle10" 
-								type="circle" 
-								:percent="item.precent" 
-								stroke-color="#fff" 
-								:stroke-background="getColor(index)"
-								font-color="#fff"
-							/>
+							<view class="name">{{item.series[0].name}}</view>
+							<view class="value">{{item.series[0].value}}</view>
+							<view class="charts-box arcbar" style="height: 180rpx;width: 60%;">
+								<qiun-data-charts type="arcbar" :chartData="item" :canvasId="'four_a_'+index" :canvas2d="isCanvas2d"
+									:resshow="delayload"
+									:opts="{title:{name:item.series[0].precent,color:item.series[0].color,fontSize:15},subtitle:{name:'',color:'#666666',fontSize:12},extra:{arcbar:{backgroundColor:item.series[0].backgroundColor}}}" />
+							</view>
 							<view class="planet">
 								<view class="planet_shadow"></view>
 								<view class="crater1"></view>
@@ -39,7 +35,15 @@
 					<view class="title">会员数据来源
 						<text class="font-small" style="color: #ff9900;">(Top5访问来源)</text>
 					</view>
-					<pie-canvas :pieJson="ProductRateData" canvasId="aa"></pie-canvas>
+					<view v-if="delayload" class="charts-box">
+						<qiun-data-charts 
+						type="ring" 
+						canvasId="four_b"
+						:canvas2d="isCanvas2d" 
+						:resshow="delayload"
+						:opts="{legend:{position: 'bottom'},extra:{ring:{ringWidth: 60}},title:{name: '',},subtitle: {name: ''}}" 
+						:chartData="ProductRateData"/>
+					</view>
 				</view>
 				<view class="split_line"></view>
 				
@@ -52,14 +56,23 @@
 				<!-- 本周会员访问趋势图 -->
 				<view class="friend_operate">
 					<view class="title">本周会员访问趋势图</view>
-					<mix-canvas :mixJson="TrendData" canvasId="aa"></mix-canvas>
+					<view v-if="delayload" class="charts-box" style="height: 300px;">
+						<qiun-data-charts 
+							type="mix" 
+							canvasId="four_c" 
+							:canvas2d="isCanvas2d" 
+							:resshow="delayload"
+							:opts="{yAxis:{data:[{position: 'left',title: '',min:0,unit:'万'}]}}"
+							:chartData="TrendData" 
+						/>
+					</view>
 				</view>
 				<view class="split_line"></view>
 				
 				<!-- 新增会员排行榜 -->
 				<view class="friend_operate">
 					<view class="title">新增会员排行榜</view>
-					<ranking-list :content="RankData" @updateRanking="updateRanking"></ranking-list>
+					<progress-bar :isPC="isPC" :isRank="isRank" :content="RankData" @updateRanking="updateRanking" />
 				</view>
 			</template>
 			<template v-else>
@@ -72,10 +85,8 @@
 </template>
 
 <script>
-	import ProgressCircle from "../canvas/progress-circle.vue"
-	import PieCanvas from "../canvas/pie-canvas.vue"
-	import MixCanvas from "../canvas/mix-canvas.vue"
-	import RankingList from "../ranking-list/ranking-list.vue"
+	import ProgressBar from "../progress-bar/progress-bar.vue"
+	
 	import CircleData from "../../static/json/user-server/1.json"
 	import ProductRateData from '../../static/json/user-server/2.json';
 	import TrendData from '../../static/json/user-server/3.json';
@@ -90,7 +101,7 @@
 			}
 		},
 		components:{
-			ProgressCircle,MixCanvas,PieCanvas,RankingList
+			ProgressBar
 		},
 		data(){
 			return {
@@ -98,34 +109,26 @@
 				TrendData,
 				ProductRateData,
 				ServiceComment,
-				RankData
+				RankData,
+				isRank:true,
+				isCanvas2d:this.$Config.ISCANVAS2D,
+				delayload: false, //延时加载图表，否则会出现图表加载完后定位错乱
 			}
 		},
 		methods:{
+			async getData(){
+				uni.showLoading();
+				await setTimeout(() => {
+					this.delayload = true;
+					uni.hideLoading();
+				}, 1000)
+			},
 			updateRanking(nVal){
 				this.RankData = nVal;
 			},
-			getColor(index){
-				let color = "";
-				switch(index){
-					case 0:
-						color = "#00AEF9";
-						break;
-					case 1:
-						color = "#F55676";
-						break;
-					case 2:
-						color = "#FAB215";
-						break;
-					case 3:
-						color = "#2EC693";
-						break;
-				}
-				return color;
-			},
 		},
-		created() {
-			
+		mounted() {
+			this.getData();
 		}
 	}
 </script>
@@ -191,6 +194,11 @@
 					position: absolute;
 					right: 8rpx;
 					top: 16rpx;
+				}
+				.arcbar{
+					position: absolute;
+					right: -4rpx;
+					top: 8rpx;
 				}
 			}
 			.block_0{

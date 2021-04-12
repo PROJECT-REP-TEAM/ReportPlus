@@ -11,43 +11,31 @@
 			<view class="friend_operate">
 				<view class="title">微好友运营</view>
 				<text-block :content="friendTextBlock"></text-block>
-				<panel-canvas :panelData="panelData"></panel-canvas>
-				<view class="trend_title">新增微好友&小程序会员趋势</view>
-				<mix-canvas :mixJson="friendTrand" canvasId="aa"></mix-canvas>
-			</view>
-			<view class="split_line"></view>
-			
-			<!-- 2d模式-->
-			<!-- <view class="friend_operate">
-				<view style="height: 800rpx;">
-					<view class="title">2D模式</view>
-					<view class="trend_title">模拟器可能会不显示，请到真机下运行查看</view>
-					<view  style="height: 600rpx;">
-						<u-charts
-						class="qiun-charts" 
-						type="column" 
-						canvasId="renshu2"
-						pixelRatio=3
-						:opts="opts"
-						canvas2d="true"
-						:chartData="chartData" 
-						:inScrollView="true"
-						@getIndex="getIndex"
-						@complete="complete"
-						@scrollLeft="scrollLeft"
-						@scrollRight="scrollRight"
-						/>
+				<view style="display: flex;justify-content: space-around;">
+					<view v-for="(item,index) in panelData" :key="index" class="charts-box"
+						style="width: 45%;height: 200px;">
+						<qiun-data-charts type="gauge"
+							:opts="{title:{name: item.series[0].data * 100 + '%',color: '#24ABFD',offsetY:30},subtitle: {name: item.series[0].name,color: '#666666',fontSize: 15,offsetY:70},extra:{gauge:{type:'progress',width:20,splitLine:{fixRadius:-10,width:15,},}}}"
+							:chartData="item" :reshow="delayload" :canvas2d="isCanvas2d" :canvasId="'one_a_' + index" />
 					</view>
 				</view>
+				<view class="trend_title">新增微好友&小程序会员趋势</view>
+				<view class="charts-box">
+					<qiun-data-charts type="mix" :chartData="friendTrand" :reshow="delayload"
+						:canvas2d="isCanvas2d" canvasId="one_b" :opts="{yAxis:{data:[{title: ''}]}}" />
+				</view>
 			</view>
-			<view class="split_line"></view> -->
+			<view class="split_line"></view>
 			
 			<!-- 微客群运营-->
 			<view class="friend_operate">
 				<view class="title">微客群运营</view>
 				<text-block :content="friendTextBlock"></text-block>
 				<view class="trend_title">新增人群&退群人数趋势</view>
-				<mix-canvas :mixJson="teamTrand" canvasId="bb"></mix-canvas>
+				<view class="charts-box">
+					<qiun-data-charts type="mix" :chartData="teamTrand" :reshow="delayload" :canvas2d="isCanvas2d"
+						canvasId="one_c" :opts="{yAxis:{data:[{title: '',max:teamTrand?teamTrand.yAxis[0].max:0,min:teamTrand?teamTrand.yAxis[0].min:0}]}}" />
+				</view>
 			</view>
 			<view class="split_line"></view>
 			
@@ -65,9 +53,6 @@
 
 <script>
 	import DataProgress from "../data-progress/data-progress.vue"
-	import MixCanvas from "../canvas/mix-canvas.vue"
-	// import uCharts from "../canvas/mix-test.vue"
-	import PanelCanvas from "../canvas/panel-canvas.vue"
 	import SeniorTable from "../data-table/senior-table.vue"
 	
 	import wechatLineBar from '../../static/json/wechat/1.json';
@@ -87,10 +72,7 @@
 		},
 		components:{
 			DataProgress,
-			MixCanvas,
-			PanelCanvas,
 			SeniorTable,
-			// uCharts
 		},
 		data() {
 			return {
@@ -101,61 +83,21 @@
 				teamTrand,
 				dataTable,
 				scrollTop: 0,
-				//覆盖默认配置，开启滚动条
-				opts:{
-					enableScroll: true,
-					xAxis: {
-						itemCount:4,
-						scrollShow:true,
-						scrollAlign:'left',
-					},
-				},
-				//模拟的后端返回数据，实际应用自行拼接
-				chartData:{
-					categories: ['2020-12-10', '2020-12-11', '2020-12-12', '2020-12-13', '2020-12-14', '2020-12-15', '2020-12-16', '2020-12-17', '2020-12-18'],
-					series: [
-						{
-							name: '日新增用户量',
-							data: [10, 20, 10, 30, 20, 15, 30, 40,55]
-						}
-					]
-				}
+				delayload: false,
+				isCanvas2d: this.$Config.ISCANVAS2D,
 			}
 		},
+		mounted() {
+			this.getData();
+		},
 		methods:{
-			//获取点击图表索引
-			getIndex(e){
-				// console.log(e);
-				//TODO something
-				// console.log(e.charts.opts);
-				//获取到索引后，可以获取该索引相关一系列数据，其中e.charts.opts中可获取相关
-				// console.log(e.charts.opts.categories[e.currentIndex],e.charts.opts.series[0].data[e.currentIndex])
-			},
-			complete(e){
-				// console.log(e);
-				//移除监听事件，避免其他动作时触发该事件
-				e.charts.delEventListener('renderComplete')
-				//TODO something
-				//下面展示了渲染完成后显示自定义tooltip
-				//{mp:{changedTouches:[{x: 0, y: 80}]}}其中x值无需指定，y值为tooltip显示的上边距的值
-				let cindex=3;//默认显示的索引位置
-				let textList=[{text:'默认显示的tooltip',color:null},{text:'类别1：某个值xxx',color:'#2fc25b'},{text:'类别2：某个值xxx',color:'#facc14'},{text:'类别3：某个值xxx',color:'#f04864'}];
-				e.charts.showToolTip({mp:{changedTouches:[{x: 0, y: 80}]}}, {
-					index:cindex,
-					textList:textList
-				});
-			},
-			//开启滚动条后，滚动条到最左侧触发的事件，用于动态打点
-			scrollLeft(e){
-				console.log(e);
-			},
-			//开启滚动条后，滚动条到最右侧触发的事件，用于动态打点
-			scrollRight(e){
-				console.log(e);
-			},
-			scroll(e) {
-					this.scrollTop = e.detail.scrollTop
-			},
+			async getData() {
+				uni.showLoading();
+				await setTimeout(() => {
+					this.delayload = true;
+					uni.hideLoading();
+				}, 1000)
+			}
 		}
 	}
 </script>
