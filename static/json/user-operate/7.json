@@ -1,16 +1,25 @@
-[
-	{
-		"series": [{
-			"title": "当前脱落率",
-			"data": 0.18,
-			"color": "#24ABFD"
-		}]
-	},
-	{
-		"series": [{
-			"title": "脱落率警示线",
-			"data": 0.25,
-			"color": "#f04864"
-		}]
-	}
-]
+[{
+ 		"series": [{
+ 			"color": "#24ABFD",
+ 			"data": 0.18,
+ 			"index": 0,
+ 			"legendShape": "circle",
+ 			"name": "当前脱落率",
+ 			"pointShape": "circle",
+ 			"show": true,
+ 			"type": "arcbar"
+ 		}]
+ 	},
+ 	{
+ 		"series": [{
+ 			"color": "#F04864",
+ 			"data": 0.25,
+ 			"index": 0,
+ 			"legendShape": "circle",
+ 			"name": "脱落率警示线",
+ 			"pointShape": "circle",
+ 			"show": true,
+ 			"type": "arcbar"
+ 		}]
+ 	}
+ ]
