@@ -17,8 +17,7 @@
 
 ## 快速体验
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20210405142313930.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwMDgxNg==,size_16,color_FFFFFF,t_70#pic_center)
-
+![体验码](https://img-blog.csdnimg.cn/2021030910362459.jpg#pic_center)
 
 ## 特点
 - 使用的是uni-app中最受欢迎的图表uCharts插件完成图表展示，该插件文档详细，且调用简单方便、性能及体验极佳。 [ucharts图表插件](https://ext.dcloud.net.cn/plugin?id=271)。
@@ -33,7 +32,8 @@
 - 会员健康
 - ![会员健康](https://img-blog.csdnimg.cn/20210311104348588.gif#pic_center)
 - 会员服务
-- ![会员服务](https://img-blog.csdnimg.cn/20210325112821960.gif#pic_center)
+- ![会员服务](https://img-blog.csdnimg.cn/20210412113943673.gif#pic_center)
+
 - 智慧教育报表中心
 - ![智慧教育报表中心](https://img-blog.csdnimg.cn/2021032511291616.gif#pic_center)
 
