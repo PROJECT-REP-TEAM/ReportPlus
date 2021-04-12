@@ -3,6 +3,20 @@ const COLOR = [
     "#EE6A66", "#6BC588", "#FFC300", "#24ABFD"
 ];
 
+var ISCANVAS2D = true;
+
+switch (uni.getSystemInfoSync().platform) {
+	case 'android':
+		ISCANVAS2D = true
+		break;
+	case 'ios':
+		ISCANVAS2D = true
+		break;
+	default:
+		ISCANVAS2D = false
+		break;
+}
+
 const RESPOND = {
     success: 0,
     warn: 301,
@@ -52,4 +66,5 @@ module.exports = {
     TIMEARRAY,
     TABLIST,
     RESPOND,
+		ISCANVAS2D
 }
