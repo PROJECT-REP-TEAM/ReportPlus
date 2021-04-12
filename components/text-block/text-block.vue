@@ -25,7 +25,7 @@
 				<view class="view_100" :style="{fontSize:item.content[0].size,color:item.content[0].colortext}">{{item.content[0].text}}</view>
 				<view class="view_100" :style="{fontSize:item.content[1].size,color:item.content[1].colorvalue}">{{item.content[1].value}}</view>
 				<view class="four_3" :style="{fontSize:item.content[2].size,color:item.content[2].colorvalue}">
-					<text>{{item.content[2].text}}</text>
+					<text :style="{fontSize:item.content[3].size,color:item.content[3].colorvalue}">{{item.content[2].text}}</text>
 					<li v-if="item.content[3].text == 'up'" class="iconfont icon-up icon" :style="{color:item.content[3].colortext}"></li>
 					<li v-else class="iconfont icon-down icon" :style="{color:item.content[3].colortext}"></li>
 					<text :style="{fontSize:item.content[3].size,color:item.content[3].colorvalue}">{{item.content[3].value}}</text>
