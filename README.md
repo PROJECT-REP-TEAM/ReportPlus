@@ -1,12 +1,13 @@
 
 # UReport数据报表中心小程序
 ## 升级版UReport已上线！！全新体验请查看[howcode-report插件](https://ext.dcloud.net.cn/plugin?id=4651)
-- 解决图层等级问题！
-- 真正全端跨域图表！
+- 解决图层等级问题！（本插件也已解决）
+- 真正全端跨域图表！（本插件也更换成uchart2.0版本）
 - 基于uniCloudAdmin框架，使用云函数开发！
-- 上手更加简便、体验更加友好！
+- 搭配权限系统，可手动分配角色权限！
+- 体验更加友好！
 
-## 若不想使用升级版，可继续使用该插件，但本人目前会花更多维护新插件！
+## 若不想使用升级版，可继续使用该插件！
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## 下载地址
@@ -122,18 +123,23 @@
 ```
 
 ## 常见问题
-### 问题一：点开下拉列表、日历等弹出图层时，图表的层级会盖过这些样式
-  - 
-![解决前](https://img-blog.csdnimg.cn/20210315165140477.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwMDgxNg==,size_16,color_FFFFFF,t_70#pic_center)
-- 原因：canvas在微信默认是最高级
-- 解决方法：将图表改成2d模式既可以解决图表层级最高级的问题，案例中提供了2d模式的demo
- - ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021031517032053.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjAwMDgxNg==,size_16,color_FFFFFF,t_70#pic_center)
-### 问题二：图表点击无效，显示不出提示信息
-- 原因：因为对它们做了限制，如果不禁掉这些点击事件，会影响整个页面的滚动，因为当你手指在图表上滚动时，会触发图表的事件从而页面的滚动事件失效
-- 解决方法：查看ucharts的混合图表案例，加上点击方法和事件
+### 问题一：图表偶尔加载不出或直接显示报错页面
+- 原因：canvasId重复导致图表加载不出；canvasId丢失导致无法获得dom；
+- 解决方法：请务必在组件上定义canvasId，不能为纯数字、不能为变量、不能重复、尽量长一些;请检查微信小程序的基础库，修改至2.16.0或者最新版本的基础库;请检查父元素或父组件是否用v-if来控制显示，如有请改为v-show，并将v-show的逻辑绑定至组件。
+
+### 问题二：图表点击显示不出提示信息或点击位置不精准
+- 原因：组件内嵌套组件 + 开启2d模式 + 组件中使用scroll-view标签，使得获取图表的定位不准
+- 解决方法：组价内加入属性 :inScrollView="true" :pageScrollTop="pageScrollTop" :ontouch="true" ，其中pageScrollTop为当前滚动距离顶部的高度
+
+### 更多问题查看：[秋云图表组件工具](https://demo.ucharts.cn/#/) -> 常见问题
 
 ## 后期计划
-- 新增排行的复用组件
-- 待uCharts的2.0稳定发布，改成uCharts2.0
+
+- 新增更多报表页面
+- 探索更多datacom的用法使用在qiun-data-charts上
+
+## 使用手册
+[uchart官网](https://demo.ucharts.cn/#/)
+[table插件使用说明](https://ext.dcloud.net.cn/plugin?id=2667)
 
 ## 作者联系：1051495009@qq.com
