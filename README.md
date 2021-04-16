@@ -143,4 +143,5 @@
 [uchart官网](https://demo.ucharts.cn/#/)
 [table插件使用说明](https://ext.dcloud.net.cn/plugin?id=2667)
 
-## 作者联系：1051495009@qq.com
+## QQ群
+- 群号：878946748 （进群备注）
