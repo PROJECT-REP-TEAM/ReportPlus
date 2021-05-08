@@ -11,7 +11,7 @@
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## 下载地址
-- [码云Gitee开源](https://gitee.com/howcode/u_report)
+- [码云Gitee开源](https://gitee.com/ureport/UReport)
 - [Dcloud插件市场](https://ext.dcloud.net.cn/plugin?id=4373)
 
 ## `无偿开源！你们的start是我的动力！`
