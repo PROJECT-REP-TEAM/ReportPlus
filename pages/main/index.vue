@@ -1,6 +1,8 @@
 <template>
 	<view class="window">
-		<view class="topLine" :style="{height: topBar+'px'}"></view>
+        <!-- #ifndef H5 -->
+        <view class="topLine" :style="{height: topBar+'px'}"></view>
+        <!-- #endif -->
 		<view class="nav row_align_center" id="nav">
 			<li :class="['iconfont icon-zuojiantou back']" @click="gotoBack()"></li>
 			<text class="title">{{title?title:''}}</text>
@@ -32,7 +34,7 @@
 		<!--滑动列表头-->
 		<wuc-tab id="wuctab" :tab-list="tabList" :tabCur.sync="tabCur" tab-class="text-center text-white bg-blue" select-class="text-white"></wuc-tab>
 		<!--主体内容-->
-		<view class="data_body">
+		<view class="data_body" :style="{height: scrollHeight}">
 			<view v-if="tabCur == 0">
 				<wechat :scrollHeight="scrollHeight" />
 			</view>
@@ -82,7 +84,7 @@
 				tabCur: 0, //标签头下标
 				topBar: 17, //导航高
 				top: '180', //下拉栏位置
-				scrollHeight:"600px", //数据展示体高度
+				scrollHeight:"100%", //数据展示体高度
 				nowDate:this.$Common.getNowDate(),//现在日期
 				endDate:this.$Common.getNowDate(),//日历可选日期范围的结束时间
 				startDate:this.$Common.getPreMonth(this.$Common.getNowDate()),//日历可选日期范围的开始时间,
@@ -141,6 +143,7 @@
 					this.top = telephoneInfo.statusBarHeight * 2 + 150;
 					this.topBar = telephoneInfo.statusBarHeight;
 				}
+                
 				// 设置滚动高度
 				const query = wx.createSelectorQuery();
 				query.select('#nav').boundingClientRect();
@@ -153,12 +156,38 @@
 					this.scrollHeight = (telephoneInfo.screenHeight - hasHeight-this.topBar) + 'px';
 				})
 			},
+            getH5Info(){
+                uni.getSystemInfo({
+                    success: e => {
+                        console.log(e);
+                        let hasHeight = 0;
+                        const element = wx.createSelectorQuery();
+                        element.select('#nav').boundingClientRect();
+                        element.select('#head').boundingClientRect();
+                        element.select('#wuctab').boundingClientRect();
+                        element.exec(res=>{
+                            res.map((item, index)=>{
+                                hasHeight += item.height;
+                            })
+                            this.scrollHeight = (e.screenHeight - hasHeight) + 'px';
+                        })
+                    },
+                    fail: (err) => {
+                        reject(err);
+                    }
+                })
+            }
 		},
 		onLoad() {
 			//#ifndef H5
 			uni.showShareMenu();
+            this.getTelephoneInfo();
 			//#endif
-			this.getTelephoneInfo();
+            //#ifdef H5
+            this.getH5Info();
+            //#endif
+            
+			console.log(this.scrollHeight);
 		}
 	};
 </script>
@@ -169,6 +198,9 @@
 		width: 100%;
 		height: 100%;
 	}
+    li{
+        list-style-type: none;
+    }
 	.window{
 		height: 100vh;
 		overflow: hidden;
@@ -232,6 +264,7 @@
 			color: #333333;
 			background-repeat: repeat;
 			background-color: #ffffff;
+            position: relative;
 			
 			.item{
 				padding: 0 20rpx;

@@ -72,7 +72,7 @@
 				<!-- 新增会员排行榜 -->
 				<view class="friend_operate">
 					<view class="title">新增会员排行榜</view>
-					<progress-bar :isPC="isPC" :isRank="isRank" :content="RankData" @updateRanking="updateRanking" />
+					<progress-bar :isRank="isRank" :content="RankData" @updateRanking="updateRanking" />
 				</view>
 			</template>
 			<template v-else>
