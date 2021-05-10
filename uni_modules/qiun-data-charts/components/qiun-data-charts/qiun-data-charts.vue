@@ -1,5 +1,5 @@
 <!-- 
- * qiun-data-charts 秋云高性能跨全端图表组件 v2.0.0-20210410
+ * qiun-data-charts 秋云高性能跨全端图表组件 v2.1.2-20210509
  * Copyright (c) 2021 QIUN® 秋云 https://www.ucharts.cn All rights reserved.
  * Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
  * 复制使用请保留本段注释，感谢支持开源！
@@ -16,7 +16,7 @@
  * 
  -->
 <template>
-  <view class="chartsview">
+  <view class="chartsview" :id="'ChartBoxId'+cid">
     <view v-if="mixinDatacomLoading">
       <!-- 自定义加载状态，请改这里 -->
       <qiun-loading :loadingType="loadingType" />
@@ -31,6 +31,7 @@
       <view
         :style="{ background: background }"
         style="width: 100%;height: 100%;"
+        :data-directory="directory"
         :id="'EC'+cid" 
         :prop="echartsOpts" 
         :change:prop="rdcharts.ecinit" 
@@ -155,7 +156,7 @@
 </template>
 
 <script>
-import uChartsMp from '../../js_sdk/u-charts/u-charts-v2.0.0.js';
+import uChartsMp from '../../js_sdk/u-charts/u-charts.js';
 import cfu from '../../js_sdk/u-charts/config-ucharts.js';
 // #ifdef APP-VUE || H5
 import cfe from '../../js_sdk/u-charts/config-echarts.js';
@@ -174,7 +175,7 @@ function deepCloneAssign(origin = {}, ...args) {
 
 function formatterAssign(args,formatter) {
   for (let key in args) {
-    if(typeof args[key] === 'object'){
+    if(args[key] !== null && typeof args[key] === 'object'){
       formatterAssign(args[key],formatter)
     }else if(key === 'format' && typeof args[key] === 'string'){
       args['formatter'] = formatter[args[key]] ? formatter[args[key]] : undefined;
@@ -332,6 +333,10 @@ export default {
     pageScrollTop: {
       type: Number,
       default: 0
+    },
+    directory: {
+      type: String,
+      default: '/'
     }
   },
   data() {
@@ -339,6 +344,8 @@ export default {
       cid: 'uchartsid',
       inWx: false,
       inAli: false,
+      inTt:false,
+      inBd:false,
       inH5: false,
       inApp: false,
       type2d: true,
@@ -366,12 +373,13 @@ export default {
       }
       this.cid = id
     }
+    const systemInfo = uni.getSystemInfoSync()
     // #ifdef MP-WEIXIN
     this.inWx = true;
-    if (this.canvas2d === false) {
+    if (this.canvas2d === false || systemInfo.platform === 'windows') {
       this.type2d = false;
     }else{
-      this.pixel = uni.getSystemInfoSync().pixelRatio;
+      this.pixel = systemInfo.pixelRatio;
       if (this.canvasId === 'uchartsid' || this.canvasId == '') {
         console.log('[uCharts]:开启canvas2d模式，必须指定canvasId，否则会出现偶尔获取不到dom节点的问题！');
       }
@@ -381,6 +389,19 @@ export default {
     // #ifndef MP-WEIXIN
     this.type2d = false;
     // #endif
+    // #ifdef MP-ALIPAY
+    this.inAli = true;
+    this.pixel = systemInfo.pixelRatio;
+    // #endif
+    // #ifdef MP-BAIDU
+    this.inBd = true;
+    // #endif
+    // #ifdef MP-TOUTIAO
+    this.inTt = true;
+    // #endif
+    this.disScroll = this.disableScroll;
+  },
+  mounted() {
     // #ifdef APP-VUE
     this.inApp = true;
     if (this.echartsApp === true) {
@@ -398,17 +419,10 @@ export default {
       this.echarts = true;
     }
     // #endif
-    // #ifdef MP-ALIPAY
-    this.inAli = true;
-    this.pixel = uni.getSystemInfoSync().pixelRatio;
-    // #endif
-    this.disScroll = this.disableScroll;
-  },
-  mounted() {
     this.$nextTick(()=>{
       this.beforeInit();
     })
-    // #ifndef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO
+    // #ifndef MP-ALIPAY || MP-BAIDU || MP-TOUTIAO || APP-PLUS
     uni.onWindowResize(res => {
       if (this.mixinDatacomLoading == true) {
         return;
@@ -509,7 +523,6 @@ export default {
     reshow(val, oldval) {
       if (val === true && this.mixinDatacomLoading === false) {
         setTimeout(() => {
-          this.showchart = true;
           this.mixinDatacomErrorMessage = null;
           this.echartsResize = !this.echartsResize;
           this.checkData(this.drawData);
@@ -558,12 +571,14 @@ export default {
     beforeInit(){
       this.mixinDatacomErrorMessage = null;
       if (typeof this.chartData === 'object' && this.chartData != null && this.chartData.series !== undefined && this.chartData.series.length > 0) {
-        this.mixinDatacomLoading = true;
         //拷贝一下chartData，为了opts变更后统一数据来源
         this.drawData = deepCloneAssign({}, this.chartData);
+        this.mixinDatacomLoading = false;
+        this.showchart = true;
         this.checkData(this.chartData);
       }else if(this.localdata.length>0){
-        this.mixinDatacomLoading = true;
+        this.mixinDatacomLoading = false;
+        this.showchart = true;
         this.localdataInit(this.localdata);
       }else if(this.collection !== ''){
         this.mixinDatacomLoading = false;
@@ -700,12 +715,9 @@ export default {
       let cid = this.cid
       //复位opts或eopts
       if(this.echarts === true){
-        if (this.type && cfe.type.includes(this.type)) {
-          cfe.option[cid] = deepCloneAssign({}, cfe[this.type], this.eopts);
-        }else{
-          cfe.option[cid] = deepCloneAssign({}, this.eopts);
-        }
+        cfe.option[cid] = deepCloneAssign({}, this.eopts);
         cfe.option[cid].id = cid;
+        cfe.option[cid].type = this.type;
       }else{
         if (this.type && cfu.type.includes(this.type)) {
           cfu.option[cid] = deepCloneAssign({}, cfu[this.type], this.opts);
@@ -721,23 +733,16 @@ export default {
       if (newData.series !== undefined && newData.series.length > 0) {
         this.mixinDatacomErrorMessage = null;
         if (this.echarts === true) {
-          if(cfe.option[cid].xAxis && cfe.option[cid].xAxis.type && cfe.option[cid].xAxis.type === 'category'){
-            cfe.option[cid].xAxis.data = newData.categories
-          }
-          if(cfe.option[cid].yAxis && cfe.option[cid].yAxis.type && cfe.option[cid].yAxis.type === 'category'){
-            cfe.option[cid].yAxis.data = newData.categories
-          }
-          cfe.option[cid].series = []
-          for (var i = 0; i < newData.series.length; i++) {
-            cfe.option[cid].seriesTemplate = cfe.option[cid].seriesTemplate ? cfe.option[cid].seriesTemplate : {}
-            let Template = deepCloneAssign({},cfe.option[cid].seriesTemplate,newData.series[i])
-            cfe.option[cid].series.push(Template)
-          }
-          this.init();
+          cfe.option[cid].chartData = newData;
+          this.$nextTick(()=>{
+            this.init()
+          })
         }else{
           cfu.option[cid].categories = newData.categories;
           cfu.option[cid].series = newData.series;
-          this.init();
+          this.$nextTick(()=>{
+            this.init()
+          })
         }
       }
     },
@@ -752,7 +757,7 @@ export default {
         // #ifndef MP-ALIPAY
         .in(this)
         // #endif
-        .select('.chartsview')
+        .select('#ChartBoxId'+this.cid)
         .boundingClientRect(data => {
           this.showchart = true;
           if (data.width > 0 && data.height > 0) {
@@ -802,7 +807,7 @@ export default {
         // #ifndef MP-ALIPAY
         .in(this)
         // #endif
-        .select('.chartsview')
+        .select('#ChartBoxId'+cid)
         .boundingClientRect(data => {
           if (data.width > 0 && data.height > 0) {
             this.lastDrawTime = Date.now();
@@ -838,6 +843,7 @@ export default {
                 cfe.option[cid].lastDrawTime = this.lastDrawTime;
                 this.echartsOpts = deepCloneAssign({}, cfe.option[cid]);
               } else {
+                cfu.option[cid].rotateLock = cfu.option[cid].rotate;
                 this.mixinDatacomLoading = false;
                 this.showchart = true;
                 this.uchartsOpts = deepCloneAssign({}, cfu.option[cid]);
@@ -863,6 +869,9 @@ export default {
                         canvas.height = data.height * this.pixel;
                         canvas._width = data.width * this.pixel;
                         canvas._height = data.height * this.pixel;
+                        cfu.option[cid].rotateLock = cfu.option[cid].rotate;
+                        cfu.option[cid].context.restore();
+                        cfu.option[cid].context.save();
                         this._newChart(cid);
                       } else {
                         this.showchart = false;
@@ -870,6 +879,9 @@ export default {
                       }
                     });
                 } else {
+                  if(this.inAli){
+                    cfu.option[cid].rotateLock = cfu.option[cid].rotate;
+                  }
                   cfu.option[cid].context = uni.createCanvasContext(cid, this);
                   this._newChart(cid);
                 }
@@ -936,7 +948,7 @@ export default {
         }
         return category + ' ' + item.name + ':' + data;
       } else {
-        if (item.properties !== undefined) {
+        if (item.properties && item.properties.name) {
           return item.properties.name;
         } else {
           return item.name + ':' + item.data;
@@ -984,7 +996,7 @@ export default {
           .createSelectorQuery()
           // #ifndef MP-ALIPAY
           .in(this)
-          .select('.chartsview')
+          .select('#ChartBoxId'+cid)
           // #endif
           // #ifdef MP-ALIPAY
           .select('#'+this.cid)
@@ -992,7 +1004,7 @@ export default {
           .boundingClientRect(data => {
             e.changedTouches=[];
             if (this.inAli) {
-              e.changedTouches.unshift({ x: e.detail.pageX - data.left, y: e.detail.pageY - data.top});
+              e.changedTouches.unshift({ x: e.detail.clientX - data.left, y: e.detail.clientY - data.top});
             }else{
               e.changedTouches.unshift({ x: e.detail.x - data.left, y: e.detail.y - data.top - this.pageScrollTop});
             }
@@ -1034,8 +1046,8 @@ export default {
       lastMoveTime=Date.now();
       if(cfu.option[cid].enableScroll === true){
         cfu.instance[cid].scrollStart(e);
-        this.emitMsg({name:'getTouchStart', params:{type:"touchStart", event:e.changedTouches[0], id:cid}});
       }
+      this.emitMsg({name:'getTouchStart', params:{type:"touchStart", event:e.changedTouches[0], id:cid}});
     },
     _touchMove(e) {
       let cid = this.cid
@@ -1045,8 +1057,8 @@ export default {
       lastMoveTime = currMoveTime;
       if(cfu.option[cid].enableScroll === true){
         cfu.instance[cid].scroll(e);
-        this.emitMsg({name: 'getTouchMove', params: {type:"touchMove", event:e.changedTouches[0], id: cid}});
       }
+      this.emitMsg({name: 'getTouchMove', params: {type:"touchMove", event:e.changedTouches[0], id: cid}});
       if(this.ontap === true && cfu.option[cid].enableScroll === false && this.onmovetip === true){
         this._tap(e,true)
       }
@@ -1055,8 +1067,8 @@ export default {
       let cid = this.cid
       if(cfu.option[cid].enableScroll === true){
         cfu.instance[cid].scrollEnd(e);
-        this.emitMsg({name:'getTouchEnd', params:{type:"touchEnd", event:e.changedTouches[0], id:cid}});
       }
+      this.emitMsg({name:'getTouchEnd', params:{type:"touchEnd", event:e.changedTouches[0], id:cid}});
       if(this.ontap === true && cfu.option[cid].enableScroll === false && this.onmovetip === true){
         this._tap(e,true)
       }
@@ -1083,16 +1095,27 @@ export default {
 
 <!-- #ifdef APP-VUE || H5 -->
 <script module="rdcharts" lang="renderjs">
-import uChartsRD from '../../js_sdk/u-charts/u-charts-v2.0.0.js';
+import uChartsRD from '../../js_sdk/u-charts/u-charts.js';
 import cfu from '../../js_sdk/u-charts/config-ucharts.js';
 import cfe from '../../js_sdk/u-charts/config-echarts.js';
 
 var that = {};
 var rootdom = null;
 
+function rddeepCloneAssign(origin = {}, ...args) {
+  for (let i in args) {
+    for (let key in args[i]) {
+      if (args[i].hasOwnProperty(key)) {
+        origin[key] = args[i][key] && typeof args[i][key] === 'object' ? rddeepCloneAssign(Array.isArray(args[i][key]) ? [] : {}, origin[key], args[i][key]) : args[i][key];
+      }
+    }
+  }
+  return origin;
+}
+
 function rdformatterAssign(args,formatter) {
   for (let key in args) {
-    if(typeof args[key] === 'object'){
+    if(args[key] !== null && typeof args[key] === 'object'){
       rdformatterAssign(args[key],formatter)
     }else if(key === 'format' && typeof args[key] === 'string'){
       args['formatter'] = formatter[args[key]] ? formatter[args[key]] : undefined;
@@ -1131,10 +1154,31 @@ export default {
   methods: {
     //==============以下是ECharts的方法====================
     ecinit(newVal, oldVal, owner, instance){
-      let cid = JSON.parse(JSON.stringify(newVal.id))
+      let cid = JSON.stringify(newVal.id)
       this.rid = cid
       that[cid] = this.$ownerInstance
-      cfe.option[cid] = JSON.parse(JSON.stringify(newVal))
+      let eopts = JSON.parse(JSON.stringify(newVal))
+      let type = eopts.type;
+      //载入并覆盖默认配置
+      if (type && cfe.type.includes(type)) {
+        cfe.option[cid] = rddeepCloneAssign({}, cfe[type], eopts);
+      }else{
+        cfe.option[cid] = rddeepCloneAssign({}, eopts);
+      }
+      let newData = eopts.chartData;
+      //挂载categories和series
+      if(cfe.option[cid].xAxis && cfe.option[cid].xAxis.type && cfe.option[cid].xAxis.type === 'category'){
+        cfe.option[cid].xAxis.data = newData.categories
+      }
+      if(cfe.option[cid].yAxis && cfe.option[cid].yAxis.type && cfe.option[cid].yAxis.type === 'category'){
+        cfe.option[cid].yAxis.data = newData.categories
+      }
+      cfe.option[cid].series = []
+      for (var i = 0; i < newData.series.length; i++) {
+        cfe.option[cid].seriesTemplate = cfe.option[cid].seriesTemplate ? cfe.option[cid].seriesTemplate : {}
+        let Template = rddeepCloneAssign({},cfe.option[cid].seriesTemplate,newData.series[i])
+        cfe.option[cid].series.push(Template)
+      }
       if (typeof window.echarts === 'object') {
           this.newEChart()
       }else{
@@ -1143,7 +1187,9 @@ export default {
         script.src = './uni_modules/qiun-data-charts/static/app-plus/echarts.min.js'
         // #endif
         // #ifdef H5
-        script.src = '/uni_modules/qiun-data-charts/static/h5/echarts.min.js'
+        const rooturl = window.location.origin 
+        const directory = instance.getDataset().directory
+        script.src = rooturl + directory + 'uni_modules/qiun-data-charts/static/h5/echarts.min.js'
         // #endif
         script.onload = this.newEChart
         document.head.appendChild(script)
@@ -1195,7 +1241,9 @@ export default {
       cfe.instance[cid].setOption(option, option.notMerge)
       cfe.instance[cid].on('finished', function(){
         that[cid].callMethod('emitMsg',{name:"complete",params:{type:"complete",complete:true,id:cid}})
-        cfe.instance[cid].off('finished')
+        if(cfe.instance[cid]){
+          cfe.instance[cid].off('finished')
+        }
       })
     },
     tooltipPosition(){
@@ -1227,6 +1275,8 @@ export default {
       let canvasdom = document.getElementById(cid)
       if(canvasdom && canvasdom.children[0]){
         cfu.option[cid].context = canvasdom.children[0].getContext("2d")
+        cfu.option[cid].context.restore();
+        cfu.option[cid].context.save();
         this.newUChart()
       }
     },
@@ -1252,8 +1302,8 @@ export default {
         }
         return category + ' ' + item.name + ':' + data;
       } else {
-        if (item.properties !== undefined) {
-          return item.properties.name;
+        if (item.properties && item.properties.name) {
+          return item.properties.name ;
         } else {
           return item.name + ':' + item.data;
         }

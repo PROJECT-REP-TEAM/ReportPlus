@@ -18,21 +18,45 @@
 					<view class="title">学历分布状况
 						<text class="font-small" style="color: #ccc;">(教职工)</text>
 					</view>
-					<pie-canvas :pieJson="ProductRateData" canvasId="aa" chartType="rose"></pie-canvas>
+					<view class="charts-box">
+						<qiun-data-charts 
+						type="rose" 
+						:chartData="ProductRateData" 
+						canvasId="school_a" 
+						:canvas2d="isCanvas2d" 
+						:resshow="delayload" />
+					</view>
 				</view>
 				<!-- 学业成绩 -->
 				<view class="view_block">
-					<view class="title">学业成绩
+					<view class="title">学业成绩分布图
 						<text class="font-small" style="color: #ccc;">(班级)</text>
 					</view>
-					<radar-canvas :RadarModel="RadarModel"></radar-canvas>
+					<view class="charts-box">
+					  <qiun-data-charts
+					    type="radar"
+					    :chartData="RadarModel"
+					    background="none"
+							canvasId="school_b" 
+					    :animation="false"
+							:canvas2d="isCanvas2d" 
+							:resshow="delayload"/>
+					</view>
 				</view>
 				<!-- 图书借阅情况 -->
 				<view class="view_block">
 					<view class="title">图书借阅情况</view>
-					<text-block :content="friendTextBlock"></text-block>
-					<panel-canvas :panelData="panelData"></panel-canvas>
-					<mix-canvas :mixJson="friendTrand" canvasId="aa"></mix-canvas>
+					<view class="charts-box" style="height: 300px;">
+						<qiun-data-charts 
+							type="line" 
+							canvasId="school_c" 
+							:canvas2d="isCanvas2d" 
+							:resshow="delayload"
+							:ontouch="true"
+							:opts="{enableScroll:true,xAxis:{scrollShow:true,itemCount:4,disableGrid:true},series:{style:'curve'}}" 
+							:chartData="friendTrand"
+						 />
+					</view>
 				</view>
 			</scroll-view>
 		</view>
@@ -40,10 +64,7 @@
 </template>
 
 <script>
-	import MixCanvas from "../../components/canvas/mix-canvas.vue"
 	import ProgressBar from "../../components/progress-bar/progress-bar.vue"
-	import PieCanvas from "../../components/canvas/pie-canvas.vue"
-	import RadarCanvas from "../../components/canvas/radar-canvas.vue"
 	
 	import RankData from '../../static/json/school/1.json';
 	import ProductRateData from '../../static/json/school/2.json';
@@ -51,7 +72,7 @@
 	import friendTrand from '../../static/json/school/4.json';
 	export default{
 		components: {
-			MixCanvas,ProgressBar,PieCanvas,RadarCanvas
+			ProgressBar
 		},  
 		data() {
 			return {
@@ -65,7 +86,9 @@
 				friendTrand,
 				RankData,
 				ProductRateData,
-				RadarModel
+				RadarModel,
+				isCanvas2d:this.$Config.ISCANVAS2D,
+				delayload: false, //延时加载图表，否则会出现图表加载完后定位错乱
 			};
 		},
 		computed: {
@@ -74,6 +97,13 @@
 			}
 		},
 		methods: {
+			async getData(){
+				uni.showLoading();
+				await setTimeout(() => {
+					this.delayload = true;
+					uni.hideLoading();
+				}, 1000)
+			},
 			gotoBack() {
 				this.$Common.navigateBack("/index/index");
 			},
@@ -103,6 +133,7 @@
 			//#ifndef H5
 			uni.showShareMenu();
 			//#endif
+			this.getData()
 			this.getTelephoneInfo();
 		}
 	}

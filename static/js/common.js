@@ -160,7 +160,7 @@ module.exports = {
 			uni.navigateTo({
 				url: url,
 				fail:err=> {
-					this.tipMsg('暂未开放该功能！');
+					this.tipMsg('页面正在火速开发中，敬请期待！');
 				},
 			})
 		}
