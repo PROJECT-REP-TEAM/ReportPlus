@@ -158,13 +158,13 @@
 				})
 			},
 			getH5Info() {
-				let element = wx.createSelectorQuery().in(this);
-				element.select('#nav').boundingClientRect();
-				element.select('#head').boundingClientRect();
-				element.select('#wuctab').boundingClientRect();
 				uni.getSystemInfo({
 					success: e => {
 						let hasHeight = 0;
+						let element = wx.createSelectorQuery().in(this);
+						element.select('#nav').boundingClientRect();
+						element.select('#head').boundingClientRect();
+						element.select('#wuctab').boundingClientRect();
 						element.exec(res => {
 							res.map((item, index) => {
 								hasHeight += item.height;
