@@ -280,6 +280,9 @@
 		background-color: #560594;
 		margin: 0;
 		padding-bottom: 20rpx;
+		li{
+			list-style-type: none;
+		}
 
 		.nav {
 			position: fixed;

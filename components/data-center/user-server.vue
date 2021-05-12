@@ -41,7 +41,7 @@
 						canvasId="four_b"
 						:canvas2d="isCanvas2d" 
 						:resshow="delayload"
-						:opts="{legend:{position: 'bottom'},extra:{ring:{ringWidth: 60}},title:{name: '',},subtitle: {name: ''}}" 
+						:opts="{legend:{position: 'bottom'},title:{name: '',},subtitle: {name: ''}}" 
 						:chartData="ProductRateData"/>
 					</view>
 				</view>

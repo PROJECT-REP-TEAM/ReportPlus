@@ -149,6 +149,9 @@
 		background-size: 400%;
 		animation: bganimation 15s infinite;
 	}
+	li{
+		list-style-type: none;
+	}
 	page,body {
 		margin: 0;
 		padding: 0;
