@@ -28,6 +28,13 @@
 				"navigationStyle": "custom",
 				"pageOrientation": "auto"
 			}
+		},
+		{
+			"path": "pages/finance/index",
+			"style": {
+				"navigationStyle": "custom",
+				"pageOrientation": "auto"
+			}
 		}
 	],
 	"window": {

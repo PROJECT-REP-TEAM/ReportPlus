@@ -1,18 +1,5 @@
 <template>
 	<view class="main" :style="{ 'background': 'url(' + backgroundImg + ')'}">
-	<!-- 	<view class="title" :class="topNavStyle.class" :style="topNavStyle.style">
-			<view class="flex_col">
-				<view class="box1"></view>
-				<view class="flex_grow flex_col flex_center tab">
-					<view v-for="(item,index) in topNavArr" :key="index"
-					 :class="{ 'active':topNavIndex==index }" 
-					 :data-index="index" @tap="changeTopNav">{{item}}</view>
-				</view>
-				<view class="box1 align_r">
-					
-				</view>
-			</view>
-		</view> -->
 		<card-swiper class="card_swiper" :card_menu="card_menu"></card-swiper>
 	</view>
 </template>
@@ -22,38 +9,21 @@
 	export default {
 		data() {
 			return {
-				topNavIndex:0,
-				topNavArr:['推荐','热门','新作'],
 				card_menu:this.$Config.CARD_MENU,
-				backgroundImg:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/87ba7919-a13b-4ddd-9281-65b643ac3878.png"
+				backgroundImg:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/e271bb60-e1cb-4d0b-9a23-e370b770851f.png"
 			}
 		},
 		components:{
 			cardSwiper
 		},
 		computed:{
-			topNavStyle(){
-				let r = this.pageScrollTop  / 100;
-				return {
-					"class":r>=0.85?'style2':'',
-					"style":`background-color: rgba(66, 185, 131,${r>=1?1:r});`
-				}
-			}
+
 		},
 		onLoad() {
 			
 		},
 		methods: {
-			// 顶部导航改变 
-			changeTopNav(e){
-				this.topNavIndex = e.currentTarget.dataset.index
-			},
-			// 去搜索
-			toSearch(){
-				uni.navigateTo({
-					url:`/pages/search/search`  
-				})
-			}
+			
 		}
 	}
 </script>
@@ -77,6 +47,9 @@
 		transform: translateY(-50%);
 		height: 800rpx;
 		width: 100%;
+	}
+	.join_tip{
+		position: fixed;
 	}
 	
 	/* 设置常用元素尺寸规则 */
