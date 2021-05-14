@@ -1,13 +1,6 @@
 
 # ReportPlus数据报表中心小程序
-## 升级版ReportPlus已上线！！全新体验请查看[howcode-report插件](https://ext.dcloud.net.cn/plugin?id=4651)
-- 解决图层等级问题！（本插件也已解决）
-- 真正全端跨域图表！（本插件也更换成uchart2.0版本）
-- 基于uniCloudAdmin框架，使用云函数开发！
-- 搭配权限系统，可手动分配角色权限！
-- 体验更加友好！
 
-## 若不想使用升级版，可继续使用该插件！
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
 
 ## 下载地址
