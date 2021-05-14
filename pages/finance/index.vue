@@ -2,7 +2,7 @@
 	<view class="body">
 		<!-- <view class="topLine" :style="{height: topBar+'px'}"></view> -->
 		<view class="nav row_align_center" id="nav">
-			<li style="color: #fff;" :class="['iconfont icon-zuojiantou back']" @click="gotoBack()"></li>
+			<li style="color: #5B099F;z-index: 999;" :class="['iconfont icon-zuojiantou back']" @click="gotoBack()"></li>
 		</view>
 		<view class="top_head">
 			<view class="text_des">
