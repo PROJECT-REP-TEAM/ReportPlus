@@ -26,7 +26,6 @@
 					<text class="font-small">(会员年度平均销售金额)</text>
 					<text class="trend_title">目标增量{{userARPU.targetAdd}}</text>
 				</view>
-				<!-- <mix-canvas :mixJson="userARPU" canvasId="cc"></mix-canvas> -->
 				<view class="charts-box">
 					<qiun-data-charts type="mix"
 						:chartData="userARPU" 
@@ -44,7 +43,6 @@
 					<text class="font-middle">(年)</text>
 					<text class="trend_title">目标增量{{userARPU.targetAdd}}</text>
 				</view>
-				<!-- <mix-canvas :mixJson="userARPU" canvasId="dd"></mix-canvas> -->
 				<view class="charts-box">
 						<qiun-data-charts type="mix"
 							:chartData="userARPU" 
@@ -70,7 +68,6 @@
 				<view class="title">
 					X（慢病） 商品脱落率
 				</view>
-				<!-- <progress-canvas :progressJson="xProductDropPrecent"></progress-canvas> -->
 				<view style="display: flex;justify-content: space-between;">
 					<view v-for="(item,index) in xProductDropPrecent" class="charts-box" style="height: 130px;width: 45%;">
 						<qiun-data-charts 
@@ -88,7 +85,6 @@
 			<view class="friend_operate">
 				<view class="title">慢病病种脱落率
 				</view>
-				<!-- <mix-canvas :mixJson="illnessDropPrecent" canvasId="ee"></mix-canvas> -->
 				<view class="charts-box">
 					<qiun-data-charts type="mix"
 						:chartData="illnessDropPrecent" 
@@ -104,7 +100,6 @@
 				<view class="title">
 					W（保健） 商品脱落率
 				</view>
-				<!-- <progress-canvas :progressJson="wProductDropPrecent"></progress-canvas> -->
 				<view style="display: flex;justify-content: space-between;">
 					<view v-for="(item,index) in wProductDropPrecent" class="charts-box" style="height: 130px;width: 45%;">
 						<qiun-data-charts 
