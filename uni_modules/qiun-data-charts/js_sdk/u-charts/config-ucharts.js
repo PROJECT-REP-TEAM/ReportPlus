@@ -41,6 +41,34 @@ const formatDateTime = (timeStamp, returnType)=>{
   return [y, m, d, h, minute, second];
 }
 
+//事件转换函数，主要用作格式化x轴为时间轴，根据需求自行修改
+const formatDateTime_JS = (timeStamp, returnType) => {
+	const dateObj = new Date(+timeStamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+	const y = dateObj.getFullYear() // 获取年，
+	const m = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+	const d = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+	const h = pad(dateObj.getHours()) // 获取时, pad函数用来补0
+	const minute = pad(dateObj.getMinutes()) // 获取分
+	const second = pad(dateObj.getSeconds()) // 获取秒
+	if (returnType == 'full') {
+		return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+	}
+	if (returnType == 'y-m-d') {
+		return y + '-' + m + '-' + d;
+	}
+	if (returnType == 'h:m') {
+		return h + ':' + minute;
+	}
+	if (returnType == 'h:m:s') {
+		return h + ':' + minute + ':' + second;
+	}
+	return [y, m, d, h, minute, second];
+}
+
+function pad(str) {
+	return +str >= 10 ? str : '0' + str
+}
+
 module.exports = {
   //demotype为自定义图表类型，一般不需要自定义图表类型，只需要改根节点上对应的类型即可
 	"type":["pie","ring","rose","word","funnel","map","arcbar","line","column","area","radar","gauge","candle","mix","tline","tarea","scatter","bubble","demotype"],
@@ -58,6 +86,7 @@ module.exports = {
     "yAxisDemo2":function(val){return val.toFixed(2)},
     "xAxisDemo1":function(val){return val+'年'},
     "xAxisDemo2":function(val){return formatDateTime(val,'h:m')},
+    "xAxisDemo3":function(val){return formatDateTime_JS(val,'h:m')},
     "seriesDemo1":function(val){return val+'元'},
     "tooltipDemo1":function(item, category, index, opts){
       if(index==0){
