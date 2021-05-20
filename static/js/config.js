@@ -61,11 +61,11 @@ const TABLIST = [
 ];
 
 const CARD_MENU = [
-	{title:"会员报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/aadf06ed-4335-49c6-9dd9-9e10a45db2e0.png",url:"/main/index"},
-	{title:"学校报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/c5c86106-ac2b-49a9-bff6-69c988ed7223.png",url:"/school/index"},
+	{title:"会员报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/aadf06ed-4335-49c6-9dd9-9e10a45db2e0.png",url:"/pages/main/index"},
+	{title:"智慧教育报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/c5c86106-ac2b-49a9-bff6-69c988ed7223.png",url:"/pages/school/index"},
 	{title:"差旅报表中心",author:"秋云",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/4c278814-13c2-4cbb-b2cb-e99befe613d5.png",url:""},
-	{title:"零售报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/175c0e3f-66d1-4a8a-ae2f-79c83f74eb65.png",url:""},
-	{title:"财务报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/1a448b3a-4029-4329-b8d2-c8000d8beeb5.png",url:"/finance/index"},
+	{title:"运动报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/175c0e3f-66d1-4a8a-ae2f-79c83f74eb65.png",url:"/myPackageA/pages/sport/index"},
+	{title:"财务报表中心",author:"howcode",img:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-e9420bcd-26cd-4faf-b47a-9949982f7c41/1a448b3a-4029-4329-b8d2-c8000d8beeb5.png",url:"/pages/finance/index"},
 ]
 
 
