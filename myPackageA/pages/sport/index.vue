@@ -85,9 +85,10 @@
 		methods: {
 			async getData() {
 				uni.showLoading();
+				/*将钟点时间随机转成某一天的具体时间戳*/
 				for(let i = 0;i<heartRateData.series.length;i++){
 					heartRateData.series[i].data.map(x=>{
-						x[0] = "2018/08/09 " + x[0];
+						x[0] = "2018/08/08 " + x[0];
 						x[0] = this.tranTimestamp(x[0]);
 						return x[0];
 					})
