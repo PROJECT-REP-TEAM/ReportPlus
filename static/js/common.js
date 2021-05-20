@@ -156,7 +156,7 @@ module.exports = {
 			for(var item in param){
 				part += '&' + item + '=' + param[item];
 			}
-			url = "/pages" + url + part.replace('&','?');
+			url = url + part.replace('&','?');
 			uni.navigateTo({
 				url: url,
 				fail:err=> {
