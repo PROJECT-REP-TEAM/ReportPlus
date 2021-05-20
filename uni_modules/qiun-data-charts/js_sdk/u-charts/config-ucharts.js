@@ -86,6 +86,7 @@ module.exports = {
     "yAxisDemo2":function(val){return val.toFixed(2)},
     "xAxisDemo1":function(val){return val+'年'},
     "xAxisDemo2":function(val){return formatDateTime(val,'h:m')},
+		/*howcode作者自定义formatter*/
     "xAxisDemo3":function(val){return formatDateTime_JS(val,'h:m')},
     "seriesDemo1":function(val){return val+'元'},
     "tooltipDemo1":function(item, category, index, opts){
