@@ -37,6 +37,16 @@
 			}
 		}
 	],
+	"subPackages":[{
+		"root":"myPackageA",
+		"pages":[{
+			"path":"pages/sport/index",
+			"style":{
+				"navigationStyle": "custom",
+				"pageOrientation": "auto"
+			}
+		}]
+	}],
 	"window": {
 		"navigationBarTitleText": "下拉刷新",
 		"enablePullDownRefresh": true,

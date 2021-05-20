@@ -1,0 +1,400 @@
+<template>
+	<view class="body">
+		<view class="nav row_align_center" id="nav">
+			<li style="z-index: 999;font-size: 50rpx;" :class="['iconfont icon-zuojiantou back']" @click="gotoBack()"></li>
+		</view>
+		<view class="head">
+			<view class="title">运动报告</view>
+			<view class="customer_img">
+				<open-data type="userAvatarUrl" class="img"></open-data>
+			</view>
+		</view>
+		<view class="score_view">
+			<view class="title">本次评分</view>
+			<view class="detail">
+				<view class="socre">98</view>
+				<li :class="['iconfont icon-up text-green']" @click="gotoBack()"></li>
+				<view class="up_socre">0.4</view>
+			</view>
+		</view>
+		<view class="census_view">
+			<view class="left">
+				<view class="text_gray small_text">消耗(千卡)</view>
+				<view class="middle_text text_wide_900">165</view>
+			</view>
+			<view class="right">
+				<view class="text_gray small_text">心率主要集中在</view>
+				<view style="font-size: 30rpx;">燃烧脂肪</view>
+			</view>
+		</view>
+		<view class="census_view">
+			<view class="left">
+				<view class="text_gray small_text">时长(分钟)</view>
+				<view class="middle_text text_wide_900">75</view>
+			</view>
+			<view class="center">
+				<view class="text_gray small_text">累计打卡(天)</view>
+				<view class="middle_text text_wide_900">24</view>
+			</view>
+			<view class="right">
+				<view class="text_gray small_text">平均心率(次/分钟)</view>
+				<view class="middle_text text_wide_900">98</view>
+			</view>
+		</view>
+		<view class="consume_view">
+			<view class="wrap"><span class="consume_tip">身体消耗</span></view>
+			<li :class="['iconfont icon-niunai consume_icon']"></li>
+			<view class="desc">
+				<view class="small_text">约消耗</view>
+				<view class="text_wide_900"><text class="left">1000</text><text class="right">毫升牛奶</text></view>
+			</view>
+		</view>
+		<view class="heart_rate_view">
+			<view class="left">
+				<li :class="['iconfont icon-zhexiantu']"></li>
+				<text class="title">心率变化曲线</text>
+			</view>
+			<view class="right text_gray">心率变化</view>
+		</view>
+		<view v-if="heartRateData.series" class="heart_rate_chart">
+			<view class="charts-box">
+				<qiun-data-charts type="tline" canvasId="sport_a" :canvas2d="isCanvas2d" :resshow="delayload"
+					:opts="{padding:[0,20,10,0],legend:{position: 'top',lineHeight:20},xAxis:{disableGrid:true,format:'xAxisDemo3'},yAxis:{data:[{min:0,max:175}],gridType:'solid'},dataLabel:false,dataPointShape:false}"
+					:chartData="heartRateData" />
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import heartRateData from "../../static/json/sport/1.json"
+	export default {
+		components: {
+
+		},
+		data() {
+			return {
+				info: this.$store.state.userInfo, //用户数据
+				isCanvas2d: this.$Config.ISCANVAS2D,
+				heartRateData:{},
+			};
+		},
+		watch: {
+
+		},
+		methods: {
+			async getData() {
+				uni.showLoading();
+				for(let i = 0;i<heartRateData.series.length;i++){
+					heartRateData.series[i].data.map(x=>{
+						x[0] = "2018/08/09 " + x[0];
+						x[0] = this.tranTimestamp(x[0]);
+						return x[0];
+					})
+				}
+				this.heartRateData = heartRateData;
+				this.delayload = true;
+				uni.hideLoading();
+			},
+			tranTimestamp(date){
+				return new Date(date).getTime()
+			} ,
+			gotoBack() {
+				this.$Common.navigateBack("/index/index");
+			},
+
+		},
+		onReady() {
+			//#ifndef H5
+			uni.showShareMenu();
+			//#endif
+			this.getData()
+		}
+	}
+</script>
+
+<style scoped lang="scss">
+	.body {
+		height: 100%;
+		background-color: #1C191F;
+		margin: 0;
+		color: #fff;
+		padding: 80rpx 20rpx 0 20rpx;
+		width: 100%;
+		box-sizing: border-box;
+		padding-bottom: 50rpx;
+		
+		.heart_rate_chart {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			position: relative;
+			background-color: #312C34;
+			color: #FFFFFF;
+			box-sizing: border-box;
+			border-radius: 20rpx;
+			overflow: hidden;
+		}
+
+		.heart_rate_view {
+			display: flex;
+			width: 100%;
+			justify-content: space-around;
+			align-items: center;
+			height: 150rpx;
+
+			.left {
+				display: flex;
+				align-items: center;
+
+				.icon-zhexiantu {
+					font-size: 26rpx;
+				}
+
+				.title {
+					font-size: 34rpx;
+					margin-left: 20rpx;
+				}
+			}
+
+			.right {
+				font-size: 22rpx;
+				padding: 10rpx 30rpx;
+				border-radius: 40rpx;
+				background-color: #342E39;
+			}
+		}
+
+		.consume_view {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			height: 190rpx;
+			position: relative;
+			margin-top: 100rpx;
+			background-color: #312C34;
+			color: #FFFFFF;
+			box-sizing: border-box;
+			border-radius: 10rpx;
+
+			.consume_img {
+				width: 240rpx;
+				height: auto;
+				position: absolute;
+				top: -80rpx;
+				left: 20rpx;
+			}
+
+			.consume_icon {
+				font-size: 220rpx;
+				position: absolute;
+				top: -80rpx;
+				left: 20rpx;
+			}
+
+			.desc {
+				position: absolute;
+				right: 80rpx;
+				top: 20rpx;
+
+				view {
+					padding: 10rpx 0;
+					display: flex;
+					align-items: center;
+				}
+
+				.left {
+					font-size: 50rpx;
+				}
+
+				.right {
+					font-size: 30rpx;
+					margin-left: 10rpx;
+					font-weight: 400;
+				}
+			}
+		}
+
+		.text-green {
+			color: #10A764;
+		}
+
+		.text_gray {
+			color: #8E8B8B;
+		}
+
+		.small_text {
+			font-size: 24rpx;
+		}
+
+		.middle_text {
+			font-size: 36rpx;
+		}
+
+		.text_wide_900 {
+			font-weight: 900;
+		}
+
+		.census_view {
+			width: 100%;
+			display: flex;
+			justify-content: space-around;
+
+			.left {
+				text-align: left;
+
+				view {
+					padding: 10rpx 0;
+				}
+			}
+
+			.center {
+				text-align: center;
+
+				view {
+					padding: 10rpx 0;
+				}
+			}
+
+			.right {
+				text-align: right;
+
+				view {
+					padding: 10rpx 0;
+				}
+			}
+		}
+
+		.score_view {
+			width: 100%;
+
+			.title {
+				color: #8E8B8B;
+				font-size: 24rpx;
+			}
+
+			.detail {
+				height: 120rpx;
+				width: 100%;
+				display: flex;
+				align-items: flex-end;
+
+				.icon-up {
+					margin-left: 40rpx;
+					height: 54rpx;
+					font-weight: 600;
+				}
+
+				.socre {
+					font-size: 80rpx;
+					font-weight: 900;
+				}
+
+				.up_socre {
+					color: #10A764;
+					height: 50rpx;
+					font-size: 24rpx;
+					font-weight: 600;
+				}
+			}
+		}
+
+		.head {
+			height: 140rpx;
+			line-height: 140rpx;
+			position: relative;
+
+			.title {
+				font-size: 40rpx;
+				margin-left: 20rpx;
+			}
+
+			.customer_img {
+				position: absolute;
+				bottom: 0rpx;
+				right: 20rpx;
+				width: 100rpx;
+				height: 100rpx;
+				margin: 0;
+				padding: 0;
+				background-size: 100% 100%;
+				border-radius: 100%;
+				overflow: hidden;
+
+				.img {
+					height: 100%;
+					width: 100%;
+				}
+			}
+		}
+
+		li {
+			list-style-type: none;
+		}
+
+		.nav {
+			position: fixed;
+			top: 50rpx;
+			left: 20rpx;
+		}
+	}
+
+	.consume_view:nth-child(even) {
+		margin-right: 4%;
+	}
+
+	.consume_tip {
+		display: inline-block;
+		text-align: center;
+		width: 188rpx;
+		height: 30rpx;
+		line-height: 30rpx;
+		position: absolute;
+		top: 36rpx;
+		right: -44rpx;
+		z-index: 2;
+		overflow: hidden;
+		transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-webkit-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		border: 1px dashed;
+		box-shadow: 0 0 0 3px #10A764, 0px 21px 5px -18px rgba(0, 0, 0, 0.6);
+		background: #10A764;
+		font-size: 16rpx;
+	}
+
+	.wrap {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: -12rpx;
+		left: 12rpx;
+		overflow: hidden;
+	}
+
+	.wrap:before {
+		content: "";
+		display: block;
+		border-radius: 8px 8px 0px 0px;
+		width: 80rpx;
+		height: 14rpx;
+		position: absolute;
+		right: 68rpx;
+		top: -1px;
+		background: #4D6530;
+	}
+
+	.wrap:after {
+		content: "";
+		display: block;
+		border-radius: 0px 8px 8px 0px;
+		width: 14rpx;
+		height: 80rpx;
+		position: absolute;
+		right: -1px;
+		top: 66rpx;
+		background: #4D6530;
+	}
+</style>

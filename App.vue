@@ -21,4 +21,5 @@
 	/*每个页面公共css */
 	@import "./static/css/common.wxss";
 	@import "./static/css/icon.wxss";
+	@import "./static/css/icon_ui.wxss";
 </style>
