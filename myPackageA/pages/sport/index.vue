@@ -1,7 +1,8 @@
 <template>
 	<view class="body">
 		<view class="nav row_align_center" id="nav">
-			<li style="z-index: 999;font-size: 50rpx;" :class="['iconfont icon-zuojiantou back']" @click="gotoBack()"></li>
+			<li style="z-index: 999;font-size: 50rpx;" :class="['iconfont icon-zuojiantou back']" @click="gotoBack()">
+			</li>
 		</view>
 		<view class="head">
 			<view class="title">运动报告</view>
@@ -63,11 +64,32 @@
 					:chartData="heartRateData" />
 			</view>
 		</view>
+		<view class="title_view">
+			<view class="left">
+				<li :class="['iconfont icon-xinlv']"></li>
+				<text class="title">心率区间</text>
+			</view>
+		</view>
+		<view class="heart_rate_range">
+			<view class="top">
+				<view class="item" v-for="(item,index) in heatRateRange" :key="index">
+					<view class="name text_gray">{{item.name}}</view>
+					<view class="data">{{item.type}}{{item.data}}<text class="unit text_gray">分钟</text></view>
+				</view>
+			</view>
+			<view v-if="heartRateRangeData" class="charts-box">
+				<qiun-data-charts type="ring" canvasId="sport_b" :canvas2d="isCanvas2d" :resshow="delayload"
+					:opts="{legend:{position: 'bottom'},extra:{ring:{border:false,centerColor:'#312C34'}},title:{name: ''},subtitle: {name: ''}}"
+					:chartData="heartRateRangeData" />
+			</view>
+		</view>
+		
 	</view>
 </template>
 
 <script>
 	import heartRateData from "../../static/json/sport/1.json"
+	import heartRateRangeData from "../../static/json/sport/2.json"
 	export default {
 		components: {
 
@@ -76,7 +98,39 @@
 			return {
 				info: this.$store.state.userInfo, //用户数据
 				isCanvas2d: this.$Config.ISCANVAS2D,
-				heartRateData:{},
+				heartRateData: {},
+				heartRateRangeData: {},
+				heatRateRange: [{
+						name: "激活放松",
+						data: "5",
+						type: "≤"
+					},
+					{
+						name: "动态热身",
+						data: "13",
+						type: ""
+					},
+					{
+						name: "脂肪燃烧",
+						data: "24",
+						type: ""
+					},
+					{
+						name: "糖分消耗",
+						data: "8",
+						type: "≤"
+					},
+					{
+						name: "心肺训练",
+						data: "7",
+						type: ""
+					},
+					{
+						name: "极限锻炼",
+						data: "16",
+						type: ""
+					},
+				]
 			};
 		},
 		watch: {
@@ -86,20 +140,21 @@
 			async getData() {
 				uni.showLoading();
 				/*将钟点时间随机转成某一天的具体时间戳*/
-				for(let i = 0;i<heartRateData.series.length;i++){
-					heartRateData.series[i].data.map(x=>{
+				for (let i = 0; i < heartRateData.series.length; i++) {
+					heartRateData.series[i].data.map(x => {
 						x[0] = "2018/08/08 " + x[0];
 						x[0] = this.tranTimestamp(x[0]);
 						return x[0];
 					})
 				}
 				this.heartRateData = heartRateData;
+				this.heartRateRangeData = heartRateRangeData;
 				this.delayload = true;
 				uni.hideLoading();
 			},
-			tranTimestamp(date){
+			tranTimestamp(date) {
 				return new Date(date).getTime()
-			} ,
+			},
 			gotoBack() {
 				this.$Common.navigateBack("/index/index");
 			},
@@ -124,7 +179,49 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding-bottom: 50rpx;
-		
+
+		.heart_rate_range {
+			width: 100%;
+			position: relative;
+			background-color: #312C34;
+			color: #FFFFFF;
+			box-sizing: border-box;
+			border-radius: 20rpx;
+			overflow: hidden;
+
+			.top {
+				width: 100%;
+
+				&:after {
+					content: "";
+					clear: both;
+					display: block;
+				}
+
+				.item {
+					float: left;
+					width: 33%;
+					box-sizing: border-box;
+					padding: 30rpx 20rpx;
+					text-align: center;
+
+					.name {
+						font-size: 26rpx;
+					}
+
+					.data {
+						font-size: 40rpx;
+						margin-top: 10rpx;
+
+						.unit {
+							font-size: 24rpx;
+							margin-left: 14rpx;
+						}
+					}
+				}
+			}
+		}
+
 		.heart_rate_chart {
 			display: flex;
 			justify-content: center;
@@ -135,6 +232,27 @@
 			box-sizing: border-box;
 			border-radius: 20rpx;
 			overflow: hidden;
+		}
+
+		.title_view {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			height: 150rpx;
+
+			.left {
+				display: flex;
+				align-items: center;
+
+				.iconfont {
+					font-size: 40rpx !important;
+				}
+
+				.title {
+					font-size: 34rpx;
+					margin-left: 20rpx;
+				}
+			}
 		}
 
 		.heart_rate_view {
