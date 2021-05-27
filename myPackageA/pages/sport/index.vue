@@ -83,7 +83,42 @@
 					:chartData="heartRateRangeData" />
 			</view>
 		</view>
-		
+		<view class="title_view">
+			<view class="left">
+				<li :class="['iconfont icon-pie']"></li>
+				<text class="title">运动分析</text>
+			</view>
+		</view>
+		<view class="sport_analysis_view">
+			<view class="top">
+				<li class="iconfont icon-feiji"></li>
+				<text class="title font-s-34">跑步机</text>
+			</view>
+			<view class="middle">
+				<view class="left">
+					<li class="iconfont icon-clock"></li>
+					<view>3.24P.M</view>
+				</view>
+				<view class="right">
+					<li class="iconfont icon-huo"></li>
+					<view>热量消耗(千卡)</view>
+				</view>
+			</view>
+			<view class="bottom">
+				<view class="left">
+					<li class="iconfont icon-kongxinyuan"></li>
+					<view>燃烧脂肪</view>
+				</view>
+				<view class="right">
+					<view class="text_wide_600 font-s-40">637</view>
+				</view>
+			</view>
+			<!-- <view v-if="heartRateRangeData" class="charts-box">
+				<qiun-data-charts type="ring" canvasId="sport_b" :canvas2d="isCanvas2d" :resshow="delayload"
+					:opts="{legend:{position: 'bottom'},extra:{ring:{border:false,centerColor:'#312C34'}},title:{name: ''},subtitle: {name: ''}}"
+					:chartData="heartRateRangeData" />
+			</view> -->
+		</view>
 	</view>
 </template>
 
@@ -179,6 +214,83 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding-bottom: 50rpx;
+		
+		.sport_analysis_view {
+			width: 100%;
+			padding: 20rpx;
+			position: relative;
+			background-color: #312C34;
+			color: #FFFFFF;
+			box-sizing: border-box;
+			border-radius: 20rpx;
+			overflow: hidden;
+		
+			.top {
+				width: 100%;
+				height: 120rpx;
+				display: flex;
+				align-items: center;
+				.icon-feiji{
+					margin-top: 10rpx;
+				}
+				.title{
+					margin-left: 10rpx;
+				}
+			}
+			.middle{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				font-size: 28rpx;
+				.iconfont{
+					font-size: 28rpx;
+					margin-right: 10rpx;
+					margin-top: 4rpx;
+				}
+				.left{
+					width: 50%;
+					height: 60rpx;
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+				}
+				.right{
+					width: 50%;
+					height: 60rpx;
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+				}
+			}
+			.bottom{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				font-size: 28rpx;
+				.iconfont{
+					font-size: 28rpx;
+					margin-right: 10rpx;
+					margin-top: 4rpx;
+				}
+				.left{
+					width: 50%;
+					height: 60rpx;
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					.icon-kongxinyuan{
+						color: #6FCEF7;
+					}
+				}
+				.right{
+					width: 50%;
+					height: 60rpx;
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+				}
+			}
+		}
 
 		.heart_rate_range {
 			width: 100%;
@@ -345,6 +457,22 @@
 		.small_text {
 			font-size: 24rpx;
 		}
+		
+		.font-s-34{
+			font-size: 34rpx;
+		}
+		
+		.font-s-36{
+			font-size: 36rpx;
+		}
+		
+		.font-s-38{
+			font-size: 38rpx;
+		}
+		
+		.font-s-40{
+			font-size: 40rpx;
+		}
 
 		.middle_text {
 			font-size: 36rpx;
@@ -352,6 +480,10 @@
 
 		.text_wide_900 {
 			font-weight: 900;
+		}
+		
+		.text_wide_600 {
+			font-weight: 600;
 		}
 
 		.census_view {
