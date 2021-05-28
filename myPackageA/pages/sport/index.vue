@@ -134,6 +134,7 @@
 				info: this.$store.state.userInfo, //用户数据
 				isCanvas2d: this.$Config.ISCANVAS2D,
 				heartRateData: {},
+				delayload:null,
 				heartRateRangeData: {},
 				heatRateRange: [{
 						name: "激活放松",
