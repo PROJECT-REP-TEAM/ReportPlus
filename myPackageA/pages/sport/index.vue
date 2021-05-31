@@ -113,11 +113,30 @@
 					<view class="text_wide_600 font-s-40">637</view>
 				</view>
 			</view>
-			<!-- <view v-if="heartRateRangeData" class="charts-box">
-				<qiun-data-charts type="ring" canvasId="sport_b" :canvas2d="isCanvas2d" :resshow="delayload"
-					:opts="{legend:{position: 'bottom'},extra:{ring:{border:false,centerColor:'#312C34'}},title:{name: ''},subtitle: {name: ''}}"
-					:chartData="heartRateRangeData" />
-			</view> -->
+		</view>
+		<view class="box_view speed_rank_view">
+			<view class="top">
+				<view class="item" v-for="(item,index) in speedRank" :key="index">
+					<view class="name text_gray">{{item.name}}</view>
+					<view class="data">{{item.data}}<text class="unit text_gray">{{item.unit}}</text></view>
+				</view>
+			</view>
+			<view v-if="speedRankData" class="charts-box">
+				<qiun-data-charts
+				    type="bar"
+						canvasId="sport_c" :canvas2d="isCanvas2d" :resshow="delayload"
+				    :chartData="speedRankData"
+				    background="none"
+						:opts="{xAxis:{disabled: true,disableGrid:true},extra:{bar:{barBorderCircle:true,width:20}},legend:{show:false}}"
+				  />
+			</view>
+		</view>
+		<view class="box_view">
+			<view v-if="speedAndRateData.series" class="charts-box">
+				<qiun-data-charts type="tline" canvasId="sport_d" :canvas2d="isCanvas2d" :resshow="delayload"
+					:opts="{padding:[0,20,10,0],legend:{position: 'top',lineHeight:20},xAxis:{disableGrid:true,format:'xAxisDemo3'},yAxis:{data:[{position:'left',min:0,max:25},{position:'right',min:50,max:175}],gridType:'solid'},dataLabel:false,dataPointShape:false}"
+					:chartData="speedAndRateData" />
+			</view>
 		</view>
 	</view>
 </template>
@@ -125,6 +144,8 @@
 <script>
 	import heartRateData from "../../static/json/sport/1.json"
 	import heartRateRangeData from "../../static/json/sport/2.json"
+	import speedRankData from "../../static/json/sport/3.json"
+	import speedAndRateData from "../../static/json/sport/4.json"
 	export default {
 		components: {
 
@@ -134,6 +155,8 @@
 				info: this.$store.state.userInfo, //用户数据
 				isCanvas2d: this.$Config.ISCANVAS2D,
 				heartRateData: {},
+				speedRankData:{},
+				speedAndRateData:{},
 				delayload:null,
 				heartRateRangeData: {},
 				heatRateRange: [{
@@ -166,6 +189,22 @@
 						data: "16",
 						type: ""
 					},
+				],
+				speedRank: [{
+						name: "距离",
+						data: "5",
+						unit:"公里"
+					},
+					{
+						name: "时长",
+						data: "12",
+						unit: "分钟"
+					},
+					{
+						name: "平均配速",
+						data: "6\'05\"",
+						unit: ""
+					}
 				]
 			};
 		},
@@ -183,8 +222,17 @@
 						return x[0];
 					})
 				}
+				for (let i = 0; i < speedAndRateData.series.length; i++) {
+					speedAndRateData.series[i].data.map(x => {
+						x[0] = "2018/08/08 " + x[0];
+						x[0] = this.tranTimestamp(x[0]);
+						return x[0];
+					})
+				}
 				this.heartRateData = heartRateData;
 				this.heartRateRangeData = heartRateRangeData;
+				this.speedRankData = speedRankData;
+				this.speedAndRateData = speedAndRateData;
 				this.delayload = true;
 				uni.hideLoading();
 			},
@@ -215,6 +263,51 @@
 		width: 100%;
 		box-sizing: border-box;
 		padding-bottom: 50rpx;
+		
+		.box_view{
+			width: 100%;
+			padding: 20rpx;
+			position: relative;
+			background-color: #312C34;
+			color: #FFFFFF;
+			box-sizing: border-box;
+			border-radius: 20rpx;
+			overflow: hidden;
+			margin-top: 30rpx;
+		}
+		.speed_rank_view{
+			.top {
+				width: 100%;
+			
+				&:after {
+					content: "";
+					clear: both;
+					display: block;
+				}
+			
+				.item {
+					float: left;
+					width: 33%;
+					box-sizing: border-box;
+					padding: 30rpx 20rpx;
+					text-align: left;
+			
+					.name {
+						font-size: 26rpx;
+					}
+			
+					.data {
+						font-size: 40rpx;
+						margin-top: 10rpx;
+			
+						.unit {
+							font-size: 24rpx;
+							margin-left: 14rpx;
+						}
+					}
+				}
+			}
+		}
 		
 		.sport_analysis_view {
 			width: 100%;
