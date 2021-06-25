@@ -1,4 +1,5 @@
 
+
 # ReportPlus数据报表中心小程序
 
 ## 该小程序主要使用了ucharts和wyb-table两插件实现的数据报表功能，感谢作者秋云和SirW的优秀开源项目
@@ -20,18 +21,11 @@
 - 对页面、图表、表格都进行了封装，用户只需要进行数据组装即可快速完成页面的布局。
 
 ## ReportPlus的页面
-- 企业微信
-- ![企业微信](https://img-blog.csdnimg.cn/20210311104151959.gif#pic_center)
-- 会员运营
-- ![会员运营](https://img-blog.csdnimg.cn/20210325112754464.gif#pic_center)
-- 会员健康
-- ![会员健康](https://img-blog.csdnimg.cn/20210311104348588.gif#pic_center)
-- 会员服务
-- ![会员服务](https://img-blog.csdnimg.cn/20210412113943673.gif#pic_center)
+- 综合报表
+![综合报表](https://img-blog.csdnimg.cn/20210625090759444.png#pic_center)
 
-- 智慧教育报表中心
-- ![智慧教育报表中心](https://img-blog.csdnimg.cn/2021032511291616.gif#pic_center)
-
+- 会员报表
+![会员报表](https://img-blog.csdnimg.cn/20210625090851706.png#pic_center)
 
 ## 由于其他图表都有对应的插件文件，所以仅对data-progress和text-block封装的参数做说明
 
