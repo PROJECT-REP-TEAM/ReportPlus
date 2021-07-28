@@ -2,8 +2,9 @@
 
 <h4 align="center">小程序、H5等多端兼容</h4>
 
+<div align="center">
+
 [![star](https://gitee.com/ureport/ReportPlus/badge/star.svg)](https://gitee.com/ureport/ReportPlus.git) [![fork](https://gitee.com/ureport/ReportPlus/badge/fork.svg)](https://gitee.com/ureport/ReportPlus.git)
-<a target="_blank" href="https://gitee.com/ureport/ReportPlus/blob/master/LICENSE"><img src="https://img.shields.io/github/license/ureport/ReportPlus.svg?logo=git&logoColor=red" ></img></a>
 
 
 
