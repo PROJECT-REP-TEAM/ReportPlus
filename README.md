@@ -4,7 +4,7 @@
 
 <div align="center">
 
-[![star](https://gitee.com/ureport/ReportPlus/badge/star.svg)](https://gitee.com/ureport/ReportPlus.git)  [![fork](https://gitee.com/ureport/ReportPlus/badge/fork.svg)](https://gitee.com/ureport/ReportPlus.git)  [![](https://img.shields.io/badge/插件市场-ReportPlus)](https://ext.dcloud.net.cn/plugin?id=4373)  [![](https://img.shields.io/badge/QQ群-878946748-red)](https://qm.qq.com/cgi-bin/qm/qr?k=ar_gonKNpbGHOiAxKXuE-9VRY89n-3kT&jump_from=webapi)
+[![star](https://gitee.com/ureport/ReportPlus/badge/star.svg)](https://gitee.com/ureport/ReportPlus.git)  [![fork](https://gitee.com/ureport/ReportPlus/badge/fork.svg)](https://gitee.com/ureport/ReportPlus.git)  [![](https://img.shields.io/badge/插件市场-ReportPlus-red)](https://ext.dcloud.net.cn/plugin?id=4373)  [![](https://img.shields.io/badge/QQ群-878946748-red)](https://qm.qq.com/cgi-bin/qm/qr?k=ar_gonKNpbGHOiAxKXuE-9VRY89n-3kT&jump_from=webapi)
 
 
 
