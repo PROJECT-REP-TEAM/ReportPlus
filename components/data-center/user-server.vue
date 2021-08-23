@@ -72,7 +72,7 @@
 				<!-- 新增会员排行榜 -->
 				<view class="friend_operate">
 					<view class="title">新增会员排行榜</view>
-					<progress-bar :isRank="isRank" :content="RankData" @updateRanking="updateRanking" />
+					<progress-bar :isRank="isRank" :content="RankData" />
 				</view>
 			</template>
 			<template v-else>
@@ -122,10 +122,7 @@
 					this.delayload = true;
 					uni.hideLoading();
 				}, 1000)
-			},
-			updateRanking(nVal){
-				this.RankData = nVal;
-			},
+			}
 		},
 		mounted() {
 			this.getData();

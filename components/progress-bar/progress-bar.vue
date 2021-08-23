@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view v-if="content.length > 0" class="ranking">
-			<view class="ranking-item" v-for="(content,index) in content" :key="index" :style="{padding:progressPadding+'rpx'}">
+		<view v-if="copyContent.length > 0" class="ranking">
+			<view class="ranking-item" v-for="(content,index) in copyContent" :key="index" :style="{padding:progressPadding+'rpx'}">
 				<view class="name">{{content.name}}</view>
 				<view class="progress" >
 					<text :style="{background:content.background,width:content.width + '%',height:progressWidth+'rpx'}"></text>
@@ -36,40 +36,51 @@
 				progressWidth:24,
 				progressPadding:10,
 				maxNumber:0,
-				culCount:0
+				culCount:0,
+				copyContent:[]
 			}
 		},
 		watch:{
 			content(newV){
-				this.culCount += 1;
-				if(this.culCount < 3){
-					this.init()
-				}
+				this.init()
 			}
 		},
 		methods:{
 			init(){
-				if(this.content && this.content.length >0){
+				this.copyContent = this.deepClone(this.content)
+				if(this.copyContent && this.copyContent.length >0){
 					if(this.isRank){
-						this.content = this.content.sort((a,b) => b.num - a.num);
-						this.maxNumber = this.content[0].num;
+						this.copyContent = this.copyContent.sort((a,b) => b.num - a.num);
+						this.maxNumber = this.copyContent[0].num;
 					}else{
-						this.maxNumber = Math.max.apply(Math,this.content.map(item => { return item.num }));
+						this.maxNumber = Math.max.apply(Math,this.copyContent.map(item => { return item.num }));
 					}
-					this.content.map((item,index) =>{
+					this.copyContent.map((item,index) =>{
 						item.width = this.computeWidth(this.maxNumber,item.num);
 					});
-					this.$emit("updateRanking",this.content)
 				}
 			},
 			computeWidth(max,current){
 				let num = (current / max) * 100;
 				return num.toFixed(2);
 			},
+			deepClone(obj) {
+			  var cloneObj = new obj.constructor()
+			  if(obj === null) return obj
+			  if(obj instanceof Date) return new Date(obj)
+			  if(obj instanceof RegExp) return new RegExp(obj)
+			  if (typeof obj !== 'object') return obj
+			  for (var i in obj) {
+			    if (obj.hasOwnProperty(i)) {
+			      cloneObj[i] = this.deepClone(obj[i])
+			    }
+			  }
+			  return cloneObj
+			}
 		},
 		mounted() {
 			if(this.isPC){
-			    this.progressWidth = 40;
+				this.progressWidth = 40;
 				this.progressPadding = 30;
 			}
 			this.init();
