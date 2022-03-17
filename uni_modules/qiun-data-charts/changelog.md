@@ -1,3 +1,35 @@
+## 2.3.7-20220122（2022-01-22）
+## 重要！使用vue3编译，请使用cli模式并升级至最新依赖，HbuilderX编译需要使用3.3.8以上版本
+- uCharts.js 修复uni-app平台组件模式使用vue3编译到小程序报错的bug。
+## 2.3.7-20220118（2022-01-18）
+## 注意，使用vue3的前提是需要3.3.8.20220114-alpha版本的HBuilder！
+## 2.3.67-20220118（2022-01-18）
+- 秋云图表组件 组件初步支持vue3，全端编译会有些问题，具体详见下面修改：
+1. 小程序端运行时，在uni_modules文件夹的qiun-data-charts.js中搜索 new uni_modules_qiunDataCharts_js_sdk_uCharts_uCharts.uCharts，将.uCharts去掉。
+2. 小程序端发行时，在uni_modules文件夹的qiun-data-charts.js中搜索 new e.uCharts，将.uCharts去掉，变为 new e。
+3. 如果觉得上述步骤比较麻烦，如果您的项目只编译到小程序端，可以修改u-charts.js最后一行导出方式，将 export default uCharts;变更为 export default { uCharts: uCharts }; 这样变更后，H5和App端的renderjs会有问题，请开发者自行选择。（此问题非组件问题，请等待DC官方修复Vue3的小程序端）
+## 2.3.6-20220111（2022-01-11）
+- 秋云图表组件 修改组件 props 属性中的 background 默认值为 rgba(0,0,0,0)
+## 2.3.6-20211201（2021-12-01）
+- uCharts.js 修复bar条状图开启圆角模式时，值很小时圆角渲染错误的bug
+## 2.3.5-20211014（2021-10-15）
+- uCharts.js 增加vue3的编译支持（仅原生uCharts，qiun-data-charts组件后续会支持，请关注更新）
+## 2.3.4-20211012（2021-10-12）
+- 秋云图表组件 修复 mac os x 系统 mouseover 事件丢失的 bug
+## 2.3.3-20210706（2021-07-06）
+- uCharts.js 增加雷达图开启数据点值（opts.dataLabel）的显示
+## 2.3.2-20210627（2021-06-27）
+- 秋云图表组件 修复tooltipCustom个别情况下传值不正确报错TypeError: Cannot read property 'name' of undefined的bug
+## 2.3.1-20210616（2021-06-16）
+- uCharts.js 修复圆角柱状图使用4角圆角时，当数值过大时不正确的bug
+## 2.3.0-20210612（2021-06-12）
+- uCharts.js 【重要】uCharts增加nvue兼容，可在nvue项目中使用gcanvas组件渲染uCharts，[详见码云uCharts-demo-nvue](https://gitee.com/uCharts/uCharts)
+- 秋云图表组件 增加tapLegend属性，是否开启图例点击交互事件
+- 秋云图表组件 getIndex事件中增加返回uCharts实例中的opts参数，以便在页面中调用参数
+- 示例项目 pages/other/other.vue增加app端自定义tooltip的方法，详见showOptsTooltip方法
+## 2.2.1-20210603（2021-06-03）
+- uCharts.js 修复饼图、圆环图、玫瑰图，当起始角度不为0时，tooltip位置不准确的bug
+- uCharts.js 增加温度计式柱状图开启顶部半圆形的配置
 ## 2.2.0-20210529（2021-05-29）
 - uCharts.js 增加条状图type="bar"
 - 示例项目 pages/ucharts/ucharts.vue增加条状图的demo

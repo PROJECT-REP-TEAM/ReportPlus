@@ -1,12 +1,12 @@
 ## [uCharts官方网站](https://www.ucharts.cn)
 ## [DEMO演示及在线生成工具（v2.0文档）https://demo.ucharts.cn](https://demo.ucharts.cn)
+## [优秀的nvue全端组件与模版库nPro](https://ext.dcloud.net.cn/plugin?id=5169)
 ## [图表组件在项目中的应用 UReport数据报表](https://ext.dcloud.net.cn/plugin?id=4651) 
-### [v1.0文档（将在9月30日作废，请尽快转v2.0）](http://doc.ucharts.cn)
 ## [如何安装、更新 uni_modules 插件点这里，必看，必看，必看](https://uniapp.dcloud.io/uni_modules?id=%e4%bd%bf%e7%94%a8-uni_modules-%e6%8f%92%e4%bb%b6)
 ## 点击右侧绿色【使用HBuilderX导入插件】即可使用，示例项目请点击右侧蓝色按钮【使用HBuilderX导入示例项目】。
 ## 初次使用不显示问题详见[常见问题选项卡](https://demo.ucharts.cn)
 ## <font color=#FF0000> 新手请先完整阅读【帮助文档】及【常见问题】3遍，右侧蓝色按钮【示例项目】请看2遍！ </font> 
-## <font color=#FF0000> 关于NVUE兼容的说明： </font> 建议NVUE使用图表的页面改为vue页面，在App端，从性能来讲，由于通讯阻塞的问题，nvue的canvas性能不可能达到使用renderjs的vue页面的canvas。在App端，推荐使用vue的canvas。[详见uni-app官方说明](https://uniapp.dcloud.io/component/canvas?id=canvas)
+## <font color=#FF0000> 关于NVUE兼容的说明： </font> uCharts.js从2.3.0开始支持nuve（暂时只能通过原生canvas写法调用uCharts，nuve版本组件请见码云示例项目[uCharts-demo-nvue](https://gitee.com/uCharts/uCharts)），因其渲染方式是通过nvue的gcanvas组件来渲染，理论上性能不及renderjs的qiun-data-charts组件性能。官方仍然建议NVUE使用图表的页面改为vue页面，在App端，从性能来讲，由于通讯阻塞的问题，nvue的canvas性能不可能达到使用renderjs的vue页面的canvas。在App端，仍然推荐使用qiun-data-charts组件。[详见uni-app官方说明](https://uniapp.dcloud.io/component/canvas?id=canvas)
 
 [![uCharts/uCharts](https://gitee.com/uCharts/uCharts/widgets/widget_card.svg?colors=393222,ebdfc1,fffae5,d8ca9f,393222,a28b40)](https://gitee.com/uCharts/uCharts)
 
@@ -28,12 +28,12 @@
 - localdata`后端数据直接渲染`，无需自行拼接chartData的categories及series，从后端拿回的数据简单处理即可生成图表。
 - 小程序端不必担心包体积过大问题，ECharts引擎将不会编译到各小程序端，u-charts.js编译后`仅为93kb`。
 - 未来将支持通过HbuilderX的[schema2code自动生成全端全平台图表](https://ext.dcloud.net.cn/plugin?id=4684)，敬请期待！！！
-- uCharts官方拥有3个2000人的QQ群支持，庞大的用户量证明我们一直在努力，本组件将持续更新，请各位放心使用，本组件问题请在`QQ3群`反馈，您的宝贵建议是我们努力的动力！！
+- uCharts官方拥有4个2000人的QQ群支持，庞大的用户量证明我们一直在努力，本组件将持续更新，请各位放心使用，您的宝贵建议是我们努力的动力！！
 
 
 ## 致开发者
 
-感谢各位开发者`两年`来对秋云及uCharts的支持，uCharts的进步离不开各位开发者的鼓励与贡献，为更好的帮助各位开发者在uni-app生态系统更好的应用图表，uCharts始终坚持开源，并提供社群帮助开发者解决问题。 为确保您能更好的应用图表组件，建议您先`仔细阅读本页文档`以及uCharts官方文档，而不是下载下来`直接使用`。 如遇到问题请先阅读文档，如仍然不能解决，请加入QQ群咨询，如群友均不能解决或者您有特殊需求，请在群内私聊我，因工作原因，回复不一定很及时，您可直接说问题，有时间一定会回复您。
+感谢各位开发者`三年`来对秋云及uCharts的支持，uCharts的进步离不开各位开发者的鼓励与贡献，为更好的帮助各位开发者在uni-app生态系统更好的应用图表，uCharts始终坚持开源，并提供社群帮助开发者解决问题。 为确保您能更好的应用图表组件，建议您先`仔细阅读本页文档`以及uCharts官方文档，而不是下载下来`直接使用`。 如遇到问题请先阅读文档，如仍然不能解决，请加入QQ群咨询，如群友均不能解决或者您有特殊需求，请在群内私聊我，因工作原因，回复不一定很及时，您可直接说问题，有时间一定会回复您。
 
 uCharts的开源图表组件的开发，付出了大量的个人时间与精力，经过两年来的考验，不会有比较明显的bug，请各位放心使用。不求您5星评价，也不求您赞赏，`只求您对开源贡献的支持态度`，所以，当您想给`1星评价`的时候，秋云真的会`含泪希望您绕路而行……`。如果您有更好的想法，可以在`码云提交Pull Requests`以帮助更多开发者完成需求，再次感谢各位对uCharts的鼓励与支持！
 
@@ -208,7 +208,7 @@ localdata:[
 
 |属性名|类型|默认值|必填|说明|
 | -- | -- | -- | -- | -- |
-|type|String|null|`是`|图表类型，如全端用uCharts，可选值为pie、ring、rose、word、funnel、map、arcbar、line、column、area、radar、gauge、candle、mix <font color=#FF0000>（您也可以根据需求自定义新图表类型，需要在config-ucharts.js或config-echarts.js内添加，可参考config-ucharts.js内的"demotype"类型）</font>|
+|type|String|null|`是`|图表类型，如全端用uCharts，可选值为pie、ring、rose、word、funnel、map、arcbar、line、column、bar、area、radar、gauge、candle、mix、tline、tarea、scatter、bubble <font color=#FF0000>（您也可以根据需求自定义新图表类型，需要在config-ucharts.js或config-echarts.js内添加，可参考config-ucharts.js内的"demotype"类型）</font>|
 |chartData|Object|见说明|`是`|图表数据，常用的标准数据格式为{categories: [],series: []}，请按不同图表类型传入对应的标准数据。|
 |localdata|Array|[]|`是`|图表数据，如果您觉得拼接上面chartData比较繁琐，可以通过使用localdata渲染，组件会根据传入的type类型，自动拼接categories或series数据（使用localdata就不必再传入chartData，详见 /pages/other/other.vue 中使用localdata渲染图表的例子）。【localdata和collection（uniCloud数据库）同时存在，优先使用localdata；如果localdata和chartData同时存在，优先使用chartData。<font color=#FF0000> 即chartData>localdata>collection的优先级</font>渲染图表】。|
 |opts|Object|{}|否|uCharts图表配置参数(option)，请参考[【在线生成工具】](https://demo.ucharts.cn)<font color=#FF0000>注：传入的opts会覆盖默认config-ucharts.js中的配置，只需传入与config-ucharts.js中属性不一致的opts即可实现【同类型的图表显示不同的样式】。</font>|
@@ -239,7 +239,8 @@ localdata:[
 |ontap|Boolean|true|否|是否监听@tap@cilck事件，禁用后不会触发组件点击事件|
 |ontouch|Boolean|false|否|（仅uCharts）是否监听@touchstart@touchmove@touchend事件（赋值为true时，非PC端在图表区域内无法拖动页面滚动）|
 |onmouse|Boolean|true|否|是否监听@mousedown@mousemove@mouseup事件，禁用后鼠标经过图表上方不会显示tooltip|
-|`onmovetip`|Boolean|false|否|（仅uCharts）是否开启跟手显示tooltip功能（前提条件，1、需要开启touch功能，即:ontouch="true"；2、并且opts.enableScroll=false即关闭图表的滚动条功能）（建议微信小程序开启canvas2d功能，否则原生canvas组件会很卡）|
+|on movetip|Boolean|false|否|（仅uCharts）是否开启跟手显示tooltip功能（前提条件，1、需要开启touch功能，即:ontouch="true"；2、并且opts.enableScroll=false即关闭图表的滚动条功能）（建议微信小程序开启canvas2d功能，否则原生canvas组件会很卡）|
+|tapLegend|Boolean|true|否|（仅uCharts）是否开启图例点击交互事件 |
 
 ## 组件事件及方法
 
@@ -415,7 +416,7 @@ tooltipCustom属性如下：
 - `开启canvas2d后图表不显示问题`：开启canvas2d后，需要手动指定canvasId，并且父元素不能含有v-if，否则会导致获取不到dom节点问题，请将v-if改成v-show，更多开启canvas2d不显示问题，请参考示例项目pages/layout/layout.vue文件，对照示例项目修改您的项目。
 - `MiniPorgramError U.createEvent is ot a function`：此问题一般是微信小程序开启了canvas2d，并点击了“真机调试导致”，参考上面【微信小程序图表层级过高问题】解决办法，开启2d后，不可以真机调试，只能开发者工具调试或者扫二维码“预览”。
 - `在图表上滑动无法使页面滚动问题`：此问题是因为监听了touchstart、touchmove和touchend三个事件，或者开启了disableScroll属性，如果您的图表不需要开启图表内的滚动条功能，请禁用这三个方法的监听，即:ontouch="false"或者:disableScroll="false"即可（此时图表组件默认通过@tap事件来监听点击，可正常显示Tooltip提示窗）。
-- `开启滚动条无法拖动图表问题`：此问题正与以上问题相反，是因为禁用了监听touchstart、touchmove和touchend三个事件，请启用这三个方法的监听，即在组件上加入 :ontouch="true" 即可。注意，不要忘记在opts里需要配置enableScroll:true，另外如果需要显示滚动条，需要在xAxis中配置scrollShow:ture。
+- `开启滚动条无法拖动图表问题`：此问题正与以上问题相反，是因为禁用了监听touchstart、touchmove和touchend三个事件，请启用这三个方法的监听，即在组件上加入 :ontouch="true" 即可。注意，不要忘记在opts里需要配置enableScroll:true，另外如果需要显示滚动条，需要在xAxis中配置scrollShow:ture，及itemCount（单屏数据密度）数量的配置。
 - `开启滚动条后图表两侧有白边问题`：此问题是因为组件上的background为none或者没有指定，请在组件上加入background="#000000"(您的背景色)。如果父元素为图片，尽量不要开启滚动条，此时图表是透明色，可以显示父元素背景图片。
 - `开启滚动条后动态打点更新数据滚动条位置问题`：开启滚动条后动态打点，需要把opts中update需要赋值为true，来启用uCharts的updateData方法来更新视图，详见示例项目pages/updata/updata.vue。
 - `地图变形问题`：此问题是因为您引用的geojson地图数据的坐标系可能是地球坐标(WGS84)导致，需要开启【是否进行WGS84转墨卡托投影】功能。开启后因大量的数据运算tooltip可能会不跟手，建议自行转换为墨卡托坐标系，可参照源码内function lonlat2mercator()。其他地图数据下载地址：[http://datav.aliyun.com/tools/atlas/](http://datav.aliyun.com/tools/atlas/)
@@ -423,25 +424,23 @@ tooltipCustom属性如下：
 - `uni-simple-router中使用问题`：如果使用uni-simple-router路由插件，H5开启完全路由模式（即h5:{vueRouterDev:true}）时，会导致组件内uni.xxx部分方法失效，引发节点获取不正常报错，请使用普通模式即可。
 - `Y轴刻度标签数字重复问题`：此问题一般是series数据内数值较小，而Y轴网格数量较多，并且Y轴刻度点显示整数导致。解决方法1，Y轴刻度值保留两位小数，组件上传值 :opts="{yAxis:{data:[{tofix:2}]}}"；解决方法2，修改Y轴网格数量为series中的最大值的数量，例如series中最大值为3，那么修改yAxis.splitNumber=3即可；解决方法3，根据Y轴网格数量修改Y轴最大值 :opts="{yAxis:{data:[{max:5}]}}"。
 - `柱状图柱子高度不符合预期问题`：此问题是Y轴最小值未默认为0的问题导致，组件上传值 :opts="{yAxis:{data:[{min:0}]}}"即可解决。
+- `饼图类百分比改其他文案的问题`：参考示例项目pages/format-u/format-u.vue，在chartData的series中使用format。
 
 ## [更多常见问题以官方网站【常见问题】为准](http://demo.ucharts.cn)
 
 ## QQ群号码
 ## <font color=#FF0000> 请先完整阅读【帮助文档】及【常见问题】3遍，右侧蓝色按钮【示例项目】请看2遍！不看文档不看常见问题进群就问的拒绝回答问题！咨询量太大请理解作者！ </font> 
-- 放在下面是为了让您先看文档，看好群分类，再进群！！
 - 交流群1：371774600（已满）
-- 交流群2：619841586（不回答本组件问题，只回答uCharts基础库问题）
-- 交流群3：955340127<font color=#FF0000>（优先解答本组件问题，其他问题群友互助）</font>
+- 交流群2：619841586
+- 交流群3：955340127（已满）
+- 交流群4：641669795
 - 口令`uniapp`
 
 
 ## 相关链接
 - [DCloud插件市场地址](https://ext.dcloud.net.cn/plugin?id=271)
 - [uCharts官网](https://www.ucharts.cn)
-- [uCharts在线生成工具](http://demo.ucharts.cn)<font color=#FF0000>（注：v2.0版本后将不提供配置手册，请通过在线生成工具生成图表配置）</font>
 - [uCharts码云开源托管地址](https://gitee.com/uCharts/uCharts) [![star](https://gitee.com/uCharts/uCharts/badge/star.svg?theme=gvp)](https://gitee.com/uCharts/uCharts/stargazers)
-- [uCharts基础库更新记录](https://gitee.com/uCharts/uCharts/wikis/%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95?sort_id=1535998)
-- [uCharts改造教程](https://gitee.com/uCharts/uCharts/wikis/%E6%94%B9%E9%80%A0uCharts%E6%89%93%E9%80%A0%E4%B8%93%E5%B1%9E%E5%9B%BE%E8%A1%A8?sort_id=1535997)
 - [图表组件在项目中的应用 UReport数据报表](https://ext.dcloud.net.cn/plugin?id=4651) 
 - [ECharts官网](https://echarts.apache.org/zh/index.html)
 - [ECharts配置手册](https://echarts.apache.org/zh/option.html)
